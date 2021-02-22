@@ -12,18 +12,21 @@
   <div id="container">
     <div class="img">
       <ion-img src="/assets/logo.png" ></ion-img>
-    </div>
+    </div><br><br>
     <ion-row align-items-center style="text-align: center">
       <ion-col size="10" style="margin: 0 auto;" align-self: center>
-        <form>
+        <form [formGroup]="dataForm" (ngSubmit)="submitData()">
           <ion-item>
-            <ion-input name="nombreUsuario" type="text" placeholder="Nombre de usuario o correo" required minlength="2"
+            <ion-input formControlName="email" type="email" 
+            placeholder="Nombre de usuario o correo" required minlength="2"
             class="form-control">
             </ion-input>
           </ion-item>
           <br>
           <ion-item>
-            <ion-input name="contraseña" type="password" placeholder="Contraseña" required></ion-input>
+            <ion-input formControlName="password" type="password" 
+            placeholder="Contraseña" minlength="6"
+            required></ion-input>
           </ion-item>
         </form>
       </ion-col>
@@ -35,8 +38,10 @@
       </ion-col>
       <ion-col size="12" size-sm="4" style="text-align: center" align-self: center>
         <div>
-          <ion-button shape="round" class="btnInfo" (click)="iniciarSesion()">Continuar</ion-button>
+          <ion-button type="submit" shape="round" class="btnInfo" (click)="iniciarSesion()"
+          [disabled]="!dataForm.valid">Iniciar Sesion</ion-button>
         </div>
+        <a href="/productos">Ingresar</a>
       </ion-col>
       <ion-col size="12" size-sm="6" style="text-align: center" align-self: center>
         <div>
