@@ -14,6 +14,8 @@ import { Restangular } from "ngx-restangular";
 export class ProductosPage implements OnInit {
 
   productos$:any=[];
+  textoBuscar:string='';
+
   
   constructor(public api:AuthProvider,private http:HttpClient, 
     private restangular:Restangular,private router: Router, ) { 
@@ -32,8 +34,13 @@ export class ProductosPage implements OnInit {
                 
       });
   }
-  producto(){
-    this.router.navigate(['/producto/', this.productos$.id, ]);
+
+  onSelect(element){
+    this.router.navigate(['/producto',element.id])
+  }
+
+  buscar(event){
+    this.textoBuscar = event.detail.value;
   }
 
 }

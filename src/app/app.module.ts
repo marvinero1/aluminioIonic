@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NgFallimgModule } from 'ng-fallimg';
+
 
 import { CommonModule } from "@angular/common";
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -22,6 +24,7 @@ import { AuthProvider } from './providers/auth/auth';
 import { RestangularConfigFactory } from './providers/restangular/restangular';
 import { TokenStorageProvider } from './providers/token-storage/token-storage';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -34,6 +37,10 @@ import { TokenStorageProvider } from './providers/token-storage/token-storage';
     AppRoutingModule,
     RestangularModule.forRoot([AuthProvider], RestangularConfigFactory),
     HttpClientModule,
+    NgFallimgModule.forRoot({
+      default: 'assets/img/default-person.jpg',
+      picture1:  'assets/img/default-product.jpg',
+    }),
   ],
   providers: [
     StatusBar,

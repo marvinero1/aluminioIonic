@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
   selector: 'app-importadoras',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImportadorasPage implements OnInit {
 
-  constructor() { }
+  importadorImagen:any;
+  importadoras$:any=[];
+  textoBuscar:string='';
+  constructor(public api:AuthProvider) { }
 
   ngOnInit() {
+    this.getImportadoras();
   }
 
+  getImportadoras(){
+    this.api.getAllObject('importadoras')
+    .subscribe((res) =>{ 
+      this.importadoras$ = res;
+      this.importadoras$ = Object.values(this.importadoras$)
+              
+    });
+  }
+
+  buscar(event){
+    this.textoBuscar = event.detail.value;
+    
+  }
+  
+  
 }

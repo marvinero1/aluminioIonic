@@ -1,9 +1,26 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>select</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content>
+<ion-content [fullscreen]="true" class="body">
+<br><br><br><br><br>
+  <h4>Seleccione que desea ver en su recorido.</h4>
+  <a (click)="goProducts()">
+    <ion-card class="cardProduct">
+      <div>
+        <h2>Productos</h2>
+      </div>
+    </ion-card>
+  </a><br>
+
+  <a (click)="goImportadoras()">
+    <ion-card class="cardImportadora">
+      <div>
+        <h2>Importadoras</h2>
+      </div>
+    </ion-card>
+  </a>
 
 </ion-content>

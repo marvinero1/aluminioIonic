@@ -35,22 +35,24 @@ export interface IUsuario {
 }
 
 
-export interface IMiss {
+export interface IProducto {
     id: number;
     nombre?: string;
-    candidata?: number;
+    estado?: string;
+    imagen?: string;
+    precio?: number;
+    color?: string;
+    ancho?: string;
+    codigo?: string;
+    alto?: string;
+    puntuacion?: string;
     descripcion?: string;
-    edad?: string;
-    estudio?: string;
-    social?: string;
-    lugar?: string;
-    hobbi?: string;
-    facebook?: string;
-    twitter?: string;
-    instagrand?: string;
-    video?: string;
-    tipo?: string;
-    imagens?:any;
-    personausers?:any;
-    personausers_count?:number;
+    importadora?: string;
+    novedad?: string;
+    categorias_id?: number;
+    subcategorias_id?:number;
+    favoritos_id?:number;
+    disponibilidad?:string;
+    tipo_medida?:string;
+
 }

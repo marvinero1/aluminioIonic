@@ -10,56 +10,34 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+  
   public selectedIndex = 0;
   public appPages = [
     {
-<<<<<<< HEAD
       title: 'Favoritos',
       url: '/favoritos',
       icon: 'heart'
     },
     {
       title: 'Producto',
-      url: '/producto',
+      url: '/productos',
       icon: 'bag'
+    },
+    {
+      title: 'Importadoras',
+      url: '/importadoras',
+      icon: 'car'
     },
     {
       title: 'Mi Perfil',
       url: '/perfil',
       icon: 'accessibility'
     },
-  
-=======
-      title: 'Producto',
-      url: '/folder/Inbox',
-      icon: 'mail'
-    },
     {
-      title: 'Login',
-      url: '/login',
-      icon: 'paper-plane'
-    },
-    {
-      title: 'Favoritos',
-      url: '/folder/Favorites',
-      icon: 'heart'
-    },
-    {
-      title: 'Perfil',
-      url: '/folder/Archived',
-      icon: 'archive'
-    },
-    {
-      title: 'Categorias',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Cotisaciones',
+      title: 'Mis Pedidos',
       url: '/folder/Spam',
-      icon: 'warning'
+      icon: 'checkmark'
     }
->>>>>>> 2b1573f9bd52f045721d4f2523729a07b5882c3a
   ];
   public labels = ['Salir'];
 

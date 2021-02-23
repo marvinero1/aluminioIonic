@@ -7,10 +7,12 @@
     </ion-toolbar>
   </ion-header>
   <ion-content [fullscreen]="true" class="body">
-    <ion-card *ngFor="let element of productos$">
+    <ion-searchbar (ionChange)="buscar($event)" animated></ion-searchbar>
+    <ion-card *ngFor="let element of productos$ ">
   
       <ion-col col-4>
-        <ion-img src="/assets/logo.png" class="img"></ion-img>
+        <ion-img src="http://192.168.1.6:5000/{{ element.imagen}}"
+          class="imagen" fallimg></ion-img>
       </ion-col>
   
       <ion-col col-8>
@@ -31,7 +33,8 @@
             </ion-col>
           </ion-row>
 
-          <ion-button color="dark" [routerLink]="['/producto/']" [routerLink]="'/producto/'"><ion-icon slot="start" name="eye">
+          <ion-button color="dark" (click)="onSelect(element)">
+            <ion-icon slot="start" name="eye">
           </ion-icon>Ver</ion-button>
           <!-- <a href="{{ route('instructor.show',$instructoritem->id ) }}">
             <button class="btn btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>Ver</button>

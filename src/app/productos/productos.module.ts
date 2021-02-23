@@ -8,12 +8,13 @@ import { ProductosPageRoutingModule } from './productos-routing.module';
 
 import { ProductosPage } from './productos.page';
 
+
 @NgModule({
-  imports: [
+  imports: [    
     CommonModule,
     FormsModule,
     IonicModule,
-    ProductosPageRoutingModule
+    ProductosPageRoutingModule,
   ],
   declarations: [ProductosPage]
 })
