@@ -29,13 +29,18 @@ export class AppComponent implements OnInit {
       icon: 'car'
     },
     {
+      title: 'Novedades',
+      url: '/novedades',
+      icon: 'bag-handle'
+    },
+    {
       title: 'Mi Perfil',
       url: '/perfil',
       icon: 'accessibility'
     },
     {
       title: 'Mis Pedidos',
-      url: '/folder/Spam',
+      url: '/pedidos',
       icon: 'checkmark'
     }
   ];

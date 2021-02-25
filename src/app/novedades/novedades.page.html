@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="perfil()">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Novedades</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+  <div class="ion-content" padding><br>
+    <ion-item-group>
+      <ion-item>
+        <p style="margin-block-start: 0em; margin-block-end: 0em;"
+        ><strong>Productos en Novedad</strong>
+        </p>
+      </ion-item>
+      <ion-item-sliding *ngFor="let element of novedades$">
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <img src="http://192.168.1.6:5000/{{ element.imagen}}" >
+          </ion-thumbnail>
+          <ion-label text-wrap>
+            <p><strong>{{ element.nombre}} </strong></p>
+            <p>{{ element.importadora }}</p>
+            <!-- <div class="ec-stars-wrapper">
+              <a data-value="1" title="Votar con 1 estrellas">&#9733;</a>
+              <a data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+              <a data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+              <a data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+              <a data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+            </div> -->
+          </ion-label>
+          <ion-icon name="star" class="star"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="success" (click)="ver(element)">
+            <ion-icon class="icongarbage" slot="icon-only" name="eye">
+
+            </ion-icon>Ver
+          </ion-item-option>
+        </ion-item-options>
+    
+      </ion-item-sliding>
+    </ion-item-group>
+
+    <br>
+  </div>
+</ion-content>

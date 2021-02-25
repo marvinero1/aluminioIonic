@@ -1,45 +1,51 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Productos</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content [fullscreen]="true" class="body">
-    <ion-searchbar (ionChange)="buscar($event)" animated></ion-searchbar>
-    <ion-card *ngFor="let element of productos$ ">
-  
-      <ion-col col-4>
-        <ion-img src="http://192.168.1.6:5000/{{ element.imagen}}"
-          class="imagen" fallimg></ion-img>
-      </ion-col>
-  
-      <ion-col col-8>
-        <ion-card-header>
-          <ion-card-title>{{ element.nombre}}</ion-card-title><br>
-          <ion-card-subtitle>{{ element.descripcion}}</ion-card-subtitle>
-        </ion-card-header>
-  
-        <ion-card-content>
-          <ion-row>
-            <ion-col col-6>
-              <h3><strong>Estado</strong></h3>
-              <p>{{ element.estado}}</p>
-            </ion-col>
-            <ion-col col-6>
-              <h3><strong>Precio</strong></h3>
-              <p>{{ element.precio}} Bs.</p>
-            </ion-col>
-          </ion-row>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="perfil()">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-          <ion-button color="dark" (click)="onSelect(element)">
-            <ion-icon slot="start" name="eye">
-          </ion-icon>Ver</ion-button>
-          <!-- <a href="{{ route('instructor.show',$instructoritem->id ) }}">
+<ion-content [fullscreen]="true" class="body">
+  <ion-searchbar (ionChange)="buscar($event)" animated></ion-searchbar>
+  <ion-card *ngFor="let element of productos$ ">
+
+    <ion-col col-4>
+      <ion-img src="http://192.168.1.6:5000/{{ element.imagen}}" class="imagen" fallimg></ion-img>
+    </ion-col>
+
+    <ion-col col-8>
+      <ion-card-header>
+        <ion-card-title>{{ element.nombre}}</ion-card-title><br>
+        <ion-card-subtitle>{{ element.descripcion}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-row>
+          <ion-col col-6>
+            <h3><strong>Estado</strong></h3>
+            <p>{{ element.estado}}</p>
+          </ion-col>
+          <ion-col col-6>
+            <h3><strong>Precio</strong></h3>
+            <p>{{ element.precio}} Bs.</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-button color="dark" (click)="onSelect(element)">
+          <ion-icon slot="start" name="eye">
+          </ion-icon>Ver
+        </ion-button>
+        <!-- <a href="{{ route('instructor.show',$instructoritem->id ) }}">
             <button class="btn btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>Ver</button>
           </a> -->
-        </ion-card-content>
-      </ion-col>
-    </ion-card>
-  </ion-content>
+      </ion-card-content>
+    </ion-col>
+  </ion-card>
+</ion-content>

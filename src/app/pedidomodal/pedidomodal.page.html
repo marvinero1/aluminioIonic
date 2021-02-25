@@ -1,0 +1,40 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Realiza Pedido</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content >
+  <ion-card style="padding: 14px;">
+    <ion-row>
+        <h5 class="h5s">Cantidad a pedir</h5> 
+    </ion-row>
+    <ion-row >
+      <div class="wrapper">
+        <ion-button color="dark" class="plusminus" (click)="handleMinus()">-</ion-button>
+        <input type="number" class="num" value="0" [(ngModel)]="value" />
+        <ion-button color="dark" class="plusminus" (click)="handlePlus()">+</ion-button>
+      </div>
+    </ion-row><br>
+    <ion-row>
+      <p><Strong>* Nota:</Strong>&nbsp; Se mandarán la solicitud de pedido y 
+        el proveedor(importadora) se comunicara con usted.</p>
+    </ion-row><br>
+
+    <ion-row style="float: left;">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon slot="start" name="arrow-back-sharp">
+      </ion-icon>Atras</ion-button>
+    </ion-row>
+    <ion-row style="float: right;">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon slot="start" name="cart-sharp">
+      </ion-icon>Mandar Pedido</ion-button>
+    </ion-row>
+  </ion-card>
+</ion-content>

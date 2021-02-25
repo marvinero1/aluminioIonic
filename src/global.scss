@@ -30,3 +30,13 @@
     --spinner-color:white;
     color: whitesmoke;
 }
+/* DOES NOT WORK - not specific enough */
+.modal-wrapper {
+    background: transparent;
+  }
+  
+  /* Works - pass "my-custom-class" in cssClass to increase specificity */
+  .my-custom-class .modal-wrapper {
+    background: transparent;
+    height: 39%;
+  }

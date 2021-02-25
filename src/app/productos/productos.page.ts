@@ -42,5 +42,8 @@ export class ProductosPage implements OnInit {
   buscar(event){
     this.textoBuscar = event.detail.value;
   }
+  perfil(){
+    this.router.navigate(['/perfil']);
+  }
 
 }

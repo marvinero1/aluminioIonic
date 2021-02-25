@@ -1,35 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="perfil()">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-buttons slot="start">
-      <ion-menu-ion-button></ion-menu-ion-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Productos</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" class="body">
-    
 
+<ion-content [fullscreen]="true" class="body">
   <ion-card>
-    
     <ion-col col-4>
       <ion-img src="http://192.168.1.6:5000/{{ productoId.imagen}}" class="imagen"></ion-img>
     </ion-col>
 
     <ion-col col-8>
       <div *ngIf="novedad == 'true'">
-        
         <ion-icon name="star-sharp" class="icon"></ion-icon> 
       </div>
-     
-        
-     
-     
-      
+     <ion-icon name="heart-sharp" (click)="favorito(productoId)"
+        class="icon1"></ion-icon>  
       <ion-card-header>
-        <ion-icon name="heart-sharp" (click)="favorito(productoId)"
-        class="icon"></ion-icon>
         <ion-card-title>{{ productoId.nombre }} </ion-card-title><br>
-        
         <ion-card-subtitle>{{ productoId.descripcion}}</ion-card-subtitle>
       </ion-card-header>
 
@@ -47,7 +43,6 @@
             <h4><strong>Alto</strong></h4>
             <p>{{ productoId.alto}}</p>
           </ion-col>
-          
         </ion-row>
 
         <ion-row>
@@ -82,21 +77,21 @@
           </ion-col>
         </ion-row><br><hr><br>
 
-        <ion-row>
+        <!-- <ion-row>
           <h5 class="h5s">Cantidad a pedir</h5> 
-        </ion-row>
+        </ion-row> -->
 
-        <ion-row >
+        <!-- <ion-row >
           <div class="wrapper">
             <ion-button color="dark" class="plusminus" (click)="handleMinus()">-</ion-button>
             <input type="number" class="num" value="0" [(ngModel)]="value" />
             <ion-button color="dark" class="plusminus" (click)="handlePlus()">+</ion-button>
           </div>
-        </ion-row><br>
-        <ion-row>
+        </ion-row><br> -->
+        <!-- <ion-row>
           <p><Strong>* Nota:</Strong>&nbsp; Se mandarán la solicitud de pedido y 
             el proveedor(importadora) se comunicara con usted.</p>
-        </ion-row><br>
+        </ion-row><br> -->
 
         <ion-row style="float: left;">
           <ion-button color="dark" (click)="back()">
@@ -105,11 +100,10 @@
         </ion-row>
 
         <ion-row style="float: right;">
-          <ion-button color="dark" (click)="onSelect(element)">
+          <ion-button color="dark" (click)="presentModal(productoId)">
             <ion-icon slot="start" name="cart-sharp">
           </ion-icon>Realizar Pedido</ion-button>
         </ion-row><br>
-        
         <!-- <a href="{{ route('instructor.show',$instructoritem->id ) }}">
           <ion-button class="btn btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>Ver</ion-button>
         </a> -->

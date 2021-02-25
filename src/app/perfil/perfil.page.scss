@@ -1,0 +1,23 @@
+ion-content{
+    --background:white;
+}
+ion-item{
+    --background:#b5e7a0;
+}
+.btnInfo{
+    --background: #157424;
+    margin: 0 auto;
+    position: relative;
+    outline: none;
+    width: 75%;
+}
+.btnInfo1{
+    --background:white; 
+    color:black;
+    margin: 0 auto;
+    position: relative;
+    outline: none;
+    width: 75%;
+    border-radius: 35px;
+    border: 1px solid black;
+}

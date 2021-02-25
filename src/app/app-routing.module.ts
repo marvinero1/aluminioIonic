@@ -39,10 +39,31 @@ const routes: Routes = [
   {
     path: 'contactanos',
     loadChildren: () => import('./contactanos/contactanos.module').then( m => m.ContactanosPageModule)
-  },  {
+  },{
+    path: 'favoritos',
+    loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+  },
+  {
+    path: 'novedades',
+    loadChildren: () => import('./novedades/novedades.module').then( m => m.NovedadesPageModule)
+  },
+  {
     path: 'select',
     loadChildren: () => import('./select/select.module').then( m => m.SelectPageModule)
+  },  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'pedidomodal',
+    loadChildren: () => import('./pedidomodal/pedidomodal.module').then( m => m.PedidomodalPageModule)
+  },
+  {
+    path: 'pedidos',
+    loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
+  },
+
+  
 
 ];
 

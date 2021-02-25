@@ -1,27 +1,6 @@
-h4{
-    color: black;
-}
-.icon{
-    font-size: 38px;
-    float: right;
-    padding: 16px;
-    color: sandybrown;
-    
-}
-.icon1{
-  font-size: 38px;
-  float: right;
-  padding: 16px;
- color: #cb3234; 
-}
-/* DOES NOT WORK - not specific enough */
-.modal-wrapper {
-  background: #222;
-}
-
-/* Works - pass "my-custom-class" in cssClass to increase specificity */
-.my-custom-class .modal-wrapper {
-  background: #222;
+.my-custom-class {
+  --background: #222;
+  height: 52%;
 }
 
 //BUTTON
@@ -69,6 +48,6 @@ input {
     border-top: 1px solid gray;
   }
   .h5s{
-    padding-left: 20px;
+    padding-left: 5px;
     margin-bottom: 6px;
   }
