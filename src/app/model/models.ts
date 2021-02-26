@@ -35,7 +35,7 @@ export interface IUsuario {
 }
 
 
-export interface IProducto {
+export interface IPedido {
     id: number;
     nombre?: string;
     estado?: string;
@@ -54,5 +54,7 @@ export interface IProducto {
     favoritos_id?:number;
     disponibilidad?:string;
     tipo_medida?:string;
+    user_id: number;
+    cantidad_pedido: number;
 
 }

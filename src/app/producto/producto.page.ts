@@ -44,7 +44,6 @@ export class ProductoPage implements OnInit {
       cssClass: 'my-custom-class',
       componentProps: {
         data:{element:element},
-        'firstName': element.nombre,
         'alto': element.alto,
         'ancho': element.ancho,
         'categorias_id': element.categorias_id,
@@ -62,7 +61,6 @@ export class ProductoPage implements OnInit {
         'puntuacion': element.puntuacion,
         'subcategorias_id': element.subcategorias_id,
         'tipo_medida': element.tipo_medida,
-        
       }
     });
     return await modal.present();

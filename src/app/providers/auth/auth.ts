@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenStorageProvider } from '../token-storage/token-storage';
 import { tap, map, switchMap, catchError } from 'rxjs/operators';
-import { ILogin } from "../../model/models";
+import { ILogin, IPedido } from "../../model/models";
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 // import 'rxjs/add/operator/map';
@@ -253,5 +253,9 @@ export class AuthProvider {
 
   getAllObjectById = (route:string, id:number) =>{
     return this.http.get(`${this.apiRoot}`+ route + id);
+  }
+
+  postPedido = (route:string,pedido:IPedido)=>{
+    return this.http.post<any>(`${this.apiRoot}`+ route, pedido);
   }
 }

@@ -34,9 +34,14 @@
 .modal-wrapper {
     background: transparent;
   }
+  .loading-wrapper{
+    background: gray !important;
+    --spinner-color:white;
+    color: white;
+  }
   
   /* Works - pass "my-custom-class" in cssClass to increase specificity */
   .my-custom-class .modal-wrapper {
-    background: transparent;
+    background: gray;
     height: 39%;
   }
