@@ -258,4 +258,8 @@ export class AuthProvider {
   postPedido = (route:string,pedido:IPedido)=>{
     return this.http.post<any>(`${this.apiRoot}`+ route, pedido);
   }
+
+  deleteObjectById = (route:string,id:number) =>{
+    return this.http.delete(`${this.apiRoot}`+ route +id);
+  }
 }

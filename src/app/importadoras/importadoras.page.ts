@@ -21,15 +21,11 @@ export class ImportadorasPage implements OnInit {
     this.api.getAllObject('importadoras')
     .subscribe((res) =>{ 
       this.importadoras$ = res;
-      this.importadoras$ = Object.values(this.importadoras$)
-              
+      this.importadoras$ = Object.values(this.importadoras$)      
     });
   }
 
   buscar(event){
     this.textoBuscar = event.detail.value;
-    
   }
-  
-  
 }

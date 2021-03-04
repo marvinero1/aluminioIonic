@@ -29,13 +29,14 @@
           <ion-label text-wrap>
             <p><strong>{{element.nombre}} </strong></p>
             <p>{{element.importadora}}</p>
-            <div class="ec-stars-wrapper">
+            <!-- <p>{{element.disponibilidad}}</p> -->
+            <!-- <div class="ec-stars-wrapper">
               <a data-value="1" title="Votar con 1 estrellas">&#9733;</a>
               <a data-value="2" title="Votar con 2 estrellas">&#9733;</a>
               <a data-value="3" title="Votar con 3 estrellas">&#9733;</a>
               <a data-value="4" title="Votar con 4 estrellas">&#9733;</a>
               <a data-value="5" title="Votar con 5 estrellas">&#9733;</a>
-            </div>
+            </div> -->
           </ion-label>
           <ion-button (click)="show(element)">
             <ion-icon name="arrow-forward"></ion-icon> 
@@ -44,7 +45,7 @@
         </ion-item>
 
         <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="unread(element)">
+          <ion-item-option color="danger" (click)="presentAlertConfirm(element)">
             <ion-icon class="icongarbage" slot="icon-only" name="trash"></ion-icon>Eliminar
           </ion-item-option>
         </ion-item-options>

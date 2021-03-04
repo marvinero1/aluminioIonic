@@ -17,9 +17,7 @@ export class ProductosPage implements OnInit {
   textoBuscar:string='';
 
   
-  constructor(public api:AuthProvider,private http:HttpClient, 
-    private restangular:Restangular,private router: Router, ) { 
-    
+  constructor(public api:AuthProvider,private router: Router){ 
   }
 
   ngOnInit() {
@@ -30,8 +28,7 @@ export class ProductosPage implements OnInit {
       this.api.getAllObject('productos')
       .subscribe((res) =>{ 
         this.productos$ = res;
-        console.log(this.productos$);
-                
+        //console.log(this.productos$);        
       });
   }
 
@@ -41,6 +38,7 @@ export class ProductosPage implements OnInit {
 
   buscar(event){
     this.textoBuscar = event.detail.value;
+    
   }
   perfil(){
     this.router.navigate(['/perfil']);
