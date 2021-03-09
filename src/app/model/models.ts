@@ -33,6 +33,18 @@ export interface IUsuario {
     usuario: string;
     password: string;
 }
+export interface IFavoritos {
+    id: number;
+    nombre?: string;
+    precio?: number;
+    color?: string;
+    codigo?: string;
+    imagen?: string;
+    importadora?: string;
+    estado?: string;
+    user_id: number;
+    productos_id: number;
+}
 
 
 export interface IPedido {

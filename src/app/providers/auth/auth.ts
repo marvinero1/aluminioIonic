@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenStorageProvider } from '../token-storage/token-storage';
 import { tap, map, switchMap, catchError } from 'rxjs/operators';
-import { ILogin, IPedido } from "../../model/models";
+import { ILogin, IPedido, IFavoritos } from "../../model/models";
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 // import 'rxjs/add/operator/map';
@@ -31,7 +31,7 @@ export interface AccessData {
 @Injectable()
 export class AuthProvider {
   // apiRoot: string = "http://127.0.0.1:8000/api";
-  apiRoot: string = "http://192.168.0.9:5000/api/";
+  apiRoot: string = "http://192.168.1.6:5000/api/";
   // apiRoot: string = "http://192.168.1.34:8000/api";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
  //apiRoot: string = "https://new.toursecret.club/api";
@@ -257,6 +257,10 @@ export class AuthProvider {
 
   postPedido = (route:string,pedido:IPedido)=>{
     return this.http.post<any>(`${this.apiRoot}`+ route, pedido);
+  }
+
+  postFavorito = (route:string,favoritos:IFavoritos)=>{
+    return this.http.post<any>(`${this.apiRoot}`+ route, favoritos);
   }
 
   deleteObjectById = (route:string,id:number) =>{

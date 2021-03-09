@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthProvider } from '../providers/auth/auth';
 import { AlertController } from '@ionic/angular';
@@ -12,11 +12,32 @@ export class FavoritosPage implements OnInit {
 
   favoritos$:any=[];
 
+  @Input() id: string;
+  @Input() nombre: string;
+  @Input() importadora: string;
+  @Input() estado: string;
+  @Input() disponibilidad: string;
+
+  @Input() codigo: string;
+  @Input() color: string;
+  @Input() descripcion: string;
+  @Input() imagen: string;
+  @Input() novedad: string;
+  @Input() precio: string;
+  @Input() alto: string;
+  @Input() ancho: string;
+  @Input() puntuacion: string;
+  @Input() categorias_id: string;
+  @Input() subcategorias_id: string;
+  @Input() tipo_medida: string;
+
   constructor(public api:AuthProvider,private router: Router,
     public alertController: AlertController) { }
 
   ngOnInit() {
     this.getFavoritos();
+    console.log(this.id);
+    
   }
 
   getFavoritos(){  
