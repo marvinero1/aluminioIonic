@@ -13,28 +13,9 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./producto.page.scss'],
 })
 export class ProductoPage implements OnInit {
-
-  @Input() id: string;
-  @Input() nombre: string;
-  @Input() importadora: string;
-  @Input() estado: string;
-  @Input() disponibilidad: string;
-
-  @Input() codigo: string;
-  @Input() color: string;
-  @Input() descripcion: string;
-  @Input() imagen: string;
-  @Input() novedad: boolean;
-  @Input() precio: string;
-  @Input() alto: string;
-  @Input() ancho: string;
-  @Input() puntuacion: string;
-  @Input() categorias_id: string;
-  @Input() subcategorias_id: string;
-  @Input() tipo_medida: string;
-  
+ 
   public productoId:any = [];
-  //public novedad:boolean;
+  public novedad:boolean;
 
   constructor(private http:HttpClient,public api:AuthProvider,
     private route: ActivatedRoute, private router: Router,
@@ -45,7 +26,7 @@ export class ProductoPage implements OnInit {
     //let id = parseInt(this.route.snapshot.paramMap.get('id'));
     //this.productoId = id;
     this.getProductById();
-    console.log(this.productoId.id);
+    console.log(productoId.id);
     
   }
 
