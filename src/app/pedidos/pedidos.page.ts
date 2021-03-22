@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pedidos',
@@ -9,7 +11,8 @@ import { AuthProvider } from '../providers/auth/auth';
 export class PedidosPage implements OnInit {
 
   pedidos$:any = [];
-  constructor(public api:AuthProvider) { }
+  constructor(public api:AuthProvider,public alertController: AlertController,
+    private router: Router,) { }
 
   ngOnInit() {
     this.getPedido();
@@ -23,4 +26,32 @@ export class PedidosPage implements OnInit {
     });
     }
 
+
+    async presentAlertConfirm(element) {
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: '¿Desea Eliminar este Elemento?',
+        message: '',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              return false
+              //console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'Si',
+            handler: () => {
+              this.api.deleteObjectById('pedidoDelete/',element.id).subscribe(res=>{
+                console.log(res);
+              });
+
+            }
+          }
+        ]
+      });
+      await alert.present();
+    }
 }

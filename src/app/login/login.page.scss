@@ -9,9 +9,12 @@ ion-input{
     background-color: transparent;
 }
 .img{
-    margin-top: 65px;
-    display: block;
     margin-block-end: 30px;
+    margin-top: 65px !important;
+    display: block;
+    margin: auto;
+    width: 85%;
+    
 }
 .text{
     background:#F4B004 !important;

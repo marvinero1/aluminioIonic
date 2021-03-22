@@ -14,6 +14,11 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
+      title:'Calculadora',
+      url:'/calculadora',
+      icon:'calculator'
+    },
+    {
       title: 'Favoritos',
       url: '/favoritos',
       icon: 'heart'

@@ -94,7 +94,7 @@ export class PedidomodalPage implements OnInit {
     const loading = await this.loadingController.create({
       cssClass: 'loading',
       message: 'Agregando a Carrito',
-      duration: 6000
+      duration: 4000
     });
     await loading.present();
 

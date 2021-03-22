@@ -26,7 +26,7 @@ export class ProductoPage implements OnInit {
     //let id = parseInt(this.route.snapshot.paramMap.get('id'));
     //this.productoId = id;
     this.getProductById();
-    console.log(productoId.id);
+    //console.log(productoId);
     
   }
 

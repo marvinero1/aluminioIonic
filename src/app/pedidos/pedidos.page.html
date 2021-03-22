@@ -20,16 +20,23 @@
           <strong>Productos Agregados a carrito</strong>
         </p>
       </ion-item>
+
+      <ion-button color="dark" class="btn" >Mandar Pedido</ion-button>
+
       
       <ion-item-sliding *ngFor="let element of pedidos$">
+        <p>{{ element.importadora}}</p>
+        <hr style="border: 1px solid black;">
         <ion-item lines="none">
           <ion-thumbnail slot="start">
-            <img src="http://192.168.1.6:5000/{{ element.imagen}}">
+            <img src="http://192.168.1.7:5000/{{ element.imagen}}">
           </ion-thumbnail>
           <ion-label text-wrap>
             <p><strong>Nombre:</strong> {{element.nombre}}</p>
             <p><strong>Precio:</strong> {{element.precio}}</p>
             <p><strong>Cantidad Pedida</strong> {{element.cantidad_pedido}}</p>
+            <p><strong>Importadora </strong> {{element.importadora}}</p>
+
             <!-- <div class="ec-stars-wrapper">
               <a data-value="1" title="Votar con 1 estrellas">&#9733;</a>
               <a data-value="2" title="Votar con 2 estrellas">&#9733;</a>
@@ -43,7 +50,6 @@
           </ion-button>
           
         </ion-item>
-2
         <!-- <ion-item-options side="end">
           <ion-item-option color="danger" (click)="presentAlertConfirm(element)">
             <ion-icon class="icongarbage" slot="icon-only" name="trash"></ion-icon>Eliminar
