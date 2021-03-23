@@ -19,6 +19,11 @@ export class AppComponent implements OnInit {
       icon:'calculator'
     },
     {
+      title:'Carrito',
+      url:'/carrito',
+      icon:'cart'
+    },
+    {
       title: 'Favoritos',
       url: '/favoritos',
       icon: 'heart'
@@ -44,9 +49,9 @@ export class AppComponent implements OnInit {
       icon: 'accessibility'
     },
     {
-      title: 'Mis Pedidos',
+      title: 'Historial Pedidos',
       url: '/pedidos',
-      icon: 'checkmark'
+      icon: 'time'
     }
   ];
   public labels = ['Salir'];

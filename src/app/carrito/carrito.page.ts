@@ -4,11 +4,11 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-pedidos',
-  templateUrl: './pedidos.page.html',
-  styleUrls: ['./pedidos.page.scss'],
+  selector: 'app-carrito',
+  templateUrl: './carrito.page.html',
+  styleUrls: ['./carrito.page.scss'],
 })
-export class PedidosPage implements OnInit {
+export class CarritoPage implements OnInit {
 
   pedidos$:any = [];
   constructor(public api:AuthProvider,public alertController: AlertController,
@@ -27,10 +27,32 @@ export class PedidosPage implements OnInit {
     }
 
 
-    
+    async sendOrder(element){
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: '¿Desea Cotizar este Elemento?',
+        message: '',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              return false
+              //console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'Si',
+            handler: () => {
+              this.api.postPedido('guardarPedidoRealizado/', element).subscribe(res=>{
+                console.log(res);
+              });
 
-    sendOrder(){
-      console.log("hola");
+            }
+          }
+        ]
+      });
+      await alert.present();
       
     }
     
@@ -63,4 +85,5 @@ export class PedidosPage implements OnInit {
       });
       await alert.present();
     }
+
 }

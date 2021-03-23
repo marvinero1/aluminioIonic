@@ -66,6 +66,14 @@ const routes: Routes = [
     path: 'calculadora',
     loadChildren: () => import('./calculadora/calculadora.module').then( m => m.CalculadoraPageModule)
   },
+  {
+    path: 'cotizacionmodal',
+    loadChildren: () => import('./cotizacionmodal/cotizacionmodal.module').then( m => m.CotizacionmodalPageModule)
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./carrito/carrito.module').then( m => m.CarritoPageModule)
+  },
 
   
 
