@@ -70,3 +70,10 @@ export interface IPedido {
     cantidad_pedido: number;
 
 }
+export interface ICalculadora {
+    id: number;
+    nombre: string;
+    numero1: number;
+    numero2: number;
+    resultado: number;
+}

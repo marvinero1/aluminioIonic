@@ -14,14 +14,54 @@
 
 
 <ion-content [fullscreen]="true" padding>
-  <ion-item>
-    <ion-label class="value" style="    text-align: center;">
-      {{value}}
-    </ion-label>
-  </ion-item>
-  <div style="text-align: center;">
-    <div *ngFor="let numGroup of numberGroups" style="padding: 15px;">
-      <ion-button *ngFor="let num of numGroup" (click)="onButtonPress(num)">{{num}}</ion-button>
+  <form [formGroup]="dataForm" (ngSubmit)="submitData()">
+    <ion-item>
+      <ion-input class="value" style="font-size: 2.5rem;"
+        [(ngModel)]="value" formControlName="resultado">
+      </ion-input>
+    </ion-item>
+    <div style="text-align: center;">
+      <div *ngFor="let numGroup of numberGroups" style="padding: 7px;">
+        <ion-button color="dark" *ngFor="let num of numGroup" (click)="onButtonPress(num)"
+          style="width: 70px;height: 70px;font-size: 1.5rem;" >{{num}}</ion-button>
+      </div>
     </div>
-  </div>
+    <div class="row" style="padding: 15px;">
+
+      <label><strong>Nombre Operación</strong></label>
+      <ion-input type="text" formControlName="nombre" placeholder="Nombre"></ion-input>
+
+      <ion-button color="dark" expand="block" type="submit">Guardar</ion-button>
+      
+      <div>
+        <ion-row style="border-bottom: groove;">
+          <ion-col col-4>
+          <ion-label><strong>Nombre</strong></ion-label>
+        </ion-col>
+        <ion-col col-4>
+          <ion-label><strong>Resultado</strong> </ion-label>
+        </ion-col>
+          <ion-col col-4>
+          <ion-label><strong>Fecha</strong></ion-label>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="border-bottom: groove;" *ngFor="let element of calculo$ ">
+          <ion-col col-4>
+          <ion-label >{{element.nombre}}</ion-label>
+        </ion-col>
+        <ion-col col-4>
+          <ion-label>{{element.resultado}}</ion-label>
+        </ion-col>
+          <ion-col col-4>
+          <ion-label>{{element.created_at | date:'fullDate' }}</ion-label>
+        </ion-col>
+      </ion-row>
+ 
+      </div>
+    </div>
+  </form>
+
+  <!-- <ion-button expand="block" color="dark" (click)="presentActionSheet()">
+    <strong>Opciones</strong> </ion-button> -->
 </ion-content>

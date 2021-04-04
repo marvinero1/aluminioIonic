@@ -52,6 +52,7 @@ export class ProductoPage implements OnInit {
         'ancho': element.ancho,
         'categorias_id': element.categorias_id,
         'codigo': element.codigo,
+        'confirmacion': element.confirmacion,
         'color': element.color,
         'descripcion': element.descripcion,
         'disponibilidad': element.disponibilidad,

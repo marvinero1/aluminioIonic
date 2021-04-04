@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenStorageProvider } from '../token-storage/token-storage';
 import { tap, map, switchMap, catchError } from 'rxjs/operators';
-import { ILogin, IPedido, IFavoritos } from "../../model/models";
+import { ILogin, IPedido, IFavoritos, ICalculadora } from "../../model/models";
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 // import 'rxjs/add/operator/map';
@@ -31,7 +31,7 @@ export interface AccessData {
 @Injectable()
 export class AuthProvider {
   // apiRoot: string = "http://127.0.0.1:8000/api";
-  apiRoot: string = "http://192.168.0.15:5000/api/";
+  apiRoot: string = "http://altools.es/api/";
   // apiRoot: string = "http://192.168.1.34:8000/api";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
  //apiRoot: string = "https://new.toursecret.club/api";
@@ -253,6 +253,10 @@ export class AuthProvider {
 
   getAllObjectById = (route:string, id:number) =>{
     return this.http.get(`${this.apiRoot}`+ route + id);
+  }
+
+  postCalculadora = (route:string,calculadora:ICalculadora)=>{
+    return this.http.post<any>(`${this.apiRoot}`+ route, calculadora);
   }
 
   postPedido = (route:string,pedido:IPedido)=>{

@@ -16,7 +16,7 @@ export class PedidomodalPage implements OnInit {
   @Input() importadora: string;
   @Input() estado: string;
   @Input() disponibilidad: string;
-
+  @Input() confirmacion: string;
   @Input() codigo: string;
   @Input() color: string;
   @Input() descripcion: string;
@@ -51,7 +51,7 @@ export class PedidomodalPage implements OnInit {
       importadora: [this.importadora,Validators.compose([Validators.required])],
       estado: [this.estado,Validators.compose([Validators.required])],
       disponibilidad: [this.disponibilidad,Validators.compose([Validators.required])],
-
+      confirmacion: [this.confirmacion,Validators.compose([Validators.required])],
       codigo: [this.codigo],
       color: [this.color],
       descripcion: [this.descripcion],
