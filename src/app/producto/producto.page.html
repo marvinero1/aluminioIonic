@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button (click)="perfil()">
+      <ion-button (click)=perfil()>
         <ion-icon name="person-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -27,7 +27,7 @@
           </ion-card-header>
         </ion-col>
         <ion-col offset-4="" class="ios hydrated">
-          <div *ngIf="novedad == 'true'">
+          <div *ngIf="novedad == true">
             <ion-icon name="star-sharp" class="icon"></ion-icon>
           </div>
           <div>

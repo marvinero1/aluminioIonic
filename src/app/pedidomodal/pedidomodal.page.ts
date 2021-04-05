@@ -73,13 +73,11 @@ export class PedidomodalPage implements OnInit {
 
   submitData(){
     let data = this.dataForm.value;
-    console.log(data);
+    //console.log(data);
 
     if(this.data){
       this.auth.postPedido('guardarPedido/', data).subscribe((datav)=>{ 
           this.dismiss();
-          
-          console.log(datav);
           this.presentLoading();
           //this.presentAlert();
       });

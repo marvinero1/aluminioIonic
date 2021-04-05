@@ -15,7 +15,7 @@
     </div><br><br>
     <ion-row align-items-center style="text-align: center">
       <ion-col size="10" style="margin: 0 auto;" align-self: center>
-        <form [formGroup]="dataForm" (ngSubmit)="submitData()">
+        <form [formGroup]="dataForm">
           <ion-item>
             <ion-input formControlName="email" type="email" 
             placeholder="Nombre de usuario o correo" required minlength="2"
@@ -44,11 +44,11 @@
         <a href="/select">Ingresar</a>
       </ion-col>
       <ion-col size="12" size-sm="6" style="text-align: center" align-self: center>
-        <div>
+        <!-- <div>
           <p (click)="registrate()" style="color: #fff;font-size: smaller;text-decoration: underline;"
           href="https://ionicframework.com/docs/components">Crear cuenta
             nueva<span></span></p>
-        </div>
+        </div> -->
       </ion-col>
     </ion-row>
   </div>

@@ -27,5 +27,7 @@ export class PedidosPage implements OnInit {
     }
 
     
-    
+    perfil(){
+      this.router.navigate(['/perfil']);
+    }
 }

@@ -11,15 +11,17 @@
 
 <ion-content >
   <ion-card style="padding: 14px;">
-    <form [formGroup]="dataForm" (ngSubmit)="submitData()">
+    <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <ion-row>
           <h5 class="h5s">Cantidad a pedir</h5> 
       </ion-row>
       <ion-row >
         <div class="wrapper">
           <ion-button color="dark" class="plusminus" (click)="handleMinus()">-</ion-button>
+          <!-- <input type="number" class="num" formControlName="cantidad_pedido" 
+          [(ngModel)]="value" [ngModelOptions]='{standalone: true}'/> -->
           <input type="number" class="num" formControlName="cantidad_pedido" 
-          [(ngModel)]="value" [ngModelOptions]="{standalone: true}"/>
+          [(ngModel)]="value" />
           <ion-button color="dark" class="plusminus" (click)="handlePlus()">+</ion-button>
         </div>
       </ion-row><br>

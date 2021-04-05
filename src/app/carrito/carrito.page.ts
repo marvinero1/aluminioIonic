@@ -115,6 +115,7 @@ export class CarritoPage implements OnInit {
     });
   }
 
-
-
+  perfil(){
+    this.router.navigate(['/perfil']);
+  }
 }

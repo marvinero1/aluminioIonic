@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
@@ -11,7 +12,7 @@ export class ImportadorasPage implements OnInit {
   importadorImagen:any;
   importadoras$:any=[];
   textoBuscar:string='';
-  constructor(public api:AuthProvider) { }
+  constructor(public api:AuthProvider,private router: Router,) { }
 
   ngOnInit() {
     this.getImportadoras();
@@ -27,5 +28,8 @@ export class ImportadorasPage implements OnInit {
 
   buscar(event){
     this.textoBuscar = event.detail.value;
+  }
+  perfil(){
+    this.router.navigate(['/perfil']);
   }
 }

@@ -23,6 +23,7 @@ import { File } from '@ionic-native/file/ngx';
 import { AuthProvider } from './providers/auth/auth';
 import { RestangularConfigFactory } from './providers/restangular/restangular';
 import { TokenStorageProvider } from './providers/token-storage/token-storage';
+import { PipesModule } from './pipes/pipes.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { TokenStorageProvider } from './providers/token-storage/token-storage';
     AppRoutingModule,
     RestangularModule.forRoot([AuthProvider], RestangularConfigFactory),
     HttpClientModule,
+    PipesModule,
     NgFallimgModule.forRoot({
       default: 'assets/img/default-person.jpg',
       picture1:  'assets/img/default-product.jpg',
