@@ -1,19 +1,22 @@
-import { Component, Input, OnInit, VERSION } from '@angular/core';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
 
-
 @Component({
-  selector: 'app-pedidomodal',
-  templateUrl: './pedidomodal.page.html',
-  styleUrls: ['./pedidomodal.page.scss'],
+  selector: 'app-modalfavoritos',
+  templateUrl: './modalfavoritos.page.html',
+  styleUrls: ['./modalfavoritos.page.scss'],
 })
-export class PedidomodalPage implements OnInit {
-  
+export class ModalfavoritosPage implements OnInit {
+
+  dataForm: FormGroup;
+  user_id = 2;
+
   @Input() id: string;
   @Input() nombre: string;
   @Input() importadora: string;
+  @Input() estado: string;
   @Input() disponibilidad: string;
   @Input() confirmacion: string;
   @Input() codigo: string;
@@ -28,16 +31,9 @@ export class PedidomodalPage implements OnInit {
   @Input() categorias_id: string;
   @Input() subcategorias_id: string;
   @Input() tipo_medida: string;
-  
 
-  dataForm: FormGroup;
-  data:any='';
-  
-  constructor(public modalController: ModalController,private _formBuilder: FormBuilder,
-    public auth:AuthProvider,public loadingController: LoadingController,
-    public alertController: AlertController
-    ) { }
- 
+  constructor(public modalController: ModalController, public auth:AuthProvider,
+     private _formBuilder: FormBuilder,public loadingController: LoadingController) { }
 
   ngOnInit() {
     this.dataForm = this.createForm();
@@ -48,7 +44,8 @@ export class PedidomodalPage implements OnInit {
       id : [this.id],
       nombre: [this.nombre,Validators.compose([Validators.required])],
       importadora: [this.importadora,Validators.compose([Validators.required])],
-      disponibilidad: [this.disponibilidad],
+      estado: [this.estado,Validators.compose([Validators.required])],
+      disponibilidad: [this.disponibilidad,Validators.compose([Validators.required])],
       confirmacion: [this.confirmacion,Validators.compose([Validators.required])],
       codigo: [this.codigo],
       color: [this.color],
@@ -62,53 +59,25 @@ export class PedidomodalPage implements OnInit {
       categorias_id: [this.categorias_id],
       subcategorias_id: [this.subcategorias_id],
       tipo_medida: [this.tipo_medida],
-      user_id : [this.data.user_id],
-      cantidad_pedido : [this.data.cantidad_pedido],
-
+      productos_id : [this.id],
+      user_id:[this.user_id],
     });
   }
 
-
-  submitData(){
+  guardarFavorito(){
     let data = this.dataForm.value;
-    //console.log(data);
+    console.log(data);
 
-    if(this.data){
-      this.auth.postPedido('guardarPedido/', data).subscribe((datav)=>{ 
+    if(data){
+      this.auth.postFavorito('guardarFavorito/', data).subscribe((datav)=>{ 
           this.dismiss();
           this.presentLoading();
-          //this.presentAlert();
       });
     }else{
       (error)=>{
         console.log(error);
-      };
-    }  
-  }
-
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'loading',
-      message: 'Agregando a Carrito',
-      duration: 4000
-    });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-    //console.log('Loading dismissed!');
-  }
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Carrito',
-      //subHeader: 'Subtitle',
-      message: 'Se añadio a Carrito',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
+    }
+  }}
 
   dismiss() {
     // using the injected ModalController this page
@@ -118,15 +87,15 @@ export class PedidomodalPage implements OnInit {
     });
   }
 
-  name = 'Angular ' + VERSION.major;
-  value = 0;
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'loading',
+      message: 'Agregando a Favoritos!!',
+      duration: 2000
+    });
+    await loading.present();
 
-  handleMinus() {
-    this.value--;  
+    const { role, data } = await loading.onDidDismiss();
+    //console.log('Loading dismissed!');
   }
-  handlePlus() {
-    this.value++;    
-  }
-
-  
 }

@@ -27,8 +27,8 @@ export function RestangularConfigFactory (RestangularProvider,AutentificacionSer
   RestangularProvider
   // .setBaseUrl('/api')
   // .setBaseUrl('http://127.0.0.1:8000/api')
-   .setBaseUrl('http://altools.es/api')
-  // .setBaseUrl('http://192.168.0.14:8000/api')
+  //.setBaseUrl('http://altools.es/api/')
+  .setBaseUrl('http://192.168.0.14:8000/api/')
   // .setBaseUrl('https://toursecret.club/api')
   //.setBaseUrl('https://new.toursecret.club/api')
   // .setDefaultHeaders(headerss)// set static header

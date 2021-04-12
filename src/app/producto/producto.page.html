@@ -14,8 +14,10 @@
 
 <ion-content [fullscreen]="true" class="body">
   <ion-card>
+    
     <ion-col col-4>
-      <ion-img src="http://altools.es/{{ productoId.imagen }}" class="imagen"></ion-img>
+      <!-- <ion-img src="http://altools.es/{{ productoId.imagen }}" class="imagen"></ion-img> -->
+      <ion-img src="http://192.168.1.7:5000/{{ productoId.imagen }}" class="imagen"></ion-img>
     </ion-col>
 
     <ion-col col-8>
@@ -31,7 +33,7 @@
             <ion-icon name="star-sharp" class="icon"></ion-icon>
           </div>
           <div>
-            <ion-icon name="heart-sharp" class="icon1" (click)="favorito(productoId)"></ion-icon>
+            <ion-icon name="heart-sharp" class="icon1" (click)="presentModalFavorito(productoId)"></ion-icon>
           </div>
         </ion-col>
       </ion-row>
@@ -84,7 +86,7 @@
           </ion-col>
         </ion-row><br>
         <hr><br>
-
+   
         <!-- <ion-row>
           <h5 class="h5s">Cantidad a pedir</h5> 
         </ion-row> -->
@@ -119,5 +121,6 @@
         </a> -->
       </ion-card-content>
     </ion-col>
+  
   </ion-card>
 </ion-content>

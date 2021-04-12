@@ -32,4 +32,14 @@ export class ImportadorasPage implements OnInit {
   perfil(){
     this.router.navigate(['/perfil']);
   }
+
+  verProductos(element){
+    console.log(element);
+    
+    // this.api.getAllObject('importadoras')
+    // .subscribe((res) =>{ 
+    //   this.importadoras$ = res;
+    //   this.importadoras$ = Object.values(this.importadoras$)      
+    // });
+  }
 }

@@ -31,8 +31,8 @@ export interface AccessData {
 @Injectable()
 export class AuthProvider {
   // apiRoot: string = "http://127.0.0.1:8000/api";
-  apiRoot: string = "http://altools.es/api/";
-  // apiRoot: string = "http://192.168.1.34:8000/api";
+  //apiRoot: string = "http://altools.es/api/";
+  apiRoot: string = "http://192.168.1.7:5000/api/";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
  //apiRoot: string = "https://new.toursecret.club/api";
   valauten:boolean = false;

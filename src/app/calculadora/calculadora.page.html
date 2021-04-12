@@ -14,53 +14,54 @@
 
 
 <ion-content [fullscreen]="true" padding>
-  <form [formGroup]="dataForm" (ngSubmit)=submitData()>
-    <ion-item>
-      <ion-input class="value" style="font-size: 2.5rem;"
-        [(ngModel)]="value" formControlName="resultado">
-      </ion-input>
-    </ion-item>
-    <div style="text-align: center;">
-      <div *ngFor="let numGroup of numberGroups" style="padding: 7px;">
-        <ion-button color="dark" *ngFor="let num of numGroup" (click)="onButtonPress(num)"
-          style="width: 70px;height: 70px;font-size: 1.5rem;" >{{num}}</ion-button>
-      </div>
-    </div>
-    <div class="row" style="padding: 15px;">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating" type="number">Numero A</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col> 
 
-      <label><strong>Nombre Operación</strong></label>
-      <ion-input type="text" formControlName="nombre" placeholder="Nombre"></ion-input>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating" type="number">Numero B</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-button color="dark" (click)="calcular()" expand="block">
+          <ion-icon name="calculator-outline"></ion-icon>Calcular</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-      <ion-button color="dark" expand="block" type="submit">Guardar</ion-button>
-      
-      <div>
-        <ion-row style="border-bottom: groove;">
-          <ion-col col-4>
-          <ion-label><strong>Nombre</strong></ion-label>
-        </ion-col>
-        <ion-col col-4>
-          <ion-label><strong>Resultado</strong> </ion-label>
-        </ion-col>
-          <ion-col col-4>
-          <ion-label><strong>Fecha</strong></ion-label>
-        </ion-col>
-      </ion-row>
 
-      <ion-row style="border-bottom: groove;" *ngFor="let element of calculo$ ">
-          <ion-col col-4>
-          <ion-label >{{element.nombre}}</ion-label>
-        </ion-col>
-        <ion-col col-4>
-          <ion-label>{{element.resultado}}</ion-label>
-        </ion-col>
-          <ion-col col-4>
-          <ion-label>{{element.created_at | date:'fullDate' }}</ion-label>
-        </ion-col>
-      </ion-row>
- 
-      </div>
-    </div>
-  </form>
+
+
+  
+  
+<div style="padding: 10px;">
+  <ion-row style="border-bottom: groove;">
+    <ion-col col-4>
+    <ion-label><strong>Numero 1</strong></ion-label>
+  </ion-col>
+  <ion-col col-4>
+    <ion-label><strong>Numero 2</strong> </ion-label>
+  </ion-col>
+    <ion-col col-4>
+    <ion-label><strong>Total</strong></ion-label>
+  </ion-col>
+</ion-row>
+</div>
+    
+
+
+
+
+
+
+
 
   <!-- <ion-button expand="block" color="dark" (click)="presentActionSheet()">
     <strong>Opciones</strong> </ion-button> -->

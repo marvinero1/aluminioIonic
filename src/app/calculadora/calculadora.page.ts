@@ -26,59 +26,11 @@ export class CalculadoraPage implements OnInit {
     private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.getCalculs();
-    this.dataForm = this.createForm();
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    //this.getCalculs();
+    //this.dataForm = this.createForm();
   }
 
-  value = '0';
-  oldValue = '0';
-  numero1 = '0';
-  numero2 = '0';
 
-  lastOperator = 'x';
-  readyForNewInput = true;
-  numberGroups = [
-    [7, 8, 9, 'x'],
-    [4, 5, 6, '-'],
-    [1, 2, 3, '+'],
-    [0, 'c', '/', '=']
-  ];
-
-  onButtonPress(symbol) {
-    console.log(symbol);
-
-    if (isNumber(symbol)) {
-      //console.log('is a number');
-      if (this.readyForNewInput)
-        this.value = '' + symbol;
-      else
-        this.value += '' + symbol;
-      this.readyForNewInput = false;
-    }
-    else if (symbol === 'c') {
-      this.value = '0';
-      this.readyForNewInput = true;
-    }
-    else if (symbol === '=') {
-      if (this.lastOperator === 'x')
-        this.value = '' + (parseInt(this.oldValue) * parseInt(this.value));
-      else if (this.lastOperator === '-')
-        this.value = '' + (parseInt(this.oldValue) - parseInt(this.value));
-      else if (this.lastOperator === '+')
-        this.value = '' + (parseInt(this.oldValue) + parseInt(this.value));
-      else if (this.lastOperator === '/')
-        this.value = '' + (parseInt(this.oldValue) / parseInt(this.value));
-      this.readyForNewInput = true;
-      console.log(this.value);
-      
-    }
-    else { // operator
-      this.readyForNewInput = true;
-      this.oldValue = this.value;
-      this.lastOperator = symbol;
-    }
-  }
 
   getCalculs(){
     this.auth.getAllObject('calculos')
@@ -86,30 +38,35 @@ export class CalculadoraPage implements OnInit {
       this.calculo$ = res;
       console.log(this.calculo$);        
     });
-}
-
-  createForm(): FormGroup {
-    return this._formBuilder.group({
-      //id : [this.id],
-      nombre: [this.data.nombre,Validators.compose([Validators.required])],
-      numero1 : [this.numero1],
-      numero2: [this.numero2],
-      resultado : [this.value],
-
-    });
   }
 
-  submitData(){
-    let data = this.dataForm.value;
-    console.log(data);
-
-    this.auth.postCalculadora('guardarCalculadora/', data).subscribe((datav)=>{ 
-        console.log(datav);
-        this.presentLoading();
-        //this.presentAlert();
-    });
+  calcular(){
+    console.log("hola calculo");
     
   }
+
+  // createForm(): FormGroup {
+    // return this._formBuilder.group({
+    //   //id : [this.id],
+    //   nombre: [this.data.nombre,Validators.compose([Validators.required])],
+    //   numero1 : [this.numero1],
+    //   numero2: [this.numero2],
+    //   resultado : [this.value],
+
+    // });
+  // }
+
+  // submitData(){
+  //   let data = this.dataForm.value;
+  //   console.log(data);
+
+  //   this.auth.postCalculadora('guardarCalculadora/', data).subscribe((datav)=>{ 
+  //       console.log(datav);
+  //       this.presentLoading();
+  //       //this.presentAlert();
+  //   });
+    
+  // }
 
   async presentLoading() {
     const loading = await this.loadingController.create({

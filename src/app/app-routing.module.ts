@@ -74,6 +74,10 @@ const routes: Routes = [
     path: 'carrito',
     loadChildren: () => import('./carrito/carrito.module').then( m => m.CarritoPageModule)
   },
+  {
+    path: 'modalfavoritos',
+    loadChildren: () => import('./modalfavoritos/modalfavoritos.module').then( m => m.ModalfavoritosPageModule)
+  },
 
   
 

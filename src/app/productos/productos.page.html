@@ -17,20 +17,22 @@
   <ion-card *ngFor="let element of productos$ | filtro:textoBuscar:'nombre'">
 
     <ion-col col-4>
-      <ion-img src="http://altools.es/{{ element.imagen }}" class="imagen" fallimg></ion-img>
+      <ion-img src="http://192.168.1.7:5000/{{ element.imagen }}" class="imagen" fallimg></ion-img>
     </ion-col>
 
-    <ion-col col-8>
-      <ion-card-header>
+  
+     <div style="padding-left: 24px;">
         <ion-card-title>{{ element.nombre}}</ion-card-title><br>
         <ion-card-subtitle>{{ element.descripcion}}</ion-card-subtitle>
-      </ion-card-header>
+     </div>
+        
+     
 
       <ion-card-content>
         <ion-row>
           <ion-col col-6>
-            <h3><strong>Estado</strong></h3>
-            <p>{{ element.estado}}</p>
+            <h3><strong>Color</strong></h3>
+            <p>{{ element.color}}</p>
           </ion-col>
           <ion-col col-6>
             <h3><strong>Precio</strong></h3>
@@ -57,6 +59,6 @@
             <button class="btn btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>Ver</button>
           </a> -->
       </ion-card-content>
-    </ion-col>
+    
   </ion-card>
 </ion-content>

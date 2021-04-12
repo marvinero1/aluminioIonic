@@ -18,8 +18,6 @@ export class FavoritosPage implements OnInit {
 
   ngOnInit() {
     this.getFavoritos();
-    
-    
   }
 
   getFavoritos(){  
@@ -36,7 +34,7 @@ export class FavoritosPage implements OnInit {
 
   show(item){
     //console.log(item);
-    this.router.navigate(['/producto/'+ item.id]);
+    this.router.navigate(['/producto/'+ item.productos_id]);
   }
 
   return(){
