@@ -25,8 +25,7 @@ export class ProductosPage implements OnInit {
   }
 
   getProducts(){
-      this.api.getAllObject('productos')
-      .subscribe((res) =>{ 
+      this.api.getAllObject('productos').subscribe((res) =>{ 
         this.productos$ = res;       
       });
   }

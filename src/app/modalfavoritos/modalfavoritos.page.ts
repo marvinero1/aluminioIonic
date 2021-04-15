@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
+import { Restangular } from "ngx-restangular";
+
 
 @Component({
   selector: 'app-modalfavoritos',
@@ -33,7 +35,8 @@ export class ModalfavoritosPage implements OnInit {
   @Input() tipo_medida: string;
 
   constructor(public modalController: ModalController, public auth:AuthProvider,
-     private _formBuilder: FormBuilder,public loadingController: LoadingController) { }
+     private _formBuilder: FormBuilder,private restangular:Restangular,
+     public loadingController: LoadingController) { }
 
   ngOnInit() {
     this.dataForm = this.createForm();
@@ -69,7 +72,7 @@ export class ModalfavoritosPage implements OnInit {
     console.log(data);
 
     if(data){
-      this.auth.postFavorito('guardarFavorito/', data).subscribe((datav)=>{ 
+      this.restangular.all('guardarFavorito').post(data).subscribe((datav)=>{ 
           this.dismiss();
           this.presentLoading();
       });
@@ -77,7 +80,8 @@ export class ModalfavoritosPage implements OnInit {
       (error)=>{
         console.log(error);
     }
-  }}
+    }
+  }
 
   dismiss() {
     // using the injected ModalController this page

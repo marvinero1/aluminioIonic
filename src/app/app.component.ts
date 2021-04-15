@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthProvider } from './providers/auth/auth';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
       icon: 'heart'
     },
     {
-      title: 'Producto',
+      title: 'Productos',
       url: '/productos',
       icon: 'bag'
     },
@@ -59,7 +60,9 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public loadingCtrl: LoadingController,
+    public auth:AuthProvider
   ) {
     this.initializeApp();
   }
@@ -76,5 +79,29 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+  }
+
+  async cerrarsesion(){
+    console.log("cerrar sesion");
+    const loading = await this.loadingCtrl.create({
+      spinner: 'dots'
+      // duration: 1500
+    });
+    loading.present().then(() => {
+      this.auth.logout().subscribe(
+        data => {
+          loading.dismiss().then(()=>{
+            // this.navCtrl.navigateRoot('/home');
+            // this.router.navigate(['/inicio']);
+          });
+          console.log("Salio");
+        },
+        ()=>{
+          // this.navCtrl.navigateRoot('/home');
+          loading.dismiss();
+        }
+      );
+      
+    });
   }
 }

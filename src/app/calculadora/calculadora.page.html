@@ -15,50 +15,104 @@
 
 <ion-content [fullscreen]="true" padding>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating" type="number">Numero A</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-      </ion-col> 
+    <form [formGroup]="dataForm" (ngSubmit)=submitData()>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" type="number">Numero A</ion-label>
+            <ion-input [(ngModel)]="numero1" formControlName="numero1"></ion-input>
+          </ion-item>
+        </ion-col>
 
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating" type="number">Numero B</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-button color="dark" (click)="calcular()" expand="block">
-          <ion-icon name="calculator-outline"></ion-icon>Calcular</ion-button>
-      </ion-col>
-    </ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" type="number">Numero B</ion-label>
+            <ion-input [(ngModel)]="numero2" formControlName="numero2"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-row>
+            <ion-item>
+              <ion-label position="floating" type="number">Total</ion-label>
+              <ion-input [(ngModel)]="resultado" formControlName="resultado"></ion-input>
+            </ion-item>
+          </ion-row>
+        </ion-col>
+
+        <ion-col>
+          <ion-button color="dark" (click)="calcular()">
+            <ion-icon name="calculator-outline"></ion-icon>Calcular
+          </ion-button>
+
+          <ion-button color="dark" (click)="submitData()">
+            <ion-icon name="save-outline"></ion-icon>Guardar
+          </ion-button>
+
+        </ion-col>
+      </ion-row>
+    </form>
   </ion-grid>
 
 
+  <div style="padding: 10px;">
+    <ion-row style="border-bottom: groove;">
+      <ion-col col-4>
+        <ion-label><strong>Numero 1</strong></ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-label><strong>Numero 2</strong> </ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-label><strong>TOTAL</strong></ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-label><strong>Acciones</strong></ion-label>
+      </ion-col>
+    </ion-row>
 
+    <ion-row style="border-bottom: groove;" *ngFor="let element of calculo$ ">
+      <ion-col col-4>
+        <ion-label>{{element.numero1}}</ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-label>{{element.numero2}}</ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-label>{{element.resultado}}</ion-label>
+      </ion-col>
+      <ion-button size="small"  color="dark" (click)="deleteAll(element)">
+        <ion-icon name="trash-outline"></ion-icon>Limpiar
+      </ion-button>
 
-  
-  
-<div style="padding: 10px;">
-  <ion-row style="border-bottom: groove;">
-    <ion-col col-4>
-    <ion-label><strong>Numero 1</strong></ion-label>
-  </ion-col>
-  <ion-col col-4>
-    <ion-label><strong>Numero 2</strong> </ion-label>
-  </ion-col>
-    <ion-col col-4>
-    <ion-label><strong>Total</strong></ion-label>
-  </ion-col>
-</ion-row>
-</div>
+      <!-- <ion-col col-4>
+        <ion-label>{{element.created_at | date:'fullDate' }}</ion-label>
+      </ion-col> -->
+
+      
+    </ion-row><br>
+
+    <p style="float: right; padding: 5px;"><strong>Total:</strong>  {{ total }}</p>
+    <!-- <p style="float: right; padding: 5px;">{{ total | currency:'':symbol: '1.0-2' }}</p> -->
     
+    <ion-button color="dark" (click)="sumaTotales()">
+      <ion-icon name="add-outline"></ion-icon>Suma Totales
+    </ion-button>
+  </div>
+  
+    <ion-row>
+      <ion-item>
+        <ion-label position="floating" type="number">Total Extra</ion-label>
+        <ion-input [(ngModel)]="totalTotales"></ion-input>
+      </ion-item>
+    </ion-row>
 
+    <p style="float: right; padding: 5px;" >Total de Totales{{ totalTotalesT }}</p>
+      <ion-button color="dark" (click)="sumaTotalesTotales()">
+        <ion-icon name="add-outline"></ion-icon>Suma Total de Totales
+      </ion-button>
 
-
-
+  
 
 
 

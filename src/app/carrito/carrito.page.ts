@@ -3,6 +3,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Restangular } from 'ngx-restangular';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class CarritoPage implements OnInit {
 
   constructor(public api:AuthProvider,public loadingController: LoadingController,
     public alertController: AlertController,private _formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,private restangular:Restangular,) { }
 
   ngOnInit() {
     this.getPedido();
@@ -50,8 +51,8 @@ export class CarritoPage implements OnInit {
             } }, 
             {
             text: 'Si',
-            handler: () => {
-              this.api.postPedido('guardarPedidoRealizado/', element).subscribe(res=>{
+            handler: () => { 
+              this.restangular.all('guardarPedidoRealizado').post(element).subscribe(res=>{
                 console.log(res);
                 this.deleteObject(element);
             });

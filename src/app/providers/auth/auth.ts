@@ -20,7 +20,7 @@ export interface AccessData {
   access_token: string;
   refresh_token: string;
 }
-
+  
 /*
   Generated class for the AuthProvider provider.
 
@@ -32,17 +32,19 @@ export interface AccessData {
 export class AuthProvider {
   // apiRoot: string = "http://127.0.0.1:8000/api";
   //apiRoot: string = "http://altools.es/api/";
-  apiRoot: string = "http://192.168.1.7:5000/api/";
+  apiRoot: string = "http://altools.es/api/";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
  //apiRoot: string = "https://new.toursecret.club/api";
   valauten:boolean = false;
+  
+
   constructor(private navCtrl: NavController,public http: HttpClient,
               private router:Router,
               // private app:App,
               public toastCtrl: ToastController,
               private tokenStorage: TokenStorageProvider) {
     //console.log('Hello AuthProvider Provider');
-    this.getAccessTokenn();    
+    this.getAccessTokenn();  
   }
   headerDefault(): any {
     let bearerToken;
@@ -77,7 +79,7 @@ export class AuthProvider {
     this.isAccessToken().subscribe((da)=>{
        if(!da) {
             this.tokenStorage
-            .setAccessToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzI5YjZkN2JmNzc0OTU4OWE0ZjU3ZmYyZDk0MGQ3Zjc1MTBjZWM5Mzg4N2Y5OTQ5NWM0MDJjMzk4NDgzNzJlNTAxMTFjODZiMjU2YTllYTgiLCJpYXQiOjE2MDU3NTI1NDgsIm5iZiI6MTYwNTc1MjU0OCwiZXhwIjo0NzYxNDI2MTQ4LCJzdWIiOiIxIiwic2NvcGVzIjpbImFwaXdlYiJdfQ.ICCfGvTcRpSq_16Vpc59kVl1erXXx8zDRw_KRYJz4igy8RKWTFqnDRUaHjtYDYNwWscI7BPT1QqCW13szsqv0J2HzOKT4cpPojFcejChFpSE5nCKs1-olXnCZCHTqieqRuBU50-gnWtPR7AOV7r5H7fAoszF79JXjBfDYoYSQvjXQjP-rn7RAm7ATZzrXFX9FhlWGpMv-asyJBWDau33HVm0kzMmmzdFsQGECzj_cnmKW6BKOBuIcdU3Aij0L1ZpB2DAOhB3l-uTpLoA5msUU73TBZd2iPnBVOgljq61_vTsRbktsN4zrmFSDvKHM38PxOgS7O2Jua-wY_Kd7N7Ko1xH2G0h84IGsSegvIXvd80jKVrk_B5UvFW5QpvSZtPdN0vCIAsOlyjDoITPwSH3hWfV6w75Pwij4n_4Q9HC6GcvomqK5UOFbxO-tWZZxnq0I60BAFBDSdziXMtU6u4IoY0ytKLSz1cBRReFwVutGUNyNNzx6_G4baOaKcnYsok_fHLnM2zXlJEuHkibBb7QxeOc5_cvawNeWS8uKbAXFEts0wJPSv81vaqsY4tuAfx1-FRmL3so7n98_7fYCDzNzL0ckYdnRrjPJvjPx0RcuWInyk-dKxM1l61sFCvnqADnczGHdmuVwUSpLlD_yquroTOS_k9rpivzyDxkdTT2iAc');
+            .setAccessToken('hEkfn9h6VOrdUJM25tvtVCRjnJTHDedlXyFhx22J');
         }
     });
     return this.tokenStorage.getAccessToken();
@@ -152,7 +154,7 @@ export class AuthProvider {
       tap((tokens: any) => {
         this.saveAccessData(tokens);
         // return "";
-        // this.router.navigate(['/']);
+        this.router.navigate(['/select']);
       }),
       catchError((err) => {
         // console.log(err);
@@ -167,6 +169,26 @@ export class AuthProvider {
     );
   }
 
+  // user() {
+  //   const headers = new HttpHeaders({
+  //     'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+  //   });
+  //   return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
+  //   .pipe(
+  //     tap(user => {
+  //       this.storage.setItem("usuario", JSON.stringify(user))
+  //         .then(
+  //           () => {
+  //             console.log('Usuario Guardado');
+  //             console.log(user);
+  //           },
+  //           error => console.error(error)
+  //         );
+  //       return user;
+  //     })
+  //   )
+  // }
+
   getuser(): Observable<any>{
     localStorage.removeItem('userdata');
     const urludata = `${this.apiRoot}userdata`;
@@ -179,10 +201,15 @@ export class AuthProvider {
       }),
       catchError((err) => {
         // this.salir();
-        console.log("errror");
+        console.log("No se encontro el usuario");
         return throwError(err);
       })
     );
+  }
+  saveAccessData({ access_token, refresh_token }: AccessData) {
+    this.tokenStorage
+      .setAccessToken(access_token)
+      .setRefreshToken(refresh_token);
   }
 
   logout(): Observable<any>{
@@ -200,11 +227,6 @@ export class AuthProvider {
     );
   }
 
-  saveAccessData({ access_token, refresh_token }: AccessData) {
-    this.tokenStorage
-      .setAccessToken(access_token)
-      .setRefreshToken(refresh_token);
-  }
 
   isAuthenticated(user):boolean{
       let data = false;

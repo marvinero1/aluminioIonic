@@ -50,7 +50,8 @@ const routes: Routes = [
   {
     path: 'select',
     loadChildren: () => import('./select/select.module').then( m => m.SelectPageModule)
-  },  {
+  },
+  {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
@@ -78,7 +79,6 @@ const routes: Routes = [
     path: 'modalfavoritos',
     loadChildren: () => import('./modalfavoritos/modalfavoritos.module').then( m => m.ModalfavoritosPageModule)
   },
-
   
 
 ];

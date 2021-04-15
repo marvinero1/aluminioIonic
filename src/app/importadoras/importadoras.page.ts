@@ -12,10 +12,12 @@ export class ImportadorasPage implements OnInit {
   importadorImagen:any;
   importadoras$:any=[];
   textoBuscar:string='';
+  productos$:any;
   constructor(public api:AuthProvider,private router: Router,) { }
 
   ngOnInit() {
     this.getImportadoras();
+    this.getProducts();
   }
 
   getImportadoras(){
@@ -33,13 +35,27 @@ export class ImportadorasPage implements OnInit {
     this.router.navigate(['/perfil']);
   }
 
-  verProductos(element){
-    console.log(element);
-    
+  onSelect(){
+    this.router.navigate(['/productos',])
+  }
+
+
+  verProductos(){
+
+  
     // this.api.getAllObject('importadoras')
     // .subscribe((res) =>{ 
     //   this.importadoras$ = res;
     //   this.importadoras$ = Object.values(this.importadoras$)      
     // });
   }
+
+  getProducts(){
+    this.api.getAllObject('misProductos')
+    .subscribe((res) =>{ 
+      this.productos$ = res; 
+      console.log(this.productos$);
+            
+    });
+}
 }

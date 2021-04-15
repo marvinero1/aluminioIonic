@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
   selector: 'app-importadora',
@@ -7,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImportadoraPage implements OnInit {
 
-  constructor() { }
+
+  constructor(private route: ActivatedRoute,public api:AuthProvider,) { }
 
   ngOnInit() {
   }
-
 }

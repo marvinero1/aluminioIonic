@@ -1,5 +1,6 @@
 .imagen{
     width: 35% !important;
+    padding-block-start: 20px;
     display: block;
     margin: auto;
 }
@@ -7,9 +8,10 @@
 --ion-background-color: gray;
 }
 
-ion-title{
-    color: white;
-}
 ion-searchbar{
     background-color: aliceblue;
 }
+
+.card{
+    background-color: white !important;
+  }

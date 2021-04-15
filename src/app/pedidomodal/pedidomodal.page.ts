@@ -2,6 +2,7 @@ import { Component, Input, OnInit, VERSION } from '@angular/core';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthProvider } from '../providers/auth/auth';
+import { Restangular } from 'ngx-restangular';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class PedidomodalPage implements OnInit {
   
   constructor(public modalController: ModalController,private _formBuilder: FormBuilder,
     public auth:AuthProvider,public loadingController: LoadingController,
-    public alertController: AlertController
+    public alertController: AlertController,private restangular:Restangular
     ) { }
  
 
@@ -74,7 +75,7 @@ export class PedidomodalPage implements OnInit {
     //console.log(data);
 
     if(this.data){
-      this.auth.postPedido('guardarPedido/', data).subscribe((datav)=>{ 
+      this.restangular.all('guardarPedido').post(data).subscribe((datav)=>{ 
           this.dismiss();
           this.presentLoading();
           //this.presentAlert();

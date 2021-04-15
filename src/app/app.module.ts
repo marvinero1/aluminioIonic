@@ -4,7 +4,6 @@ import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgFallimgModule } from 'ng-fallimg';
 
-
 import { CommonModule } from "@angular/common";
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -24,7 +23,7 @@ import { AuthProvider } from './providers/auth/auth';
 import { RestangularConfigFactory } from './providers/restangular/restangular';
 import { TokenStorageProvider } from './providers/token-storage/token-storage';
 import { PipesModule } from './pipes/pipes.module';
-
+import { HTTP } from '@ionic-native/http/ngx'
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,6 +48,7 @@ import { PipesModule } from './pipes/pipes.module';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthProvider,
+    HTTP,
     TokenStorageProvider,
     NotificacionsService,
     Camera,

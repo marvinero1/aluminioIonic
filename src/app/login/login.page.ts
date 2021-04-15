@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
       // message: 'iniciar sesión.',
       spinner: 'dots'
       // duration: 1500
-    });
+    });  
     loading.present().then(() => {
       this.auth.login(this.user).subscribe(
         (dat) => {
@@ -48,13 +48,11 @@ export class LoginPage implements OnInit {
           this.auth.getuser().subscribe(
             data => {
               loading.dismiss().then(()=>{
-                  
                   // this.router.navigate(['/ciudad']);
                   //this.closemodal(true);
                   this.navCtrl.navigateRoot('/select');
-                  
               });
-              console.log("correcto");
+              console.log(data);
             },
             err => {
               loading.dismiss();
@@ -63,7 +61,7 @@ export class LoginPage implements OnInit {
           );
         },
         (err) => {
-          console.log(err);
+          console.log("Password o Email Incorrectos");
           
           loading.dismiss();          
         },
