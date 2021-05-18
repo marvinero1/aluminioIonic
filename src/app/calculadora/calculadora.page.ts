@@ -1,32 +1,12 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router
-} from '@angular/router';
-import {
-  isNumber
-} from 'util';
-import {
-  ActionSheetController
-} from '@ionic/angular';
-import {
-  AuthProvider
-} from '../providers/auth/auth';
-import {
-  LoadingController
-} from '@ionic/angular';
-import {
-  FormGroup,
-  FormBuilder
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute,Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
+import { AuthProvider } from '../providers/auth/auth';
+import { LoadingController } from '@ionic/angular';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Restangular } from 'ngx-restangular';
-
-
+import { DecimalPipe } from '@angular/common';
 @Component({
   selector: 'app-calculadora',
   templateUrl: './calculadora.page.html',
@@ -38,8 +18,9 @@ export class CalculadoraPage implements OnInit {
   dataForm: FormGroup;
   data: any = '';
   calculo$: any;
-  numero1: any;
-  numero2: any;
+  numero1: number;
+  numero2: number;
+  resParse:any;
   resultado: any = 0;
   total: number;
   totalTotales: number;
@@ -49,7 +30,7 @@ export class CalculadoraPage implements OnInit {
     private activatedRoute: ActivatedRoute, private router: Router,
     public auth: AuthProvider, public loadingController: LoadingController,
     private _formBuilder: FormBuilder,public alertController: AlertController,
-    private restangular:Restangular,
+    private restangular:Restangular,private decimalPipe: DecimalPipe
     ) {}
 
   ngOnInit() {
@@ -76,11 +57,12 @@ export class CalculadoraPage implements OnInit {
   }
 
   calcular() {
+
     let num1 = this.numero1;
     let num2 = this.numero2;
-    this.resultado = this.numero1 * this.numero2;
-    console.log(this.resultado);
-
+    this.resultado = num1 * num2;
+    this.resultado = this.decimalPipe.transform(this.resultado, '1.1-1');  
+    console.log(this.resParse);
   }
 
   submitData() {
@@ -89,6 +71,7 @@ export class CalculadoraPage implements OnInit {
     this.restangular.all('guardarCalculadora').post(data).subscribe((datav) => {
       console.log(datav);
       this.presentLoading();
+      window.location.reload();
       //this.presentAlert();
     });
   }
@@ -96,8 +79,7 @@ export class CalculadoraPage implements OnInit {
   sumaTotales() {
     //Calculamos el TOTAL 
     this.total = this.calculo$.reduce(
-      (acc, obj) => acc + obj.resultado,
-      0
+      (acc, obj) => acc + obj.resultado, 0
     );
     console.log("Total: ", this.total);
   }
@@ -141,7 +123,7 @@ export class CalculadoraPage implements OnInit {
           text: 'Si',
           handler: () => {
             this.auth.deleteObjectById('calculadoraDelete/',item.id).subscribe(res=>{
-              console.log(res);
+              window.location.reload();
             });
           }
         }

@@ -53,7 +53,6 @@ export class CarritoPage implements OnInit {
             text: 'Si',
             handler: () => { 
               this.restangular.all('guardarPedidoRealizado').post(element).subscribe(res=>{
-                console.log(res);
                 this.deleteObject(element);
             });
             }
@@ -65,7 +64,7 @@ export class CarritoPage implements OnInit {
 
   deleteObject(element){
     this.api.deleteObjectById('pedidoDelete/', element.id).subscribe(res=>{
-      console.log(res);
+      window.location.reload();
     });
   }
 

@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { AuthProvider } from '../providers/auth/auth';
-
+import {  MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +19,10 @@ export class LoginPage implements OnInit {
   user:any = {usuario: '', password: ''};
 
   constructor(public auth:AuthProvider,public loadingCtrl: LoadingController,private router: Router,
-    private _formBuilder: FormBuilder,private navCtrl: NavController) { }
+    private _formBuilder: FormBuilder,private navCtrl: NavController,public menuCtrl: MenuController) { }
   
   ngOnInit() {
+    this.menuCtrl.enable(false);
     this.dataForm = this.createForm();
   }
 
@@ -72,6 +73,4 @@ export class LoginPage implements OnInit {
     });
     
   }
-
-
 }

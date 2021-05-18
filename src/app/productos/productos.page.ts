@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Restangular } from "ngx-restangular";
-
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.page.html',
@@ -16,7 +14,6 @@ export class ProductosPage implements OnInit {
   productos$:any=[];
   textoBuscar:string='';
 
-  
   constructor(public api:AuthProvider,private router: Router){ 
   }
 

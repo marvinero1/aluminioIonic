@@ -24,7 +24,7 @@ import { RestangularConfigFactory } from './providers/restangular/restangular';
 import { TokenStorageProvider } from './providers/token-storage/token-storage';
 import { PipesModule } from './pipes/pipes.module';
 import { HTTP } from '@ionic-native/http/ngx'
-
+import { DecimalPipe } from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -49,6 +49,7 @@ import { HTTP } from '@ionic-native/http/ngx'
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthProvider,
     HTTP,
+    DecimalPipe,
     TokenStorageProvider,
     NotificacionsService,
     Camera,
