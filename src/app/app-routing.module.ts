@@ -78,7 +78,15 @@ const routes: Routes = [
   {
     path: 'modalfavoritos',
     loadChildren: () => import('./modalfavoritos/modalfavoritos.module').then( m => m.ModalfavoritosPageModule)
+  },  {
+    path: 'calculadora-historial',
+    loadChildren: () => import('./calculadora-historial/calculadora-historial.module').then( m => m.CalculadoraHistorialPageModule)
   },
+  {
+    path: 'mis-cotizaciones',
+    loadChildren: () => import('./mis-cotizaciones/mis-cotizaciones.module').then( m => m.MisCotizacionesPageModule)
+  },
+
   
 
 ];

@@ -10,7 +10,8 @@ import { Restangular } from "ngx-restangular";
   styleUrls: ['./productos.page.scss'],
 })
 export class ProductosPage implements OnInit {
-
+  
+  titulo= "Productos";
   productos$:any=[];
   textoBuscar:string='';
 

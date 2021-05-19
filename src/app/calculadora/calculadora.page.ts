@@ -16,15 +16,18 @@ export class CalculadoraPage implements OnInit {
 
   public folder: string;
   dataForm: FormGroup;
+  dataFormHistorial: FormGroup;
   data: any = '';
   calculo$: any;
   numero1: number;
   numero2: number;
+  nombreOperacion: string;
   resParse:any;
   resultado: any = 0;
   total: number;
   totalTotales: number;
   totalTotalesT: number;
+  user_id='1';
 
   constructor(public actionSheetController: ActionSheetController,
     private activatedRoute: ActivatedRoute, private router: Router,
@@ -35,6 +38,7 @@ export class CalculadoraPage implements OnInit {
 
   ngOnInit() {
     this.dataForm = this.createForm();
+    
     this.getCalculs();
   }
 
@@ -56,8 +60,9 @@ export class CalculadoraPage implements OnInit {
     });
   }
 
-  calcular() {
+  
 
+  calcular() {
     let num1 = this.numero1;
     let num2 = this.numero2;
     this.resultado = num1 * num2;
@@ -76,6 +81,7 @@ export class CalculadoraPage implements OnInit {
     });
   }
 
+
   sumaTotales() {
     //Calculamos el TOTAL 
     this.total = this.calculo$.reduce(
@@ -85,10 +91,33 @@ export class CalculadoraPage implements OnInit {
   }
 
   sumaTotalesTotales() {
-   this.totalTotalesT = this.totalTotales * this.total;
-    //console.log(totalTotalesT);
+   this.totalTotalesT =  this.total * this.totalTotales;
     return this.totalTotalesT;
   }
+
+
+  guardarOperacion(){
+     let data = this._formBuilder.group({
+      //id : [this.id],
+      //nombre: [this.data.nombre,Validators.compose([Validators.required])],
+      extra: [this.totalTotalesT],
+      nombre_operacion : [this.nombreOperacion],
+      total_suma: [this.total],
+      total_extra:[this.totalTotales],
+      user_id:[this.user_id]
+    });
+    let data1 = data.value;
+    // let objecy=JSON.stringify(data1);
+    // console.log(objecy);
+
+    this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
+      //console.log(data1);
+      this.presentLoading();
+      window.location.reload();
+    });
+  }
+  
+ 
 
   async presentLoading() {
     const loading = await this.loadingController.create({

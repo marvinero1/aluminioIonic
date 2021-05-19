@@ -50,6 +50,16 @@ export class AppComponent implements OnInit {
       icon: 'accessibility'
     },
     {
+      title: 'Mis Cotizaciones',
+      url: '/mis-cotizaciones',
+      icon: 'checkbox'
+    },
+    {
+      title: 'Historial Calculos',
+      url: '/calculadora-historial',
+      icon: 'time'
+    },
+    {
       title: 'Historial Pedidos',
       url: '/pedidos',
       icon: 'time'

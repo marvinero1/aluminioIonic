@@ -15,6 +15,7 @@ export class CarritoPage implements OnInit {
 
   pedidos$:any = [];
   data:any='';
+  nombre_cotizacion:string;
   dataForm: FormGroup;
   confirmacion:string='true';
 
@@ -23,6 +24,7 @@ export class CarritoPage implements OnInit {
     private router: Router,private restangular:Restangular,) { }
 
   ngOnInit() {
+    this.dataForm = this.createForm();
     this.getPedido();
   }
 
@@ -30,37 +32,49 @@ export class CarritoPage implements OnInit {
     this.api.getAllObject('getPedido')
       .subscribe((res) =>{ 
       this.pedidos$ = res;
-        //console.log(this.pedidos$);        
-      //console.log(this.pedidos$);        
-        //console.log(this.pedidos$);        
+      
+      
       });
   }
 
   async sendOrder(element){
-      const alert = await this.alertController.create({
-        cssClass: 'my-custom-class',
-        header: '¿Desea Cotizar este Elemento?',
-        message: '',
-        buttons: [{
-            text: 'Cancelar',
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: (blah) => {
-              return false
-              //console.log('Confirm Cancel: blah');
-            } }, 
-            {
-            text: 'Si',
-            handler: () => { 
-              this.restangular.all('guardarPedidoRealizado').post(element).subscribe(res=>{
-                this.deleteObject(element);
-            });
-            }
-          }
-        ]
+    
+    let data =  this._formBuilder.group({
+        //id : [this.id],
+        //nombre: [this.data.nombre,Validators.compose([Validators.required])],
+        id: [element.id],
+        nombre: this.nombre_cotizacion,
+       
       });
-      await alert.present();
-  }
+     console.log(data.value); 
+
+     // const alert = await this.alertController.create({
+      //   cssClass: 'my-custom-class',
+      //   header: '¿Desea Cotizar este Elemento?',
+      //   message: '',
+      //   buttons: [{
+      //       text: 'Cancelar',
+      //       role: 'cancel',
+      //       cssClass: 'secondary',
+      //       handler: (blah) => {
+      //         return false
+      //         //console.log('Confirm Cancel: blah');
+      //       } }, 
+      //       {
+      //       text: 'Si',
+      //       handler: () => { 
+      //         this.restangular.all('guardarPedidoRealizado').post(element).subscribe(res=>{
+      //           this.deleteObject(element);
+      //       });
+      //       }
+      //     }
+      //   ]
+      // });
+      // await alert.present();
+    }
+    
+      
+  
 
   deleteObject(element){
     this.api.deleteObjectById('pedidoDelete/', element.id).subscribe(res=>{
