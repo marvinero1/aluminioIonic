@@ -48,11 +48,10 @@
           <hr style="border: 0.5px solid black;">
           <ion-item lines="none">
             <ion-thumbnail slot="start">
-              <img src="http://192.168.1.7:5000/{{ element.imagen }}">
+              <img src="http://192.168.0.4:5000/{{ element.imagen }}">
             </ion-thumbnail>
             <ion-label text-wrap>
               <p><strong>Nombre:</strong> {{element.nombre}}</p>
-              <ion-input [(ngModel)]="nombre_cotizacion" type="text" value="nombre_cotizacion">{{element.nombre}}</ion-input>
               <p><strong>Precio:</strong> {{element.precio}}</p>
               <p><strong>Cantidad Pedida</strong> {{element.cantidad_pedido}}</p>
             </ion-label>

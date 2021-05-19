@@ -85,7 +85,7 @@ export class CalculadoraPage implements OnInit {
   sumaTotales() {
     //Calculamos el TOTAL 
     this.total = this.calculo$.reduce(
-      (acc, obj) => acc + obj.resultado, 0
+      (acc, obj) => acc + obj.resultado,0
     );
     console.log("Total: ", this.total);
   }
