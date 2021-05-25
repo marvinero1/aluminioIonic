@@ -45,10 +45,12 @@ export class LoginPage implements OnInit {
     loading.present().then(() => {
       this.auth.login(this.user).subscribe(
         (dat) => {
-          console.log("autenticado correctamente");
+          console.log("autenticado correctamente" );
           this.auth.getuser().subscribe(
             data => {
               loading.dismiss().then(()=>{
+                  console.log(data);
+                   
                   // this.router.navigate(['/ciudad']);
                   //this.closemodal(true);
                   this.navCtrl.navigateRoot('/select');

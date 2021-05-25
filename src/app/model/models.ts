@@ -9,6 +9,7 @@ export interface ILoginData {
     email:string;
 }
 export interface ILogin {
+    id:number;
     email: string;
     password: string;
 }

@@ -30,7 +30,7 @@ export interface AccessData {
 
 @Injectable()
 export class AuthProvider {
-  apiRoot: string = "http://192.168.1.7:5000/api/";
+  apiRoot: string = "http://192.168.0.4:5000/api/";
   //apiRoot: string = "http://altools.es/api";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
  //apiRoot: string = "https://new.toursecret.club/api";
@@ -118,33 +118,12 @@ export class AuthProvider {
     // this.router.navigate(['/home']);
     // this.app.getRootNav().setRoot(LoginPage);
   }
-  loginsocial(data:any): Observable<any>{
-    let url = `${this.apiRoot}/social_auth`;
-    // const da = { 
-    //   usuario: data.usuario,
-    //   password: data.password,
-    //   // provider: 'adm'
-    // };
-    return this.http.post(url, data, this.headerDefault())
-    .pipe(
-      tap((tokens: any) => {
-        this.saveAccessData(tokens);
-        // return "";
-        // this.router.navigate(['/']);
-      }),
-      catchError((err) => {
-        // this.salir();
-        console.log("errror");
-        return throwError(err);
-      })
-    );
-  }
+ 
   login(data:ILogin): Observable<any>{
     const url = `${this.apiRoot}login`;
     const da = { 
       email: data.email,
       password: data.password,
-      // provider: 'adm'
     };
     console.log(da);
     
@@ -153,7 +132,10 @@ export class AuthProvider {
       tap((tokens: any) => {
         this.saveAccessData(tokens);
         // return "";
+
+        //ACA HACER EL GUARDADO EN EL STORAGE
         this.router.navigate(['/select']);
+        this.presentToast('!!! Bienvenido a Altools ¡¡¡')
       }),
       catchError((err) => {
         // console.log(err);

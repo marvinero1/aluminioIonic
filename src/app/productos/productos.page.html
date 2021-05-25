@@ -19,51 +19,47 @@
     <ion-col col-4>
       <ion-card-subtitle style="padding: 4px;"><strong>Codigo:</strong>  {{ element.codigo}}</ion-card-subtitle>
       <!-- <ion-img src="http://192.168.1.7:5000/{{ element.imagen }}" class="imagen" fallimg></ion-img> -->
-      <ion-img src="http://192.168.1.7:5000/{{ element.imagen }}" class="imagen"></ion-img>
-      
+      <ion-img src="http://192.168.0.4:5000/{{ element.imagen }}" class="imagen"></ion-img>
     </ion-col>
 
-     <div style="padding-left: 24px;">
-        <ion-card-title>{{ element.nombre}}</ion-card-title><br>
-        <ion-card-subtitle>{{ element.descripcion}}</ion-card-subtitle>
-     </div>
-        
-     
+    <div style="padding-left: 24px;">
+      <ion-card-title>{{ element.nombre}}</ion-card-title><br>
+      <ion-card-subtitle>{{ element.descripcion}}</ion-card-subtitle>
+    </div>    
 
-      <ion-card-content class="card"> 
-        <div class="card">
-         <ion-row class="card">
-          <ion-col col-6>
-            <h3><strong>Color</strong></h3>
-            <p>{{ element.color}}</p>
-          </ion-col>
-          <ion-col col-6>
-            <h3><strong>Precio</strong></h3>
-            <p>{{ element.precio}} Bs.</p>
-          </ion-col>
-        </ion-row>
-
+    <ion-card-content class="card"> 
+      <div class="card">
         <ion-row class="card">
-          <ion-col col-6>
-            <h3><strong>Importadora</strong></h3>
-            <p>{{ element.importadora}}</p>
-          </ion-col>
-          <!-- <ion-col col-6>
-            <h3><strong>Precio</strong></h3>
-            <p>{{ element.precio}} Bs.</p>
-          </ion-col> -->
-        </ion-row>
+        <ion-col col-6>
+          <h3><strong>Color</strong></h3>
+          <p>{{ element.color}}</p>
+        </ion-col>
+        <ion-col col-6>
+          <h3><strong>Precio</strong></h3>
+          <p>{{ element.precio}} Bs.</p>
+        </ion-col>
+      </ion-row>
 
-        <ion-button color="dark" (click)="onSelect(element)">
-          <ion-icon slot="start" name="eye">
-          </ion-icon>Ver
-        </ion-button>
-        <!-- <a href="{{ route('instructor.show',$instructoritem->id ) }}">
-            <button class="btn btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>Ver</button>
-          </a> --> 
-        </div>
-        
-      </ion-card-content>
-    
+      <ion-row class="card">
+        <ion-col col-6>
+          <h3><strong>Importadora</strong></h3>
+          <p>{{ element.importadora}}</p>
+        </ion-col>
+        <!-- <ion-col col-6>
+          <h3><strong>Precio</strong></h3>
+          <p>{{ element.precio}} Bs.</p>
+        </ion-col> -->
+      </ion-row>
+
+      <ion-button color="dark" (click)="onSelect(element)">
+        <ion-icon slot="start" name="eye">
+        </ion-icon>Ver
+      </ion-button>
+      <!-- <a href="{{ route('instructor.show',$instructoritem->id ) }}">
+          <button class="btn btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>Ver</button>
+        </a> --> 
+      </div>
+      
+    </ion-card-content>
   </ion-card>
 </ion-content>
