@@ -11,12 +11,17 @@
 
 <ion-content >
   <ion-card style="padding: 14px;">
+    <div *ngIf="btnCarrito == false">
+        <ion-button color="light" (click)="crearCarrito();">Crear Carrito</ion-button>
+      </div>
     <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <ion-row>
           <h5 class="h5s">Cantidad a pedir</h5> 
       </ion-row>
       <ion-row >
-        <div class="wrapper">
+        <input type="text" value="{{carrito$.id}}" [(ngModel)]="carrito$.id" hidden="true" formControlName="carro_id">
+        <ion-col col-4>
+          <div class="wrapper">
           <ion-button color="dark" class="plusminus" (click)="handleMinus()">-</ion-button>
           <!-- <input type="number" class="num" formControlName="cantidad_pedido" 
           [(ngModel)]="value" [ngModelOptions]='{standalone: true}'/> -->
@@ -24,7 +29,31 @@
           [(ngModel)]="value" />
           <ion-button color="dark" class="plusminus" (click)="handlePlus()">+</ion-button>
         </div>
-      </ion-row><br>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item class="backItem">
+            <ion-label>Color</ion-label>
+            <ion-select cancelText="Cancelar" okText="Enviar" formControlName="color">
+              <ion-select-option value="natural">Natural</ion-select-option>
+              <ion-select-option value="titanio">Titanio</ion-select-option>
+              <ion-select-option value="champagne">Champagne</ion-select-option>
+              <ion-select-option value="bronce">Bronce</ion-select-option>
+              <ion-select-option value="negro">Negro</ion-select-option>
+              <ion-select-option value="blanco">Blanco</ion-select-option>
+              <ion-select-option value="madera">Madera</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="md-12">
+          <ion-item>
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-input formControlName="descripcion" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <br>
       <ion-row>
         <p><Strong>* Nota:</Strong>&nbsp; Se mandarán la solicitud de pedido y 
           el proveedor(importadora) se comunicara con usted.</p>
@@ -37,12 +66,10 @@
     </ion-row>
     </form>
     
-
     <ion-row style="float: left;">
       <ion-button color="dark" (click)="dismiss()">
         <ion-icon slot="start" name="arrow-back-sharp">
       </ion-icon>Atras</ion-button>
     </ion-row>
-    
   </ion-card>
 </ion-content>

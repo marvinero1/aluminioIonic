@@ -15,20 +15,23 @@
   
   <ion-searchbar (ionChange)="buscar($event)" animated></ion-searchbar>
   <ion-card *ngFor="let element of importadoras$ | filtro:textoBuscar:'name'">
-    
-    <ion-col col-4 >
-      <ion-img src="http://192.168.0.4:5000/{{ element.imagen}}" 
-       class="imagen" alt="{{element.name}}"></ion-img>
+    <ion-row>
+      <ion-col col-4 >
+        <ion-img src="http://192.168.1.7:5000/{{ element.imagen}}" 
+        class="imagen" alt="{{element.name}}"></ion-img>
       </ion-col>
+      <ion-col col-8>
+        <ion-card-header>
+          <ion-card-title>{{ element.name}}</ion-card-title><br>
+          <a href="mailto:{{element.email}}">
+            <p>{{ element.email}}</p>
+          </a>
+        </ion-card-header>
+      </ion-col>
+    </ion-row>
+    
 
     <ion-col col-8>
-      <ion-card-header>
-        <ion-card-title>{{ element.name}}</ion-card-title><br>
-        <a href="mailto:{{element.email}}">
-          <p>{{ element.email}}</p>
-        </a>
-      </ion-card-header>
-
       <ion-card-content>
         <ion-row>
           <ion-col col-6>
@@ -61,7 +64,7 @@
               <p >{{element.whatsapp}}</p></a>
           </ion-col>
           <ion-col>
-            <ion-button color="dark" (click)=onSelect()>
+            <ion-button color="dark" (click)=onSelect(element)>
               <ion-icon slot="start" name="eye">
               </ion-icon>Ver Productos
             </ion-button>

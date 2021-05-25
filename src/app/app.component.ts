@@ -59,11 +59,6 @@ export class AppComponent implements OnInit {
       url: '/calculadora-historial',
       icon: 'time'
     },
-    {
-      title: 'Historial Pedidos',
-      url: '/pedidos',
-      icon: 'time'
-    }
   ];
   public labels = ['Salir'];
 

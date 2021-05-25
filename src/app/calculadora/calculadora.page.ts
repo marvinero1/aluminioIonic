@@ -23,6 +23,7 @@ export class CalculadoraPage implements OnInit {
   numero2: number;
   nombreOperacion: string;
   resParse:any;
+  descripcion:string;
   resultado: any = 0;
   total: number;
   totalTotales: number;
@@ -98,26 +99,24 @@ export class CalculadoraPage implements OnInit {
 
   guardarOperacion(){
      let data = this._formBuilder.group({
-      //id : [this.id],
-      //nombre: [this.data.nombre,Validators.compose([Validators.required])],
       extra: [this.totalTotalesT],
       nombre_operacion : [this.nombreOperacion],
       total_suma: [this.total],
       total_extra:[this.totalTotales],
+      descripcion:[this.descripcion],
       user_id:[this.user_id]
     });
+
     let data1 = data.value;
+        
     // let objecy=JSON.stringify(data1);
     // console.log(objecy);
 
     this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
-      //console.log(data1);
-      this.presentLoading();
+      // console.log(data1);
       window.location.reload();
     });
   }
-  
- 
 
   async presentLoading() {
     const loading = await this.loadingController.create({
@@ -162,7 +161,47 @@ export class CalculadoraPage implements OnInit {
     await alert.present();
   }
 
+  async showAlert() { 
+    const alert = await this.alertController.create({ 
+    header: 'Calculo', 
+    subHeader: 'Estado Historial Calculo', 
+    message: 'Se guardo el calculo', 
+    buttons: ['OK'] 
+    }); 
+    await alert.present(); 
+    const result = await alert.onDidDismiss();  
+    console.log(result); 
+    }
+
   perfil() {
     this.router.navigate(['/perfil']);
+  }
+
+  async deleteAllALL(){
+    const alert = await this.alertController.create({
+      cssClass: 'alert-confirm23',
+      header: '¿Desea Eliminar este Elemento?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          
+          handler: (blah) => {
+            return false
+            //console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            this.auth.deleteAllObject('calculadoraDeleteAll/').subscribe(res=>{
+              window.location.reload();
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

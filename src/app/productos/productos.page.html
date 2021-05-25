@@ -14,11 +14,12 @@
 
 <ion-content [fullscreen]="true" class="body">
   <ion-searchbar (ionChange)="buscar($event)" animated></ion-searchbar>
-  <ion-card class="card" *ngFor="let element of productos$ | filtro:textoBuscar:'nombre'">
-
+  <ion-card class="card" *ngFor="let element of productos$ | filtro:textoBuscar:'nombre','color'">
+    
     <ion-col col-4>
+      <ion-card-subtitle style="padding: 4px;"><strong>Codigo:</strong>  {{ element.codigo}}</ion-card-subtitle>
       <!-- <ion-img src="http://192.168.1.7:5000/{{ element.imagen }}" class="imagen" fallimg></ion-img> -->
-      <ion-img src="http://192.168.0.4:5000/{{ element.imagen }}" class="imagen"></ion-img>
+      <ion-img src="http://192.168.1.7:5000/{{ element.imagen }}" class="imagen"></ion-img>
       
     </ion-col>
 

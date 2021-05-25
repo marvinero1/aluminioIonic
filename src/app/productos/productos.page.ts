@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
-import { catchError, map, tap } from 'rxjs/operators';
+
 import { Restangular } from "ngx-restangular";
 @Component({
   selector: 'app-productos',

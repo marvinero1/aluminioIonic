@@ -43,4 +43,29 @@
   .div{
     margin:     auto;
   background: steelblue;
-  }
+  }  
+p {
+  font-family: Lato;
+}
+
+.box{
+  width: 500px;
+  margin: auto;
+  height: 700px;
+  background: #E3E4DB;
+}
+
+.box2{
+  width: 500px;
+  margin: auto;
+  height: 100px;
+  background: #CDCDCD;
+  margin-top: 30px; 
+}
+
+.fixed{
+  position: fixed;
+  bottom: 50px;
+  left:50%;
+  transform: translateX(-50%);
+}

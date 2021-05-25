@@ -50,34 +50,34 @@ export class ProductoPage implements OnInit {
     }
   }
 
-  async presentModal(element) {
-    const modal = await this.modalController.create({
-      component: PedidomodalPage,
-      cssClass: 'my-custom-class',
-      componentProps: {
-        data:{element:element},
-        'alto': element.alto,
-        'ancho': element.ancho,
-        'categorias_id': element.categorias_id,
-        'codigo': element.codigo,
-        'confirmacion': element.confirmacion,
-        'color': element.color,
-        'descripcion': element.descripcion,
-        'disponibilidad': element.disponibilidad,
-        'estado': element.estado,
-        'id': element.id,
-        'imagen': element.imagen,
-        'importadora': element.importadora,
-        'nombre': element.nombre,
-        'novedad':element.novedad,
-        'precio': element.precio,
-        'puntuacion': element.puntuacion,
-        'subcategorias_id': element.subcategorias_id,
-        'tipo_medida': element.tipo_medida,
-      }
-    });
-    return await modal.present();
-  }
+  // async presentModal(element) {
+  //   const modal = await this.modalController.create({
+  //     component: PedidomodalPage,
+  //     cssClass: 'my-custom-class',
+  //     componentProps: {
+  //       data:{element:element},
+  //       'alto': element.alto,
+  //       'ancho': element.ancho,
+  //       'categorias_id': element.categorias_id,
+  //       'codigo': element.codigo,
+  //       'confirmacion': element.confirmacion,
+  //       'color': element.color,
+  //       'descripcion': element.descripcion,
+  //       'disponibilidad': element.disponibilidad,
+  //       'estado': element.estado,
+  //       'id': element.id,
+  //       'imagen': element.imagen,
+  //       'importadora': element.importadora,
+  //       'nombre': element.nombre,
+  //       'novedad':element.novedad,
+  //       'precio': element.precio,
+  //       'puntuacion': element.puntuacion,
+  //       'subcategorias_id': element.subcategorias_id,
+  //       'tipo_medida': element.tipo_medida,
+  //     }
+  //   });
+  //   return await modal.present();
+  // }
 
   name = 'Angular ' + VERSION.major;
   value = 0;

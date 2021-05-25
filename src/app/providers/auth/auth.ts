@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenStorageProvider } from '../token-storage/token-storage';
 import { tap, map, switchMap, catchError } from 'rxjs/operators';
-import { ILogin, IPedido, IFavoritos, ICalculadora } from "../../model/models";
+import { ILogin, IPedido, IFavoritos, ICalculadora, ICarrito } from "../../model/models";
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 // import 'rxjs/add/operator/map';
@@ -30,7 +30,7 @@ export interface AccessData {
 
 @Injectable()
 export class AuthProvider {
-  apiRoot: string = "http://192.168.0.4:5000/api/";
+  apiRoot: string = "http://192.168.1.7:5000/api/";
   //apiRoot: string = "http://altools.es/api";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
  //apiRoot: string = "https://new.toursecret.club/api";
@@ -280,6 +280,10 @@ export class AuthProvider {
     return this.http.post<any>(`${this.apiRoot}`+ route, calculadora);
   }
 
+  getCarrito = (route:string, id:number)=>{
+    return this.http.get(`${this.apiRoot}`+ route + id);
+  }
+
   postPedido = (route:string,pedido:IPedido)=>{
     return this.http.post<any>(`${this.apiRoot}`+ route, pedido);
   }
@@ -290,5 +294,13 @@ export class AuthProvider {
 
   deleteObjectById = (route:string,id:number) =>{
     return this.http.delete(`${this.apiRoot}`+ route +id);
+  }
+
+  updateObjectById = (route:string,carro:ICarrito) =>{
+    return this.http.put(`${this.apiRoot}`+ route , carro);
+  }
+
+  deleteAllObject = (route:string) =>{
+    return this.http.delete(`${this.apiRoot}`+ route);
   }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthProvider } from '../providers/auth/auth';
-
+import { Restangular } from "ngx-restangular";
+import { ModalController } from '@ionic/angular';
+import { MisProductosPage } from '../mis-productos/mis-productos.page';
 @Component({
   selector: 'app-importadoras',
   templateUrl: './importadoras.page.html',
@@ -13,11 +15,13 @@ export class ImportadorasPage implements OnInit {
   importadoras$:any=[];
   textoBuscar:string='';
   productos$:any;
-  constructor(public api:AuthProvider,private router: Router,) { }
+
+  constructor(public api:AuthProvider,private router: Router, private rest:Restangular,
+    public modalController: ModalController) { }
 
   ngOnInit() {
     this.getImportadoras();
-    this.getProducts();
+    //this.getProducts();
   }
 
   getImportadoras(){
@@ -35,27 +39,22 @@ export class ImportadorasPage implements OnInit {
     this.router.navigate(['/perfil']);
   }
 
-  onSelect(){
-    this.router.navigate(['/productos',])
+
+  onSelect(element){   
+    this.presentModal(element);
   }
 
-
-  verProductos(){
-
-  
-    // this.api.getAllObject('importadoras')
-    // .subscribe((res) =>{ 
-    //   this.importadoras$ = res;
-    //   this.importadoras$ = Object.values(this.importadoras$)      
-    // });
-  }
-
-  getProducts(){
-    this.api.getAllObject('misProductos')
-    .subscribe((res) =>{ 
-      this.productos$ = res; 
-      console.log(this.productos$);
-            
+  async presentModal(element:any) {
+    const modal = await this.modalController.create({
+      component: MisProductosPage,
+      cssClass: 'my-modal-products',
+      componentProps: {
+        data:{element:element},
+        'id':element.id,
+        'importadora':element.importadora,
+        'user_id': element.user_id,
+      }
     });
-}
+    return await modal.present();
+  }
 }

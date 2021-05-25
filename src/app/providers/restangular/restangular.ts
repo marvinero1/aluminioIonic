@@ -26,7 +26,7 @@ export function RestangularConfigFactory (RestangularProvider,AutentificacionSer
   };
   RestangularProvider
   // .setBaseUrl('/api')
-  .setBaseUrl('http://192.168.0.4:5000/api')
+  .setBaseUrl('http://192.168.1.7:5000/api')
   //.setBaseUrl('http://altools.es/api/')
   //.setBaseUrl('http://altools.es/api/')
  

@@ -41,10 +41,10 @@
   }
   
   /* Works - pass "my-custom-class" in cssClass to increase specificity */
-  .my-custom-class .modal-wrapper {
-    background: gray;
-    height: 39%;
-  }
+  // .my-custom-class .modal-wrapper {
+  //   background: gray;
+  //   height: 39%;
+  // }
 
   .alert-wrapper {
     background: #e5e5e5;
@@ -61,4 +61,22 @@
   }
   ion-title{
     text-align: center;
+  }
+  .action-sheet-group.sc-ion-action-sheet-md{
+    --background: steelblue !important;
+    //background-color: steelblue !important;
+
+  }
+
+  .alert-wrapper.sc-ion-alert-md{
+    background-color: steelblue;
+  }
+  .alert-button.sc-ion-alert-md{
+    color: white !important;
+
+  }
+  .my-custom-class-pedidoModal{
+    padding-top: 24pc;
+
+    
   }

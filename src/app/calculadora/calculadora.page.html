@@ -15,6 +15,7 @@
 
 <ion-content [fullscreen]="true" padding>
   <ion-grid><br>
+    
     <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <ion-row>
         <ion-col>
@@ -53,7 +54,9 @@
       </ion-row>
     </form>
   </ion-grid>
-
+  <!-- <ion-button size="small" color="dark" (click)="deleteAllALL()">ALL
+    <ion-icon name="trash-outline"></ion-icon>
+  </ion-button> -->
 
   <div style="padding: 10px;">
     <ion-row style="border-bottom: groove;text-align: center;">
@@ -92,7 +95,7 @@
 
     </ion-row><br>
 
-    <p style="float: right; padding: 5px;"><strong>Total:</strong> {{ total }}</p>
+    <p style="float: right; padding: 5px;"><strong>Total:</strong> {{ total | currency:'' }}</p>
     <!-- <p style="float: right; padding: 5px;">{{ total | currency:'':symbol: '1.0-2' }}</p> -->
 
     <ion-button color="dark" (click)="sumaTotales()">
@@ -100,8 +103,14 @@
     </ion-button>
   </div>
   <br><br><br>
-  <div class="div">
-    
+  
+
+  
+  <!-- <ion-button expand="block" color="dark" (click)="presentActionSheet()">
+    <strong>Opciones</strong> </ion-button> -->
+</ion-content>
+<ion-footer>
+<div class="div">
     <ion-row>
       <ion-col>
         <ion-item>
@@ -116,9 +125,18 @@
         </ion-item>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col class="md-12">
+        <ion-item>
+          <ion-label position="floating" type="number">Descripción</ion-label>
+          <ion-input [(ngModel)]="descripcion" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+  
+    </ion-row>
     <br>
 
-    <p style="float: right; padding: 5px;"><strong>Precio Total $: </strong> {{ totalTotalesT }}</p>
+    <p style="float: right; padding: 5px;"><strong>Precio Total $: </strong> {{ totalTotalesT | currency:'' }}</p>
 
     <!-- <ion-item>
       <ion-label position="floating">Total</ion-label>
@@ -132,10 +150,5 @@
     <ion-button color="dark" (click)="guardarOperacion()" class="float">
       <ion-icon name="save"></ion-icon>Guardar Operacion
     </ion-button>
- 
   </div>
-
-
-  <!-- <ion-button expand="block" color="dark" (click)="presentActionSheet()">
-    <strong>Opciones</strong> </ion-button> -->
-</ion-content>
+</ion-footer> 

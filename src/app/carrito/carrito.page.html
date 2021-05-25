@@ -1,14 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button (click)=perfil()>
-        <ion-icon name="person-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Mi Carrito</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dissmis();"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -22,14 +21,12 @@
           </p>
         </ion-item>
       </div>
-      
-
       <div>
-        <ion-card>
+        <!-- <ion-card>
           <ion-card-header>
             <ion-card-title>Enviar Cotización</ion-card-title>
           </ion-card-header>
-        
+
           <ion-card-content>
             <ion-col>
               <ion-item>
@@ -37,27 +34,28 @@
                 <ion-input [(ngModel)]="nombre_cotizacion" type="text"></ion-input>
               </ion-item>
             </ion-col>
-            
+
           </ion-card-content>
-        </ion-card>
-
-
+        </ion-card> -->
+       
+          <p>{{carrito$.id}}</p>
+       
 
         <ion-item-sliding *ngFor="let element of pedidos$">
-          <p><strong>Importadora:</strong> {{ element.importadora }}</p>
+          
           <hr style="border: 0.5px solid black;">
           <ion-item lines="none">
             <ion-thumbnail slot="start">
-              <img src="http://192.168.0.4:5000/{{ element.imagen }}">
+              <img src="http://192.168.1.7:5000/{{ element.imagen }}">
             </ion-thumbnail>
             <ion-label text-wrap>
+              <p><strong>Codigo:</strong> {{element.codigo}}</p>
               <p><strong>Nombre:</strong> {{element.nombre}}</p>
               <p><strong>Precio:</strong> {{element.precio}}</p>
               <p><strong>Cantidad Pedida</strong> {{element.cantidad_pedido}}</p>
+              <p><strong>Importadora:</strong> {{ element.importadora }}</p>
             </ion-label>
-            <ion-button (click)="sendOrder(element)" color="light">
-              Mandar Pedido
-            </ion-button>
+            
             <ion-button (click)="presentAlertConfirm(element)" color="danger">
               <ion-icon name="trash" class="icongarbage"></ion-icon>
             </ion-button>
@@ -65,41 +63,12 @@
           </ion-item>
         </ion-item-sliding>
       </div>
-
-
-
-
     </ion-item-group>
-    <!-- <ion-item-group>
-      <ion-item>
-        <p style="color:#157424; margin-block-start: 0em; margin-block-end: 0em;"><strong>Corredores destacados</strong>
-        </p>
-      </ion-item>
-      <ion-item-sliding *ngFor="let item of [1,2,3,4,5,6]">
-        <ion-item lines="none">
-          <ion-thumbnail slot="start">
-            <img src="assets/images/corredor.png">
-          </ion-thumbnail>
-          <ion-label text-wrap>
-            <p style="color:#157424;"><strong>Juan Carlos</strong></p>
-            <p>Asociado titanium</p>
-            <div class="ec-stars-wrapper">
-              <a data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-              <a data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-              <a data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-              <a data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-              <a data-value="5" title="Votar con 5 estrellas">&#9733;</a>
-            </div>
-          </ion-label>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="unread(item)">
-            <ion-icon class="icongarbage" slot="icon-only" name="trash"></ion-icon>Eliminar
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-item-group> -->
     <br>
   </div>
 </ion-content>
+<ion-footer>
+  <ion-button (click)="sendOrder()" color="light" expand="block" fill="outline">
+    <ion-icon name="cart-outline"></ion-icon> Mandar Pedido
+  </ion-button>
+</ion-footer>

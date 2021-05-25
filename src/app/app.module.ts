@@ -23,7 +23,7 @@ import { AuthProvider } from './providers/auth/auth';
 import { RestangularConfigFactory } from './providers/restangular/restangular';
 import { TokenStorageProvider } from './providers/token-storage/token-storage';
 import { PipesModule } from './pipes/pipes.module';
-
+import { Downloader } from '@ionic-native/downloader/ngx';
 import { DecimalPipe } from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
@@ -52,7 +52,7 @@ import { DecimalPipe } from '@angular/common';
     TokenStorageProvider,
     NotificacionsService,
     Camera,
-    File,
+    Downloader
   ],
   bootstrap: [AppComponent]
 })

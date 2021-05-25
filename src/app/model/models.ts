@@ -70,6 +70,37 @@ export interface IPedido {
     cantidad_pedido: number;
 
 }
+
+export interface ICarrito {
+    id: number;
+    estado?: string;
+    descripcion?: string;
+    importadora?: string; 
+    user_id: number;
+}
+export interface IMProducto {
+    id: number;
+    nombre?: string;
+    estado?: string;
+    imagen?: string;
+    precio?: number;
+    color?: string;
+    ancho?: string;
+    codigo?: string;
+    alto?: string;
+    puntuacion?: string;
+    descripcion?: string;
+    importadora?: string;
+    novedad?: string;
+    categorias_id?: number;
+    subcategorias_id?:number;
+    favoritos_id?:number;
+    disponibilidad?:string;
+    tipo_medida?:string;
+    user_id: number;
+    cantidad_pedido: number;
+
+}
 export interface ICalculadora {
     id: number;
     nombre: string;

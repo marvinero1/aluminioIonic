@@ -7,6 +7,47 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content no-padding>
+  <div class="ion-content" padding><br>
+    <ion-item-group>
+      <ion-item>
+        <p style="margin-block-start: 0em; margin-block-end: 0em;">
+          <strong>Mis Cotizaciones</strong>
+        </p>
+      </ion-item>
+      
+      <ion-item-sliding *ngFor="let element of  cotizaciones$">
+        <ion-item lines="none">
+          
+          
+          <ion-thumbnail slot="start">
+           
+            <ion-icon name="logo-buffer" style="font-size: 53px;"></ion-icon>
+            
+          </ion-thumbnail>
+          <ion-label text-wrap>
+            <p><strong>{{element.importadora}} </strong></p>
+            <p>Carrito Cotizado: {{element.carrito_id}}</p>
+            <p>Estado: {{element.estado}}</p>
+            <p></p>
 
+            <p>{{element.descripcion}}</p>
+            
+
+          </ion-label>
+          <ion-button (click)="show(element)">
+            <ion-icon name="arrow-forward"></ion-icon> 
+          </ion-button>
+          
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="presentAlertConfirm(element)">
+            <ion-icon class="icongarbage" slot="icon-only" name="trash"></ion-icon>Eliminar
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+    <br>
+  </div>
 </ion-content>

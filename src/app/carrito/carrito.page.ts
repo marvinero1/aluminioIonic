@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Restangular } from 'ngx-restangular';
@@ -14,56 +14,57 @@ import { Restangular } from 'ngx-restangular';
 export class CarritoPage implements OnInit {
 
   pedidos$:any = [];
+  carrito$:any = [];
+
   data:any='';
   nombre_cotizacion:string;
   dataForm: FormGroup;
   confirmacion:string='true';
+  id_carrito;
+  user_id=2;
+  estado=true;
 
   constructor(public api:AuthProvider,public loadingController: LoadingController,
     public alertController: AlertController,private _formBuilder: FormBuilder,
-    private router: Router,private restangular:Restangular,) { }
+    private router: Router,private restangular:Restangular,public modalController: ModalController,) { }
 
   ngOnInit() {
     this.dataForm = this.createForm();
-    this.getPedido();
+    this.getCarrito();
   }
 
-  getPedido(){
-    this.api.getAllObject('getPedido')
+  getCarrito(){
+    return this.api.getAllObjectById('getCartAttribute/', this.user_id)
       .subscribe((res) =>{ 
-      this.pedidos$ = res;
-      
-      
+      this.carrito$ = res;
+      console.log(this.carrito$.id);
+      this.getCarritoProductos(this.carrito$.id)
       });
   }
 
-  async sendOrder(element){
+  getCarritoProductos(id_carrito:number){
+    return this.api.getAllObjectById('carritoProductosIonic/', id_carrito)
+      .subscribe((res) =>{ 
+      this.pedidos$ = res;
+      });
+  }
+
+  sendOrder(){
     let data =  this._formBuilder.group({
         //id : [this.id],
         //nombre: [this.data.nombre,Validators.compose([Validators.required])],
-        id: [element.id],
-        nombre: [element.nombre],
-        imagen: [element.imagen],
-        precio: [element.precio],
-        color: [element.color],
-        ancho: [element.ancho],
-        codigo: [element.codigo],
-        alto: [element.alto],
-        puntuacion: [element.puntuacion],
-        descripcion: [element.descripcion],
-        importadora: [element.importadora],
-        disponibilidad: [element.disponibilidad],
-        tipo_medida: [element.tipo_medida],
-        cantidad_pedido: [element.cantidad_pedido],
-        user_id: [element.user_id],
         
-        nombre_pedido: this.nombre_cotizacion,
+        estado:[this.estado]
        
       });
       let data1 = data.value
      console.log(data1); 
 
-     this.loadingSave(data1);
+     return this.api.updateObjectById('updateStatusCart/', this.carrito$.id)
+      .subscribe((res) =>{ 
+      
+      
+      });
     }
 
     async loadingSave(element){
@@ -92,14 +93,7 @@ export class CarritoPage implements OnInit {
       await alert.present();
     }
     
-      
-  
 
-  deleteObject(element){
-    this.api.deleteObjectById('pedidoDelete/', element.id).subscribe(res=>{
-      window.location.reload();
-    });
-  }
 
   async presentLoading(){
     const loading = await this.loadingController.create({
@@ -130,8 +124,10 @@ export class CarritoPage implements OnInit {
         }, {
           text: 'Si',
           handler: () => {
-            this.api.deleteObjectById('pedidoDelete/',element.id).subscribe(res=>{
+            this.api.deleteObjectById('deleteProductoCarrito/',element.id).subscribe(res=>{
               console.log(res);
+            window.location.reload();
+
             });
 
           }
@@ -151,4 +147,14 @@ export class CarritoPage implements OnInit {
   perfil(){
     this.router.navigate(['/perfil']);
   }
+
+  dissmis(){
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
 }
+function id_carrito(id_carrito: any) {
+  throw new Error('Function not implemented.');
+}
+
