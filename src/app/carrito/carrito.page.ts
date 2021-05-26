@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Restangular } from 'ngx-restangular';
-
 
 @Component({
   selector: 'app-carrito',
@@ -15,21 +14,21 @@ export class CarritoPage implements OnInit {
 
   pedidos$:any = [];
   carrito$:any = [];
-
+  data1:any=[];
   data:any='';
   nombre_cotizacion:string;
   dataForm: FormGroup;
   confirmacion:string='true';
   id_carrito;
   user_id=2;
-  estado=true;
+  estado='true';
 
   constructor(public api:AuthProvider,public loadingController: LoadingController,
     public alertController: AlertController,private _formBuilder: FormBuilder,
-    private router: Router,private restangular:Restangular,public modalController: ModalController,) { }
+    private router: Router,private restangular:Restangular,public modalController: ModalController,
+    private loadingCtrl:LoadingController, public toastCtrl: ToastController,) { }
 
   ngOnInit() {
-    this.dataForm = this.createForm();
     this.getCarrito();
   }
 
@@ -49,21 +48,42 @@ export class CarritoPage implements OnInit {
       });
   }
 
-  sendOrder(){
-    let data =  this._formBuilder.group({
-        //id : [this.id],
-        //nombre: [this.data.nombre,Validators.compose([Validators.required])],
-        
-        estado:[this.estado]
-       
+    async sendOrder(){
+      const loading = await this.loadingCtrl.create({
+        // message: 'Registrando.',
+        spinner: 'dots'
+        // duration: 1500
       });
-      let data1 = data.value
-     console.log(data1); 
-
-     return this.api.updateObjectById('updateStatusCart/', this.carrito$.id)
-      .subscribe((res) =>{ 
-      
-      
+  
+      loading.present().then(() => {
+        let data =  this._formBuilder.group({
+          //id : [this.id],
+          //nombre: [this.data.nombre,Validators.compose([Validators.required])],
+          estado:[this.estado]
+        });
+        try {
+          this.data1 = data.value;
+          let a = this.carrito$.id          
+          this.api.cerrarCarrito('updateStatusCart/', a , this.data1).subscribe((datav) => {
+                
+            this.presentToast('Carrito Guardado su cotizacion sera respondida pronto!');
+            
+            loading.dismiss().then(()=>{
+            console.log(datav);
+            
+            // this.navCtrl.back();
+            //this.modalController.dismiss();
+            // this.closemodal(response.data);
+            window.location.reload();  
+            });
+          },
+          ()=>{
+            loading.dismiss();
+            
+          });
+        } catch (error) {
+          console.log(error);
+        }
       });
     }
 
@@ -92,14 +112,13 @@ export class CarritoPage implements OnInit {
       });
       await alert.present();
     }
-    
 
-
-  async presentLoading(){
+  async presentLoading(mensaje){
     const loading = await this.loadingController.create({
       cssClass: 'loading',
-      message: 'Realizando Cotizacion...',
-      duration: 4000
+      message: mensaje,
+      duration: 4000,
+      
     });
     await loading.present();
 
@@ -127,9 +146,7 @@ export class CarritoPage implements OnInit {
             this.api.deleteObjectById('deleteProductoCarrito/',element.id).subscribe(res=>{
               console.log(res);
             window.location.reload();
-
             });
-
           }
         }
       ]
@@ -137,12 +154,6 @@ export class CarritoPage implements OnInit {
     await alert.present();
   }
 
-  createForm(): FormGroup {
-    return this._formBuilder.group({
-      //id : [this.id],
-      confirmacion: [this.confirmacion],
-    });
-  }
 
   perfil(){
     this.router.navigate(['/perfil']);
@@ -153,8 +164,11 @@ export class CarritoPage implements OnInit {
       'dismissed': true
     });
   }
+  async presentToast(mensaje) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      duration: 1500
+    });
+    toast.present();
+  }
 }
-function id_carrito(id_carrito: any) {
-  throw new Error('Function not implemented.');
-}
-

@@ -49,4 +49,8 @@ export class MisCotizacionesPage implements OnInit {
 
   }
 
+  presentAlertConfirm(element){
+    console.log(element);
+    
+  }
 }

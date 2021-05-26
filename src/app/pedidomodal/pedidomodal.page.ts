@@ -3,9 +3,6 @@ import { AlertController, LoadingController, ModalController } from '@ionic/angu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthProvider } from '../providers/auth/auth';
 import { Restangular } from 'ngx-restangular';
-import { empty } from 'rxjs';
-
-
 @Component({
   selector: 'app-pedidomodal',
   templateUrl: './pedidomodal.page.html',
@@ -112,25 +109,29 @@ export class PedidomodalPage implements OnInit {
 
   crearCarrito(){
     let estado:string = 'false';
+
     this.formularioarrito = this._formBuilder.group({
-      id : [this.id],
-      estado: [estado],
-      importadora: [this.importadora],
-      descripcion: [this.descripcion],
-      user_id : [this.user_id],
-    });
+        //id : [this.id],
+        estado: [estado],
+        importadora: [this.importadora],
+        descripcion: [this.descripcion],
+        user_id : [this.user_id],
+      });
+
     let data = this.formularioarrito.value;
+    console.log(data);
+
     if(data){
-        this.restangular.all('guardarCarrito/').post(data).subscribe((datav)=>{ 
-            this.dismiss();
-            // this.presentLoading();
-            // this.presentAlert();
-        });
-      }else{
-        (error)=>{
-          console.log(error);
-        };
-      } 
+      this.restangular.all('guardarCarrito').post(data).subscribe((datav)=>{ 
+          this.dismiss();
+          this.presentLoading();
+      });
+    }else{
+      (error)=>{
+        console.log(error);
+    }
+    }
+  
   }
 
   async presentLoading() {

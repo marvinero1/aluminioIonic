@@ -30,8 +30,8 @@ export interface AccessData {
 
 @Injectable()
 export class AuthProvider {
-  apiRoot: string = "http://192.168.0.4:5000/api/";
-  //apiRoot: string = "http://altools.es/api";
+  //apiRoot: string = "http://192.168.1.7:5000/api/";
+  apiRoot: string = "http://altools.es/api/";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
  //apiRoot: string = "https://new.toursecret.club/api";
   valauten:boolean = false;
@@ -278,8 +278,12 @@ export class AuthProvider {
     return this.http.delete(`${this.apiRoot}`+ route +id);
   }
 
-  updateObjectById = (route:string,carro:ICarrito) =>{
-    return this.http.put(`${this.apiRoot}`+ route , carro);
+  updateObjectById = (route:string,id:number, carrito:ICarrito) =>{
+    return this.http.put<any>(`${this.apiRoot}`+ route + id, carrito);
+  }
+
+  cerrarCarrito = (route:string,id:number, carrito:ICarrito) =>{
+    return this.http.put<any>(`${this.apiRoot}`+ route + id, carrito);
   }
 
   deleteAllObject = (route:string) =>{

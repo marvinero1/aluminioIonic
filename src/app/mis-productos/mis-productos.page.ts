@@ -16,13 +16,14 @@ export class MisProductosPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  @Input() id: string;
+  @Input() id: string; //id de la importadora
   @Input() user_id:any;
   @Input() importadora:any;
 
   dataForm: FormGroup;
   productos$:any=[];
   textoBuscar:string='';
+  
   //importadora:string;
   data: any;
   IMProducto
@@ -164,8 +165,10 @@ export class MisProductosPage implements OnInit {
 
   getmyProducts(){  
     let data = this.dataForm.value;
+    let a = data.id;
+    console.log(data);
     
-    this.api.getAllObjectById('getMyProducts/', data.id)
+    this.api.getAllObjectById('getMyProducts/', a)
     .subscribe((res) =>{ 
       this.productos$ = res;
       this.productos$ = Object.values(this.productos$);

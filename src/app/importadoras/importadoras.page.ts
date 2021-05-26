@@ -39,12 +39,7 @@ export class ImportadorasPage implements OnInit {
     this.router.navigate(['/perfil']);
   }
 
-
-  onSelect(element){   
-    this.presentModal(element);
-  }
-
-  async presentModal(element:any) {
+  async onSelect(element:any) {
     const modal = await this.modalController.create({
       component: MisProductosPage,
       cssClass: 'my-modal-products',

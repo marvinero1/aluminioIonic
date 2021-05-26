@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController, ActionSheetController  } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
 import { Restangular } from 'ngx-restangular';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-calculadora-historial',
   templateUrl: './calculadora-historial.page.html',
@@ -25,7 +27,8 @@ export class CalculadoraHistorialPage implements OnInit {
 
   constructor(public auth: AuthProvider,public alertController: AlertController,
     public actionSheetController: ActionSheetController,private _formBuilder: FormBuilder,
-    private restangular:Restangular) { 
+    private restangular:Restangular,private loadingCtrl:LoadingController,
+    private router: Router) { 
 
     }
 
@@ -34,32 +37,45 @@ export class CalculadoraHistorialPage implements OnInit {
     
   }
 
-  guardarOperacion(){
-    let data = this._formBuilder.group({
-      id:[this.id],
-     extra: [this.totalTotalesT],
-     nombre_operacion : [this.nombre_operacion],
-     total_suma: [this.total_suma],
-     total_extra:[this.total_extra],
-     descripcion:[this.descripcion],
-     user_id:[this.user_id]
-     
-   });
+  async guardarOperacion(){
+    const loading = await this.loadingCtrl.create({
+      // message: 'Registrando.',
+      spinner: 'dots'
+      // duration: 1500
+    });
 
-    this.data1 = data.value;
-    
-   // let objecy=JSON.stringify(data1);
-   // console.log(objecy);
-    //console.log(this.data1);
-    //console.log('updateCalculo/'+this.data1.id);
-    
-   this.auth.updateObjectById('updateCalculo/' , this.data1.id).subscribe((datav) => {
-     
-     window.location.reload();
-   });
- }
+    loading.present().then(() => {
+      let data = this._formBuilder.group({
+        id:[this.id],
+        extra: [this.totalTotalesT],
+        nombre_operacion : [this.nombre_operacion],
+        total_suma: [this.total_suma],
+        total_extra:[this.total_extra],
+        descripcion:[this.descripcion],
+        user_id:[this.user_id]
+      });
+      try {
+        this.data1 = data.value;
+        let a = this.data1.id; 
+        console.log('actualizarCalculo/',this.data1.id);
+        this.auth.updateObjectById('actualizarCalculo/', a , this.data1).subscribe((datav) => {
+              loading.dismiss().then(()=>{
+                console.log(datav);
+              // this.navCtrl.back();
+              //this.modalController.dismiss();
+              // this.closemodal(response.data);
+              window.location.reload();
+          });
+        },
+        ()=>{
+          loading.dismiss();
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }
  
-
   getCalculos() {
     this.auth.getAllObject('historialCalculos')
       .subscribe((res) => {
@@ -145,5 +161,8 @@ export class CalculadoraHistorialPage implements OnInit {
 
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
+  }
+  perfil(){
+    this.router.navigate(['/perfil']);
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
 import { Router } from '@angular/router';
 
-import { Restangular } from "ngx-restangular";
+import {  MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.page.html',
@@ -14,10 +14,12 @@ export class ProductosPage implements OnInit {
   productos$:any=[];
   textoBuscar:string='';
 
-  constructor(public api:AuthProvider,private router: Router){ 
+  constructor(public api:AuthProvider,private router: Router,
+    public menuCtrl: MenuController){ 
   }
 
   ngOnInit() {
+    this.menuCtrl.enable(true);
     this.getProducts();
   }
 
