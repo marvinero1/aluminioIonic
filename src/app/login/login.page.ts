@@ -49,13 +49,10 @@ export class LoginPage implements OnInit {
           this.auth.getuser().subscribe(
             data => {
               loading.dismiss().then(()=>{
-                  console.log(data);
-                   
                   // this.router.navigate(['/ciudad']);
                   //this.closemodal(true);
                   this.navCtrl.navigateRoot('/select');
               });
-              console.log(data);
             },
             err => {
               loading.dismiss();
