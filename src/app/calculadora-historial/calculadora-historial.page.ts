@@ -126,7 +126,9 @@ export class CalculadoraHistorialPage implements OnInit {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-          console.log(element);
+          this.auth.deleteObjectById('calculadoraHistorialDelete/', element.id).subscribe(res=>{
+            window.location.reload();
+          });
         }
       }, {
         text: 'Editar',

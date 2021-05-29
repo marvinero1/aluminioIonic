@@ -15,7 +15,6 @@
 
 <ion-content [fullscreen]="true" padding>
   <ion-grid><br>
-    
     <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <ion-row>
         <ion-col>
@@ -27,7 +26,7 @@
 
         <ion-col>
           <ion-item>
-            <ion-label position="floating" type="number">Largo</ion-label>
+            <ion-label position="floating" type="number">Alto</ion-label>
             <ion-input [(ngModel)]="numero2" formControlName="numero2"></ion-input>
           </ion-item>
         </ion-col>
@@ -95,11 +94,11 @@
 
     </ion-row><br>
 
-    <p style="float: right; padding: 5px;"><strong>{{ total }} </strong> </p>
+    <p style="float: right; padding: 5px;"><strong>{{ total }} M²</strong> </p>
     <!-- <p style="float: right; padding: 5px;">{{ total | currency:'':symbol: '1.0-2' }}</p> -->
 
     <ion-button color="dark" (click)="sumaTotales()">
-      <ion-icon name="calculator-outline"></ion-icon>Total M2
+      <ion-icon name="calculator-outline"></ion-icon>Total M²
     </ion-button>
   </div>
   <br><br><br>
@@ -114,7 +113,7 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label position="floating" type="number">Nombre Operación</ion-label>
+          <ion-label position="floating" type="number">Celular</ion-label>
           <ion-input [(ngModel)]="nombreOperacion" type="text"></ion-input>
         </ion-item>
       </ion-col>
@@ -128,7 +127,7 @@
     <ion-row>
       <ion-col class="md-12">
         <ion-item>
-          <ion-label position="floating" type="number">Descripción</ion-label>
+          <ion-label position="floating" type="number">Nombre Cliente</ion-label>
           <ion-input [(ngModel)]="descripcion" type="text"></ion-input>
         </ion-item>
       </ion-col>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthProvider } from '../providers/auth/auth';
 import { Restangular } from "ngx-restangular";
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { MisProductosPage } from '../mis-productos/mis-productos.page';
 @Component({
   selector: 'app-importadoras',
@@ -17,9 +17,10 @@ export class ImportadorasPage implements OnInit {
   productos$:any;
 
   constructor(public api:AuthProvider,private router: Router, private rest:Restangular,
-    public modalController: ModalController) { }
+    public modalController: ModalController,public menuCtrl: MenuController) { }
 
   ngOnInit() {
+    this.menuCtrl.enable(true);
     this.getImportadoras();
     //this.getProducts();
   }
