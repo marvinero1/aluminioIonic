@@ -12,8 +12,8 @@
 <ion-content >
   <ion-card style="padding: 14px;">
     <div *ngIf="btnCarrito == false">
-        <ion-button color="light" (click)="crearCarrito();">Crear Carrito</ion-button>
-      </div>
+      <ion-button color="light" (click)="crearCarrito();">Crear Carrito</ion-button>
+    </div>
     <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <ion-row>
           <h5 class="h5s">Cantidad a pedir</h5> 

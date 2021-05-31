@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content [fullscreen]="true" class="body">
   
-  <ion-searchbar (ionChange)="buscar($event)" animated></ion-searchbar>
+  <ion-searchbar mode="ios" (ionChange)="buscar($event)" animated></ion-searchbar>
   <ion-card *ngFor="let element of importadoras$ | filtro:textoBuscar:'name'">
     <ion-row>
       <ion-col col-4 >

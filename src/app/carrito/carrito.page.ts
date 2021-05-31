@@ -164,7 +164,7 @@ export class CarritoPage implements OnInit {
       'dismissed': true
     });
   }
-  async presentToast(mensaje) {
+  async presentToast(mensaje){
     const toast = await this.toastCtrl.create({
       message: mensaje,
       duration: 1500

@@ -54,7 +54,7 @@ export class PedidomodalPage implements OnInit {
     .subscribe((res) =>{ 
       this.carrito$ = res as string[];
       //this.carrito$ = Object.values(this.carrito$);
-      if(this.carrito$.estado == 'false' ||this.carrito$.user_id == data.user_id){
+      if(this.carrito$.estado == 'false' || this.carrito$.user_id == data.user_id){
         this.btnCarrito = true;
         //console.log("si hay algo");
       }else{
