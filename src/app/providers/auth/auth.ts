@@ -6,6 +6,8 @@ import { tap, map, switchMap, catchError } from 'rxjs/operators';
 import { ILogin, IPedido, IFavoritos, ICalculadora, ICarrito } from "../../model/models";
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
+import { Storage } from '@ionic/storage'
+
 // import 'rxjs/add/operator/map';
 // import 'rxjs/add/operator/do';
 // import 'rxjs/add/operator/switchMap';
@@ -30,19 +32,23 @@ export interface AccessData {
 
 @Injectable()
 export class AuthProvider {
-  apiRoot: string = "http://192.168.1.7:5000/api/";
+  apiRoot: string = "http://192.168.0.4:5000/api/";
   // apiRoot: string = "http://altools.es/api/";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
 
   valauten:boolean = false;
+  logs:any=[];
+  usuarios$:any=[];
   
   constructor(private navCtrl: NavController,public http: HttpClient,
               private router:Router,
               // private app:App,
               public toastCtrl: ToastController,
-              private tokenStorage: TokenStorageProvider) {
+              private tokenStorage: TokenStorageProvider,
+              private storage:Storage) {
     //console.log('Hello AuthProvider Provider');
     this.getAccessTokenn();  
+    this.getEmail();
   }
   headerDefault(): any {
     let bearerToken;
@@ -109,6 +115,7 @@ export class AuthProvider {
       })
     );
   }
+
   salir(){
     this.tokenStorage.clear();
     localStorage.removeItem('userdata');
@@ -125,18 +132,17 @@ export class AuthProvider {
       password: data.password,
     };
     console.log(da);
-    
     return this.http.post(url, da, this.headerDefault())
     .pipe(
       tap((tokens: any) => {
         this.saveAccessData(tokens);
-        // return "";
+        this.router.navigate(['/select']);
 
         //ACA HACER EL GUARDADO EN EL STORAGE
-        this.router.navigate(['/select']);
+        localStorage.setItem('Usuario', JSON.stringify(data.email));
       }),
       catchError((err) => {
-        // console.log(err);
+        console.log(err);
         // console.log(err.error.message);
         if(err.error.message == 'Su dirección de correo electrónico no está verificada.'){
           this.presentToast('Su dirección de correo electrónico no está verificada.')
@@ -146,6 +152,19 @@ export class AuthProvider {
         return throwError(err);
       })
     );
+  }
+
+  getEmail(){
+    this.logs = JSON.parse(localStorage.getItem('Usuario'));
+    console.log(this.logs);
+    this.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+      this.usuarios$ = res; 
+      console.log(this.usuarios$);
+    });
+  }
+
+  getUsers = (route:string, id:number)=>{
+    return this.http.get(`${this.apiRoot}`+ route + id);
   }
 
   // user() {
@@ -169,13 +188,13 @@ export class AuthProvider {
   // }
 
   getuser(): Observable<any>{
-    localStorage.removeItem('userdata');
+    //localStorage.removeItem('userdata');
     const urludata = `${this.apiRoot}userdata`;
     return this.http.get(urludata,this.headerDefault())
     .pipe(
       tap((data: any) => {
         console.log("user login data");
-        localStorage.setItem('userdata', JSON.stringify(data.data.data));
+        //localStorage.setItem('userdata', JSON.stringify(data.data.data));
         console.log(data);
       }),
       catchError((err) => {

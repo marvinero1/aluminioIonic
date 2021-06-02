@@ -25,6 +25,7 @@ import { TokenStorageProvider } from './providers/token-storage/token-storage';
 import { PipesModule } from './pipes/pipes.module';
 import { Downloader } from '@ionic-native/downloader/ngx';
 import { DecimalPipe } from '@angular/common';
+import { Storage } from '@ionic/storage'
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -49,6 +50,7 @@ import { DecimalPipe } from '@angular/common';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthProvider,
     DecimalPipe,
+    Storage,
     TokenStorageProvider,
     NotificacionsService,
     Camera,

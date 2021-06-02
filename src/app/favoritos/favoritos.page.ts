@@ -27,11 +27,6 @@ export class FavoritosPage implements OnInit {
       console.log(this.favoritos$);       
     });
   }
-
-  perfil(){
-    this.router.navigate(['/perfil']);
-  }
-
   show(item){
     //console.log(item);
     this.router.navigate(['/producto/'+ item.productos_id]);
@@ -69,5 +64,8 @@ export class FavoritosPage implements OnInit {
     });
 
     await alert.present();
+  }
+  perfil(){
+    this.router.navigate(['/perfil']);
   }
 }

@@ -1,40 +1,52 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button><ion-icon name="menu-outline"></ion-icon></ion-menu-button>
+      <ion-menu-button>
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-menu-button>
     </ion-buttons>
     <ion-title>Mi Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content no-padding>
-  <p style="text-align:center; margin:0 auto; font-size: 20px; padding-block-start: 2vh;"><strong>Mi Cuenta</strong></p>
-<ion-row align-items-center style="text-align: center">  
-    <img style="margin: 0 auto; display:block; padding-block-start:5vh; padding-block-end: 5vh;width: 75%;" src="assets/img/default-person.jpg">   
-  <ion-col size="10" style="margin: 0 auto;" align-self: center>
-      <form>
-        <ion-item>   
-          <ion-label ngModel name="usuario" type="text" required>
-            <strong>Nombre:</strong> </ion-label>
-        </ion-item>
-        <br>
-        <ion-item>      
-          <ion-label ngModel name= "nombreUsuario" #nombre="ngModel" type="text">
-            <strong>Pais:</strong> </ion-label>
-        </ion-item>
-        <br>
-        <ion-item>   
-          <ion-label ngModel name="ciudad" type="text" required>
-            <strong>Ciudad: </strong> </ion-label>
-        </ion-item> 
-        <br>
-        
-        
-        <ion-item>   
-          <ion-label ngModel name="e-mail"  type="text" required>
-            <strong>Email:</strong> </ion-label>
-        </ion-item> 
-      </form>
-  </ion-col>
+  <ion-row align-items-center style="text-align: center">
+    <img src="http://192.168.0.4:5000/{{ usuarios$.imagen }}" class="ima">
+    <ion-col size="10" style="margin: 0 auto;" align-self: center>
+      <ion-item>
+        <ion-label>
+          <strong>Nombre:</strong> {{ usuarios$.name }}</ion-label>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label>
+          <strong>Telefono:</strong> {{ usuarios$.telefono }}</ion-label>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label>
+          <strong>Whatsapp:</strong> {{ usuarios$.whatsapp }}</ion-label>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label>
+          <strong>Pais:</strong> {{ usuarios$.pais }}</ion-label>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label>
+          <strong>Ciudad: </strong> {{ usuarios$.ciudad }}</ion-label>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label>
+          <strong>Email:</strong> {{ usuarios$.email }} </ion-label>
+      </ion-item><br>
+      <ion-item>
+        <ion-label>
+          <strong>Rol:</strong> {{ usuarios$.role }}</ion-label>
+      </ion-item>
+      <br>
+    </ion-col>
   </ion-row>
 </ion-content>

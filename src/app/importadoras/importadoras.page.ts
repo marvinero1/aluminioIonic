@@ -36,10 +36,7 @@ export class ImportadorasPage implements OnInit {
   buscar(event){
     this.textoBuscar = event.detail.value;
   }
-  perfil(){
-    this.router.navigate(['/perfil']);
-  }
-
+  
   async onSelect(element:any) {
     const modal = await this.modalController.create({
       component: MisProductosPage,
@@ -55,12 +52,13 @@ export class ImportadorasPage implements OnInit {
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
-
     setTimeout(() => {
       console.log('Actualizando Productos...');
       this.getImportadoras();
       event.target.complete();
     }, 2000);
+  }
+  perfil(){
+    this.router.navigate(['/perfil']);
   }
 }
