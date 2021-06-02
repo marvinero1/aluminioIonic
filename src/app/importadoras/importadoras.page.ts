@@ -53,4 +53,14 @@ export class ImportadorasPage implements OnInit {
     });
     return await modal.present();
   }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Actualizando Productos...');
+      this.getImportadoras();
+      event.target.complete();
+    }, 2000);
+  }
 }

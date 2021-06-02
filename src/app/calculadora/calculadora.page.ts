@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ToastController } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
 import { LoadingController } from '@ionic/angular';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Restangular } from 'ngx-restangular';
 import { DecimalPipe } from '@angular/common';
@@ -34,12 +34,12 @@ export class CalculadoraPage implements OnInit {
     private activatedRoute: ActivatedRoute, private router: Router,
     public auth: AuthProvider, public loadingController: LoadingController,
     private _formBuilder: FormBuilder,public alertController: AlertController,
-    private restangular:Restangular,private decimalPipe: DecimalPipe
+    private restangular:Restangular,private decimalPipe: DecimalPipe,
+    public toastController: ToastController
     ) {}
 
   ngOnInit() {
     this.dataForm = this.createForm();
-    
     this.getCalculs();
   }
 
@@ -48,7 +48,27 @@ export class CalculadoraPage implements OnInit {
       .subscribe((res) => {
         this.calculo$ = res;
         console.log(this.calculo$);
+        //Calculamos el TOTAL 
+        this.total = this.calculo$.reduce((
+          acc,
+          obj,
+        ) => acc + (obj.numero1 * obj.numero2),
+        0);
+        console.log("Total: ", this.total);
       });
+  }
+
+  calcular() {
+      let num1 = this.numero1;
+      let num2 = this.numero2;
+      if (num1>0||num2>0) {
+        this.resultado = num1 * num2;
+        this.resultado = this.decimalPipe.transform(this.resultado, '1.1-1');  
+        console.log(this.resParse);
+      } else {
+        this.presentToast("Intenta agregando numeros, para sacar el total.");
+      }
+      
   }
 
   createForm(): FormGroup {
@@ -61,27 +81,31 @@ export class CalculadoraPage implements OnInit {
     });
   }
 
-  
-
-  calcular() {
-    let num1 = this.numero1;
-    let num2 = this.numero2;
-    this.resultado = num1 * num2;
-    this.resultado = this.decimalPipe.transform(this.resultado, '1.1-1');  
-    console.log(this.resParse);
-  }
 
   submitData() {
     let data = this.dataForm.value;
+    let data_resultado = data.resultado;
     console.log(data);
-    this.restangular.all('guardarCalculadora').post(data).subscribe((datav) => {
+    if (data_resultado > 0) {
+      this.restangular.all('guardarCalculadora').post(data).subscribe((datav) => {
       console.log(datav);
       this.presentLoading();
       window.location.reload();
       //this.presentAlert();
     });
+    } else {
+      this.presentToast("El resultado no puede ser 0");
+    }
+    
   }
 
+  async presentToast(message:any) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   sumaTotales() {
     //Calculamos el TOTAL 
@@ -96,26 +120,30 @@ export class CalculadoraPage implements OnInit {
     return this.totalTotalesT;
   }
 
-
   guardarOperacion(){
      let data = this._formBuilder.group({
       extra: [this.totalTotalesT],
       nombre_operacion : [this.nombreOperacion],
       total_suma: [this.total],
       total_extra:[this.totalTotales],
-      descripcion:[this.descripcion],
+      descripcion:[this.descripcion, Validators.compose([Validators.required])],
       user_id:[this.user_id]
     });
-
     let data1 = data.value;
-        
+    let cel = data1.nombre_operacion;
+    let precio = data1.total_extra;
+
     // let objecy=JSON.stringify(data1);
     // console.log(objecy);
-
-    this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
-      // console.log(data1);
+    if (cel>0 || precio>0) {
+      this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
+       console.log(data1);
       window.location.reload();
     });
+    } else {
+      this.presentToast("Ingresa los datos requeridos")
+    }
+    
   }
 
   async presentLoading() {

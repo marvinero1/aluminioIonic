@@ -30,13 +30,12 @@ export interface AccessData {
 
 @Injectable()
 export class AuthProvider {
-  //apiRoot: string = "http://192.168.1.7:5000/api/";
-  apiRoot: string = "http://altools.es/api/";
+  apiRoot: string = "http://192.168.1.7:5000/api/";
+  // apiRoot: string = "http://altools.es/api/";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
- //apiRoot: string = "https://new.toursecret.club/api";
+
   valauten:boolean = false;
   
-
   constructor(private navCtrl: NavController,public http: HttpClient,
               private router:Router,
               // private app:App,
@@ -135,7 +134,6 @@ export class AuthProvider {
 
         //ACA HACER EL GUARDADO EN EL STORAGE
         this.router.navigate(['/select']);
-        this.presentToast('!!! Bienvenido a Altools ¡¡¡')
       }),
       catchError((err) => {
         // console.log(err);

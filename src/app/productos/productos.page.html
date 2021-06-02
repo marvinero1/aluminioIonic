@@ -10,11 +10,14 @@
     </ion-buttons>
     <ion-title>{{ titulo }}</ion-title>
   </ion-toolbar>
+  <ion-searchbar mode="ios" (ionChange)="buscar($event)" placeholder="Buscar por Nombre" animated></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="body">
-  <ion-searchbar mode="ios" (ionChange)="buscar($event)" animated></ion-searchbar>
-  <ion-card class="card" *ngFor="let element of productos$ | filtro:textoBuscar:'nombre','color'">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card class="card" *ngFor="let element of productos$ | filtro:textoBuscar:'nombre'">
     
     <ion-col col-4>
       <ion-card-subtitle style="padding: 4px;"><strong>Codigo:</strong>  {{ element.codigo}}</ion-card-subtitle>

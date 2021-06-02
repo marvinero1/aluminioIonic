@@ -23,32 +23,21 @@
       <ion-item-sliding *ngFor="let element of novedades$">
         <ion-item lines="none">
           <ion-thumbnail slot="start">
-            <img src="http://altools.es/{{ element.imagen}}" >
+            <img src="http://192.168.1.7:5000/{{ element.imagen}}" >
           </ion-thumbnail>
           <ion-label text-wrap>
             <p><strong>{{ element.nombre}} </strong></p>
             <p>{{ element.importadora }}</p>
-            <!-- <div class="ec-stars-wrapper">
-              <a data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-              <a data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-              <a data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-              <a data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-              <a data-value="5" title="Votar con 5 estrellas">&#9733;</a>
-            </div> -->
           </ion-label>
           <ion-icon name="star" class="star"></ion-icon>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option color="success" (click)="ver(element)">
             <ion-icon class="icongarbage" slot="icon-only" name="eye">
-
             </ion-icon>Ver
           </ion-item-option>
         </ion-item-options>
-    
       </ion-item-sliding>
-    </ion-item-group>
-
-    <br>
+    </ion-item-group><br>
   </div>
 </ion-content>

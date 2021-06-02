@@ -50,15 +50,20 @@
     background: #e5e5e5;
   }
   
+  
   /* Works - pass "my-custom-class" in cssClass to increase specificity */
   .my-custom-class .alert-wrapper {
     background: #e5e5e5;
   }
   .my-custom-class-modal-favorito{
-    background: transparent;
-    height: 62%;
-    padding-block-start: 313px;
+    height: 56%;
+    -webkit-padding-before: 190px;
+
+    toolbar-background{
+      background: black;
+    }
   }
+  
   ion-title{
     text-align: center;
   }

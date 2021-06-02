@@ -25,7 +25,8 @@ export class ProductosPage implements OnInit {
 
   getProducts(){
       this.api.getAllObject('productos').subscribe((res) =>{ 
-        this.productos$ = res;       
+        this.productos$ = res; 
+              
       });
   }
 
@@ -41,4 +42,12 @@ export class ProductosPage implements OnInit {
     this.router.navigate(['/perfil']);
   }
 
+  doRefresh(event) {
+    setTimeout(() => {
+      console.log('Actualizando Productos...');
+      this.getProducts();
+      event.target.complete();
+    }, 2000);
+  }
+  
 }

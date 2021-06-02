@@ -144,8 +144,8 @@ export class CarritoPage implements OnInit {
           text: 'Si',
           handler: () => {
             this.api.deleteObjectById('deleteProductoCarrito/',element.id).subscribe(res=>{
-              console.log(res);
-            window.location.reload();
+            console.log(res);
+            this.router.navigateByUrl('/carrito');
             });
           }
         }
