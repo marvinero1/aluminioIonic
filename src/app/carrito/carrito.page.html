@@ -41,7 +41,7 @@
           <ion-item lines="none">
             <ion-thumbnail slot="start">
               <!-- <img src="http://altools.es/{{ element.imagen }}"> -->
-              <img src="http:/192.168.0.4:5000/{{ element.imagen }}">
+              <img src="http://192.168.1.7:5000/{{ element.imagen }}">
 
             </ion-thumbnail>
             <ion-label text-wrap>
@@ -63,7 +63,7 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-button (click)="sendOrder()" color="light" expand="block" fill="outline">
-    <ion-icon name="cart-outline"></ion-icon> Mandar Pedido
+  <ion-button (click)="sendOrder()" color="dark" expand="block" fill="outline">
+     <p><ion-icon name="cart-outline"></ion-icon> Mandar Pedido</p> 
   </ion-button>
 </ion-footer>

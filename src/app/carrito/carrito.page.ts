@@ -20,8 +20,10 @@ export class CarritoPage implements OnInit {
   dataForm: FormGroup;
   confirmacion:string='true';
   id_carrito;
-  user_id=2;
+  user_id:number;
   estado='true';
+  logs:any=[];
+  usuarios$:any=[];
 
   constructor(public api:AuthProvider,public loadingController: LoadingController,
     public alertController: AlertController,private _formBuilder: FormBuilder,
@@ -29,11 +31,11 @@ export class CarritoPage implements OnInit {
     private loadingCtrl:LoadingController, public toastCtrl: ToastController,) { }
 
   ngOnInit() {
-    this.getCarrito();
+    this.getUser();
   }
 
-  getCarrito(){
-    return this.api.getAllObjectById('getCartAttribute/', this.user_id)
+  getCarrito(user_id){
+    return this.api.getAllObjectById('getCartAttribute/', user_id)
       .subscribe((res) =>{ 
       this.carrito$ = res;
       console.log(this.carrito$.id);
@@ -65,8 +67,7 @@ export class CarritoPage implements OnInit {
           this.data1 = data.value;
           let a = this.carrito$.id          
           this.api.cerrarCarrito('updateStatusCart/', a , this.data1).subscribe((datav) => {
-                
-            this.presentToast('Carrito Guardado su cotizacion sera respondida pronto!');
+            this.presentLoading('Carrito Guardado su cotizacion sera respondida pronto!');
             
             loading.dismiss().then(()=>{
             console.log(datav);
@@ -145,7 +146,7 @@ export class CarritoPage implements OnInit {
           handler: () => {
             this.api.deleteObjectById('deleteProductoCarrito/',element.id).subscribe(res=>{
             console.log(res);
-            this.router.navigateByUrl('/carrito');
+            window.location.reload();
             });
           }
         }
@@ -170,5 +171,17 @@ export class CarritoPage implements OnInit {
       duration: 1500
     });
     toast.present();
+  }
+
+  getUser(){
+    this.logs = JSON.parse(localStorage.getItem('Usuario'));
+    
+    this.api.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+      this.usuarios$ = res;
+      let user_id =  this.usuarios$.id;
+
+      this.getCarrito(user_id);
+      //console.log(this.usuarios$);
+    });
   }
 }

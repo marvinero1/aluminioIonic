@@ -5,8 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-row style="justify-content: center;text-align: center; padding: 22px;">
+  <ion-row class="fila">
+    <form [formGroup]="dataForm" (ngSubmit)=guardarFavorito()>
+      <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
       <ion-button color="dark" (click)="dismiss()"><ion-icon name="alert-outline"></ion-icon>Atras</ion-button>
       <ion-button color="dark" (click)="guardarFavorito()"><ion-icon name="checkmark-outline"></ion-icon>Si, Agregar</ion-button>
+    </form>
   </ion-row>
 </ion-content>

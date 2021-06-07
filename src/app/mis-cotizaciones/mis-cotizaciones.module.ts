@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { MisCotizacionesPageRoutingModule } from './mis-cotizaciones-routing.module';
 
 import { MisCotizacionesPage } from './mis-cotizaciones.page';
-
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 @NgModule({
   imports: [
     CommonModule,

@@ -23,11 +23,9 @@ export class MisProductosPage implements OnInit {
   dataForm: FormGroup;
   productos$:any=[];
   textoBuscar:string='';
-  
   //importadora:string;
   data: any;
   IMProducto
-  
   misProductos:any={};
 
   constructor(private route: ActivatedRoute, private _formBuilder: FormBuilder,
@@ -35,7 +33,6 @@ export class MisProductosPage implements OnInit {
     public popoverController: PopoverController, public modalController: ModalController,
     private router: Router,
    ) {
-    
     
    }
 

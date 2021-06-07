@@ -30,15 +30,21 @@ export class AppComponent implements OnInit {
       icon: 'heart'
     },
     {
-      title: 'Productos',
-      url: '/productos',
-      icon: 'bag'
+      title: 'Historial Calculos',
+      url: '/calculadora-historial',
+      icon: 'time'
     },
     {
       title: 'Importadoras',
       url: '/importadoras',
       icon: 'car'
     },
+    {
+      title: 'Productos',
+      url: '/productos',
+      icon: 'bag'
+    },
+    
     {
       title: 'Novedades',
       url: '/novedades',
@@ -55,10 +61,11 @@ export class AppComponent implements OnInit {
       icon: 'checkbox'
     },
     {
-      title: 'Historial Calculos',
-      url: '/calculadora-historial',
-      icon: 'time'
+      title: 'Contáctanos',
+      url: '/cantactanos',
+      icon: 'storefront'
     },
+    
   ];
   public labels = ['Salir'];
 

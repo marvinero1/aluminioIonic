@@ -1,19 +1,12 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismiss()">
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Realiza Pedido</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content >
   <ion-card style="padding: 14px;">
-    <div *ngIf="btnCarrito == false">
+    <form [formGroup]="dataCarrito" (ngSubmit)=crearCarrito()>
+     <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
+    
+    </form>
+    <div *ngIf="btnCarrito == true">
       <ion-button color="light" (click)="crearCarrito();">Crear Carrito</ion-button>
-    </div>
+    </div> 
     <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <ion-row>
           <h5 class="h5s">Cantidad a pedir</h5> 
@@ -22,25 +15,35 @@
         <input type="text" value="{{carrito$.id}}" [(ngModel)]="carrito$.id" hidden="true" formControlName="carro_id">
         <ion-col col-4>
           <div class="wrapper">
-          <ion-button color="dark" class="plusminus" (click)="handleMinus()">-</ion-button>
+          <ion-button color="dark" class="plusminus" (click)="handleMinus()"><strong>-</strong></ion-button>&nbsp;
           <!-- <input type="number" class="num" formControlName="cantidad_pedido" 
           [(ngModel)]="value" [ngModelOptions]='{standalone: true}'/> -->
           <input type="number" class="num" formControlName="cantidad_pedido" 
           [(ngModel)]="value" />
-          <ion-button color="dark" class="plusminus" (click)="handlePlus()">+</ion-button>
+          <ion-button color="dark" class="plusminus" (click)="handlePlus()" style="margin-left: 2.5px;"><strong>+</strong></ion-button>
         </div>
         </ion-col>
         <ion-col col-4>
           <ion-item class="backItem">
             <ion-label>Color</ion-label>
             <ion-select cancelText="Cancelar" okText="Enviar" formControlName="color">
-              <ion-select-option value="natural">Natural</ion-select-option>
-              <ion-select-option value="titanio">Titanio</ion-select-option>
-              <ion-select-option value="champagne">Champagne</ion-select-option>
-              <ion-select-option value="bronce">Bronce</ion-select-option>
-              <ion-select-option value="negro">Negro</ion-select-option>
-              <ion-select-option value="blanco">Blanco</ion-select-option>
-              <ion-select-option value="madera">Madera</ion-select-option>
+              <ion-select-option value="Natural">Natural</ion-select-option>
+              <ion-select-option value="Titanio">Titanio</ion-select-option>
+              <ion-select-option value="Champagne">Champagne</ion-select-option>
+              <ion-select-option value="Bronce">Bronce</ion-select-option>
+              <ion-select-option value="Negro">Negro</ion-select-option>
+              <ion-select-option value="Blanco">Blanco</ion-select-option>
+              <ion-select-option value="Madera">Madera</ion-select-option>
+              <ion-select-option value="Rojo">Rojo</ion-select-option>
+              <ion-select-option value="Verde">Verde</ion-select-option>
+              <ion-select-option value="Azul">Azul</ion-select-option>
+              <ion-select-option value="Amarillo">Amarillo</ion-select-option>
+              <ion-select-option value="Plomo">Plomo</ion-select-option>
+              <ion-select-option value="Rosado">Rosado</ion-select-option>
+              <ion-select-option value="Turquesa">Turquesa</ion-select-option>
+              <ion-select-option value="Cafe">Cafe</ion-select-option>
+              <ion-select-option value="Violeta">Violeta</ion-select-option>
+              <ion-select-option value="Naranja">Naranja</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -59,11 +62,13 @@
           el proveedor(importadora) se comunicara con usted.</p>
       </ion-row><br> 
       <!-- <input type="hidden" formControlName="confirmacion" value="false"> -->
-    <ion-row style="float: right;">
-      <ion-button color="dark"  type="submit">
-        <ion-icon slot="start" name="cart-sharp">
-      </ion-icon>Mandar Pedido</ion-button>
-    </ion-row>
+      <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
+
+      <ion-row style="float: right;">
+        <ion-button color="dark"  type="submit">
+          <ion-icon slot="start" name="cart-sharp">
+        </ion-icon>Mandar Pedido</ion-button>
+      </ion-row>
     </form>
     
     <ion-row style="float: left;">

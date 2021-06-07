@@ -1,6 +1,9 @@
 ion-menu ion-content {
  
 }
+.ima{
+  width: 25%;
+}
 
 ion-menu.md ion-content {
   --padding-start: 8px;
@@ -14,7 +17,7 @@ ion-menu.md ion-list {
   padding: 20px 0;
 }
 ion-menu.md ion-note {
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 }
 
 ion-menu.md ion-list-header,

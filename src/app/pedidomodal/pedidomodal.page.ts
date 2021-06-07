@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, VERSION } from '@angular/core';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthProvider } from '../providers/auth/auth';
 import { Restangular } from 'ngx-restangular';
@@ -27,39 +27,43 @@ export class PedidomodalPage implements OnInit {
   @Input() categorias_id: string;
   @Input() subcategorias_id: string;
   @Input() tipo_medida: string;
-  
-  formularioarrito : FormGroup;
+ 
   dataForm: FormGroup;
+  dataCarrito: FormGroup;
   data:any='';
   carrito$:any=[];
-  user_id=2;
+  logs:any=[];
+  usuarios$:any=[];
+  user_id:number;
   carrito_id:string;
   btnCarrito:boolean;
   
   constructor(public modalController: ModalController,private _formBuilder: FormBuilder,
     public auth:AuthProvider,public loadingController: LoadingController,
-    public alertController: AlertController,private restangular:Restangular
+    public alertController: AlertController,private restangular:Restangular,
+    public toastController: ToastController
     ) { }
  
 
   ngOnInit() {
+    this.getUser();
     this.dataForm = this.createForm();
-    this.getmyCars();
+    this.dataCarrito = this.data_Carrito();
   }
 
-  getmyCars(){  
-    let data = this.dataForm.value;
-    //console.log(data);
-    this.auth.getCarrito('getCartAttribute/', data.user_id)
+  getmyCars(user_id:number){  
+    this.auth.getCarrito('getCartAttribute/', user_id)
     .subscribe((res) =>{ 
       this.carrito$ = res as string[];
+      console.log(this.carrito$);
+      
       //this.carrito$ = Object.values(this.carrito$);
-      if(this.carrito$.estado == 'false' || this.carrito$.user_id == data.user_id){
-        this.btnCarrito = true;
+      if(this.carrito$.estado == 'false' ){
+        this.btnCarrito = false;
         //console.log("si hay algo");
       }else{
         //console.log("no lo hay");
-        this.btnCarrito = false;
+        this.btnCarrito = true;
       }
       //this.loadData();    
     });
@@ -74,7 +78,6 @@ export class PedidomodalPage implements OnInit {
       descripcion: [this.descripcion],
       color: [this.data.color],
       cantidad_pedido:[this.data.cantidad_pedido],
-      user_id : [this.user_id],
 
       nombre:[this.nombre],
       imagen:[this.imagen],
@@ -85,59 +88,57 @@ export class PedidomodalPage implements OnInit {
       tipo_medida:[this.tipo_medida],
       categorias_id:[this.categorias_id],
       subcategorias_id:[this.subcategorias_id],
-
     });
   }
 
   submitData(){
     let data = this.dataForm.value;
     console.log(data);
-    
-    console.log(data);
-    if(this.data){
+    if(this.btnCarrito == false){
       this.restangular.all('guardarPedido').post(data).subscribe((datav)=>{ 
           this.dismiss();
-          this.presentLoading();
+          this.presentLoading("Agregando Producto a Carrito");
           this.presentAlert();
       });
     }else{
+      this.presentToast("Primero Cree un Carrito");
       (error)=>{
         console.log(error);
       };
     }  
   }
 
+  data_Carrito(): FormGroup {
+    let estado = "false";
+    let confirmacion = "false";
+    return this._formBuilder.group({
+      estado: [estado],
+      confirmacion:[confirmacion],
+      importadora: [this.importadora],
+      descripcion: [this.descripcion],
+      user_id : [this.user_id],
+    });
+  }
+
   crearCarrito(){
-    let estado:string = 'false';
-
-    this.formularioarrito = this._formBuilder.group({
-        //id : [this.id],
-        estado: [estado],
-        importadora: [this.importadora],
-        descripcion: [this.descripcion],
-        user_id : [this.user_id],
-      });
-
-    let data = this.formularioarrito.value;
+    let data = this.dataCarrito.value;
     console.log(data);
-
     if(data){
       this.restangular.all('guardarCarrito').post(data).subscribe((datav)=>{ 
-          this.dismiss();
-          this.presentLoading();
+        this.dismiss();
+        this.presentLoading("Creando Carrito");
       });
     }else{
       (error)=>{
         console.log(error);
+      }
     }
-    }
-  
   }
 
-  async presentLoading() {
+  async presentLoading(mensaje:string) {
     const loading = await this.loadingController.create({
       cssClass: 'loading',
-      message: 'Agregando a Carrito',
+      message: mensaje,
       duration: 4000
     });
     await loading.present();
@@ -171,5 +172,23 @@ export class PedidomodalPage implements OnInit {
   }
   handlePlus() {
     this.value++;    
+  }
+  async presentToast(message:any) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  getUser(){
+    this.logs = JSON.parse(localStorage.getItem('Usuario'));
+    
+    this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+      this.usuarios$ = res;
+      let user_id =  this.usuarios$.id;
+      this.getmyCars(user_id);
+      console.log(this.usuarios$);
+    });
   }
 }

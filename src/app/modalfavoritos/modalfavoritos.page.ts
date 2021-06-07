@@ -13,8 +13,10 @@ import { Restangular } from "ngx-restangular";
 export class ModalfavoritosPage implements OnInit {
 
   dataForm: FormGroup;
-  user_id = 2;
-
+  user_id:number;
+  logs:any=[];
+  usuarios$:any=[];
+  
   @Input() id: string;
   @Input() nombre: string;
   @Input() importadora: string;
@@ -40,6 +42,7 @@ export class ModalfavoritosPage implements OnInit {
 
   ngOnInit() {
     this.dataForm = this.createForm();
+    this.getUser();
   }
 
   createForm(): FormGroup {
@@ -70,7 +73,6 @@ export class ModalfavoritosPage implements OnInit {
   guardarFavorito(){
     let data = this.dataForm.value;
     console.log(data);
-
     if(data){
       this.restangular.all('guardarFavorito').post(data).subscribe((datav)=>{ 
           this.dismiss();
@@ -79,13 +81,11 @@ export class ModalfavoritosPage implements OnInit {
     }else{
       (error)=>{
         console.log(error);
-    }
+      }
     }
   }
 
   dismiss() {
-    // using the injected ModalController this page
-    // can "dismiss" itself and optionally pass back data
     this.modalController.dismiss({
       'dismissed': true
     });
@@ -98,8 +98,15 @@ export class ModalfavoritosPage implements OnInit {
       duration: 2000
     });
     await loading.present();
-
     const { role, data } = await loading.onDidDismiss();
     //console.log('Loading dismissed!');
+  }
+
+  getUser(){
+    this.logs = JSON.parse(localStorage.getItem('Usuario'));
+    
+    this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+      this.usuarios$ = res;
+    });
   }
 }

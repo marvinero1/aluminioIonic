@@ -18,7 +18,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { Camera } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { File } from "@ionic-native/file/ngx";
 import { AuthProvider } from './providers/auth/auth';
 import { RestangularConfigFactory } from './providers/restangular/restangular';
 import { TokenStorageProvider } from './providers/token-storage/token-storage';
@@ -45,9 +46,11 @@ import { Storage } from '@ionic/storage'
     }),
   ],
   providers: [
+    File,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    FileTransfer,
     AuthProvider,
     DecimalPipe,
     Storage,

@@ -16,25 +16,27 @@ export class CalculadoraHistorialPage implements OnInit {
   dataForm: FormGroup;
   user_id=1;
   id:number;
+  total:number;
+  resultadoM:number;
+  logs:any=[];
+  usuarios$:any=[];
 
   data1:any=[];
-  extra: any;
-  nombre_operacion:any;
+  nombre_cliente:any;
   total_suma:any;
-  total_extra:any;
+  celular:any;
   descripcion:any;
-  totalTotalesT:any;
+  precio:any;
 
   constructor(public auth: AuthProvider,public alertController: AlertController,
     public actionSheetController: ActionSheetController,private _formBuilder: FormBuilder,
     private restangular:Restangular,private loadingCtrl:LoadingController,
-    private router: Router) { 
+    private router: Router,  public toastController: ToastController) { 
 
     }
 
   ngOnInit() {
-    this.getCalculos();
-    
+    this.getUser();
   }
 
   async guardarOperacion(){
@@ -47,37 +49,45 @@ export class CalculadoraHistorialPage implements OnInit {
     loading.present().then(() => {
       let data = this._formBuilder.group({
         id:[this.id],
-        extra: [this.totalTotalesT],
-        nombre_operacion : [this.nombre_operacion],
-        total_suma: [this.total_suma],
-        total_extra:[this.total_extra],
-        descripcion:[this.descripcion],
-        user_id:[this.user_id]
+        celular: [this.celular],
+        nombre_cliente: [this.nombre_cliente],
+        precio: [this.precio],
+        total_suma:[this.resultadoM],
+        descripcion: [this.descripcion],
+        user_id: [this.user_id]
       });
       try {
         this.data1 = data.value;
         let a = this.data1.id; 
-        console.log('actualizarCalculo/',this.data1.id);
-        this.auth.updateObjectById('actualizarCalculo/', a , this.data1).subscribe((datav) => {
-              loading.dismiss().then(()=>{
-                console.log(datav);
-              // this.navCtrl.back();
-              //this.modalController.dismiss();
-              // this.closemodal(response.data);
-              window.location.reload();
-          });
+        //console.log('actualizarCalculo/',this.data1.id);
+        console.log(this.data1);
+
+        if (a != 0) {
+          this.auth.updateObjectById('actualizarCalculo/', a , this.data1).subscribe((datav) => {
+            loading.dismiss().then(()=>{
+              console.log(datav);
+            // this.navCtrl.back();
+            //this.modalController.dismiss();
+            // this.closemodal(response.data);
+            window.location.reload();
+        });
         },
         ()=>{
           loading.dismiss();
         });
-      } catch (error) {
+      } else{
+        loading.dismiss();
+
+        this.presentToast("Ingrese Datos para Actualizar")
+      }
+    }catch (error) {
         console.log(error);
       }
     });
   }
  
-  getCalculos() {
-    this.auth.getAllObject('historialCalculos')
+  getCalculos(user_id) {
+    this.auth.getAllObjectById('historialCalculos/', user_id)
       .subscribe((res) => {
         this.calculo$ = res;
         console.log(this.calculo$);
@@ -85,8 +95,10 @@ export class CalculadoraHistorialPage implements OnInit {
   }
 
   sumaTotalesTotales() {
-    this.totalTotalesT =  this.total_suma * this.total_extra;
-     return this.totalTotalesT;
+    this.resultadoM =  this.total_suma * this.precio;
+    console.log(this.resultadoM);
+    
+   return this.resultadoM;
    }
 
   async deleteAll(item){
@@ -136,19 +148,20 @@ export class CalculadoraHistorialPage implements OnInit {
         handler: () => {
          let data = this._formBuilder.group({
             id : [element.id],
-            extra: [element.extra],
-            nombre_operacion : [element.nombre_operacion],
-            total_suma: [element.total_suma],
-            total_extra:[element.total_extra],
+            celular: [element.celular],
+            nombre_cliente : [element.nombre_cliente],
+            precio: [element.precio],
+            total_suma:[element.total_suma],
             descripcion:[element.descripcion],
             user_id:[element.user_id]
           });
           this.id = element.id;
-          this.nombre_operacion = element.nombre_operacion;
-          this.extra = element.extra;
-          this.descripcion = element.descripcion;
-          this.total_extra = element.total_extra;
+          this.celular = element.celular;
+          this.nombre_cliente = element.nombre_cliente;
+          this.precio = element.precio;
           this.total_suma = element.total_suma;
+          this.descripcion = element.descripcion;
+          this.user_id = element.user_id;
         }
       },  {
         text: 'Cancelar',
@@ -166,5 +179,25 @@ export class CalculadoraHistorialPage implements OnInit {
   }
   perfil(){
     this.router.navigate(['/perfil']);
+  }
+
+  async presentToast(message:any) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  getUser(){
+    this.logs = JSON.parse(localStorage.getItem('Usuario'));
+    
+    this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+      this.usuarios$ = res;
+      let user_id =  this.usuarios$.id;
+
+      this.getCalculos(user_id);
+      //console.log(this.usuarios$);
+    });
   }
 }

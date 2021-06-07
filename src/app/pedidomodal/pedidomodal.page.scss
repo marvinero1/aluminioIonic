@@ -17,7 +17,7 @@ input {
   
   .wrapper {
     border: 2px #dcd3d3 solid;
-    width: 38vw;
+    width: 41vw;
     height: 50px;
     padding: 10px;
     display: flex;
@@ -25,12 +25,12 @@ input {
   }
   
   .plusminus {
-    height: 100%;
-    width: 30%;
-    background: white;
+    height: 80%;
+    width: 24%;
+    margin-right: 1.5px;
+    // background: white;
     border: none;
-    font-size: 20px;
-    color: #5f5fce;
+    font-size: 0.9rem;
   }
   
   .num {

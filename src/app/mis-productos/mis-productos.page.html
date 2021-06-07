@@ -8,10 +8,10 @@
       <ion-button (click)="cartDetails()"><ion-icon name="cart"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-searchbar mode="ios" (ionChange)="buscar($event)" placeholder="Buscar por Código" animated></ion-searchbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar (ionChange)="buscar($event)" animated></ion-searchbar>
   <div class="contenido">
     <ion-row style="border-bottom: groove;text-align: center;">
       <ion-col col-4>

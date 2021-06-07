@@ -10,7 +10,7 @@
     </ion-buttons>
     <ion-title>Importadoras</ion-title>
   </ion-toolbar>
-  <ion-searchbar mode="ios" (ionChange)="buscar($event)" placeholder="Buscar por Nombre" animated></ion-searchbar>
+  <ion-searchbar mode="ios" (ionChange)="buscar($event)" placeholder="Buscar Nombre" animated></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="body">
@@ -20,7 +20,8 @@
   <ion-card *ngFor="let element of importadoras$ | filtro:textoBuscar:'name'" class="card">
     <ion-row>
       <ion-col col-4>
-        <ion-img src="http://192.168.0.4:5000/{{ element.imagen}}" class="imagen" alt="{{element.name}}"></ion-img>
+        <ion-img src="http://192.168.1.7:5000/{{ element.imagen}}" class="imagen" alt="{{element.name}}"></ion-img>
+        <!-- <ion-img src="http://altools.es/{{ element.imagen}}" class="imagen" alt="{{element.name}}"></ion-img> -->
       </ion-col>
       <ion-col col-8>
         <ion-card-header>

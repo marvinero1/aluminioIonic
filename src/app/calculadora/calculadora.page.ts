@@ -21,14 +21,21 @@ export class CalculadoraPage implements OnInit {
   calculo$: any;
   numero1: number;
   numero2: number;
-  nombreOperacion: string;
+  nombre_cliente: string;
   resParse:any;
   descripcion:string;
   resultado: any = 0;
   total: number;
   totalTotales: number;
-  totalTotalesT: number;
-  user_id='1';
+  celular: number;
+  precio: number;
+  total_suma: number;
+  resultadoM: number;
+  logs:any=[];
+  usuarios$:any=[];
+  user_id:number;
+  Aid:number;
+  btnbool:boolean = false; 
 
   constructor(public actionSheetController: ActionSheetController,
     private activatedRoute: ActivatedRoute, private router: Router,
@@ -40,11 +47,13 @@ export class CalculadoraPage implements OnInit {
 
   ngOnInit() {
     this.dataForm = this.createForm();
-    this.getCalculs();
+    this.dataFormHistorial = this.createFormHist();
+    this.btnboolean();
+    this.getUser();
   }
 
-  getCalculs() {
-    this.auth.getAllObject('calculos')
+  getCalculs(user_id) {
+    this.auth.getAllObjectById('calculos/', user_id)
       .subscribe((res) => {
         this.calculo$ = res;
         console.log(this.calculo$);
@@ -68,7 +77,6 @@ export class CalculadoraPage implements OnInit {
       } else {
         this.presentToast("Intenta agregando numeros, para sacar el total.");
       }
-      
   }
 
   createForm(): FormGroup {
@@ -78,15 +86,26 @@ export class CalculadoraPage implements OnInit {
       numero1: [this.numero1],
       numero2: [this.numero2],
       resultado: [this.resultado],
+      user_id: [this.user_id],
     });
   }
 
-
+  createFormHist(): FormGroup {
+    return this._formBuilder.group({
+      celular: [this.celular],
+      nombre_cliente: [this.nombre_cliente],
+      precio: [this.precio],
+      total_suma:[this.total_suma],
+      descripcion: [this.descripcion, Validators.compose([Validators.required])],
+      user_id: [this.user_id]
+    });
+  }
+ 
   submitData() {
     let data = this.dataForm.value;
     let data_resultado = data.resultado;
-    console.log(data);
-    if (data_resultado > 0) {
+    //console.log(data);
+    if (data_resultado != 0) {
       this.restangular.all('guardarCalculadora').post(data).subscribe((datav) => {
       console.log(datav);
       this.presentLoading();
@@ -96,7 +115,6 @@ export class CalculadoraPage implements OnInit {
     } else {
       this.presentToast("El resultado no puede ser 0");
     }
-    
   }
 
   async presentToast(message:any) {
@@ -116,34 +134,29 @@ export class CalculadoraPage implements OnInit {
   }
 
   sumaTotalesTotales() {
-   this.totalTotalesT =  this.total * this.totalTotales;
-    return this.totalTotalesT;
+   this.resultadoM =  this.total * this.precio;
+   console.log(this.resultadoM);
+   
+  return this.resultadoM;
   }
 
   guardarOperacion(){
-     let data = this._formBuilder.group({
-      extra: [this.totalTotalesT],
-      nombre_operacion : [this.nombreOperacion],
-      total_suma: [this.total],
-      total_extra:[this.totalTotales],
-      descripcion:[this.descripcion, Validators.compose([Validators.required])],
-      user_id:[this.user_id]
-    });
-    let data1 = data.value;
-    let cel = data1.nombre_operacion;
-    let precio = data1.total_extra;
-
-    // let objecy=JSON.stringify(data1);
-    // console.log(objecy);
-    if (cel>0 || precio>0) {
+    let data1 = this.dataFormHistorial.value;
+    console.log(data1);
+    
+    let precio_total = data1.total_suma;
+  
+    let objecy = JSON.stringify(data1);
+    console.log(objecy);
+    if (precio_total > 0) {
       this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
        console.log(data1);
+       this.presentLoading();
       window.location.reload();
     });
-    } else {
+    }else{
       this.presentToast("Ingresa los datos requeridos")
     }
-    
   }
 
   async presentLoading() {
@@ -229,7 +242,26 @@ export class CalculadoraPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
+  }
+
+  btnboolean(){
+    if (this.btnbool) {
+      this.btnbool = false;
+    } else {
+      this.btnbool = true;
+    }
+  }
+
+  getUser(){
+    this.logs = JSON.parse(localStorage.getItem('Usuario'));
+    
+    this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+      this.usuarios$ = res;
+      let user_id =  this.usuarios$.id;
+
+      this.getCalculs(user_id);
+      //console.log(this.usuarios$);
+    });
   }
 }
