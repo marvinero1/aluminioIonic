@@ -35,17 +35,15 @@ export class MisCotizacionesPage implements OnInit {
 
     const fileTransfer: FileTransferObject = this.transfer.create();
 
-    const url = ('http://192.168.1.7:5000/download/');
+    const url = ('http://192.168.1.7:5000/api/');
 
     //console.log(url);
     
-    fileTransfer.download(url, this.file.dataDirectory + element.file ).then((entry) => {
+    fileTransfer.download(url, 'download/' + element.file ).then((entry) => {
       console.log('download complete: ' + entry.toURL());
     }, (error) => {
       console.log(error);
-      
     });
-
   }
 
   presentAlertConfirm(element){
