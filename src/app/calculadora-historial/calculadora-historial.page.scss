@@ -1,14 +1,15 @@
-ion-col{
-    text-align: center;
-  }
   ion-label{
     color: black;
     font-size: 1.1rem;
   }
   .contenido{
-      padding: 10px;
+    padding: 10px;
   }
   .div{
     margin:     auto;
-  background: steelblue;
+    background: steelblue;
   } 
+  .col{
+    Word-wrap: break-Word;
+    max-width: 150px;
+  }

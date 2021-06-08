@@ -142,17 +142,15 @@ export class CalculadoraPage implements OnInit {
 
   guardarOperacion(){
     let data1 = this.dataFormHistorial.value;
-    console.log(data1);
-    
+    let a = data1.user_id;
+
     let precio_total = data1.total_suma;
-  
     let objecy = JSON.stringify(data1);
     console.log(objecy);
     if (precio_total > 0) {
       this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
-       console.log(data1);
-       this.presentLoading();
-      window.location.reload();
+         this.presentLoading();
+        this.deleteAll(a);
     });
     }else{
       this.presentToast("Ingresa los datos requeridos")
@@ -163,10 +161,9 @@ export class CalculadoraPage implements OnInit {
     const loading = await this.loadingController.create({
       cssClass: 'loading',
       message: 'Guardando...',
-      duration: 2000
+      duration: 4000
     });
     await loading.present();
-
     const {
       role,
       data
@@ -174,7 +171,7 @@ export class CalculadoraPage implements OnInit {
     //console.log('Loading dismissed!');
   }
 
-  async deleteAll(item){
+  async deleteItem(item){
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: '¿Desea Eliminar este Elemento?',
@@ -251,6 +248,14 @@ export class CalculadoraPage implements OnInit {
     } else {
       this.btnbool = true;
     }
+  }
+
+  deleteAll(user_id){
+    this.auth.deleteObjectById('calculadoraDeleteAll/', user_id).subscribe(res=>{
+      //window.location.reload();
+      console.log(res);
+      window.location.reload();
+    });
   }
 
   getUser(){

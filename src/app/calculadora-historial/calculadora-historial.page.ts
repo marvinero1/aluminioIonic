@@ -138,9 +138,8 @@ export class CalculadoraHistorialPage implements OnInit {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-          this.auth.deleteObjectById('calculadoraHistorialDelete/', element.id).subscribe(res=>{
-            window.location.reload();
-          });
+          this.confirmacion(element);
+          
         }
       }, {
         text: 'Editar',
@@ -187,6 +186,34 @@ export class CalculadoraHistorialPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  async confirmacion(element){
+      const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '¿Desea Eliminar este Elemento?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            return false
+            //console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            this.auth.deleteObjectById('calculadoraHistorialDelete/', element.id).subscribe(res=>{
+              window.location.reload();
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   getUser(){
