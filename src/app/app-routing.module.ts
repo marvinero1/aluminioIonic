@@ -92,10 +92,6 @@ const routes: Routes = [
     path: 'mis-productos/:res',
     loadChildren: () => import('./mis-productos/mis-productos.module').then( m => m.MisProductosPageModule)
   },
-  {
-    path: 'cantactanos',
-    loadChildren: () => import('./cantactanos/cantactanos.module').then( m => m.CantactanosPageModule)
-  },
 ];
 
 @NgModule({

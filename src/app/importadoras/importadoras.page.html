@@ -20,8 +20,8 @@
   <ion-card *ngFor="let element of importadoras$ | filtro:textoBuscar:'name'" class="card">
     <ion-row>
       <ion-col col-4>
-        <ion-img src="http://192.168.1.7:5000/{{ element.imagen}}" class="imagen" alt="{{element.name}}"></ion-img>
-        <!-- <ion-img src="http://altools.es/{{ element.imagen}}" class="imagen" alt="{{element.name}}"></ion-img> -->
+        <!-- <ion-img src="http://192.168.1.7:5000/{{ element.imagen}}" class="imagen" alt="{{element.name}}"></ion-img> -->
+        <ion-img src="http://altools.es/{{ element.imagen}}" class="imagen" alt="{{element.name}}"></ion-img>
       </ion-col>
       <ion-col col-8>
         <ion-card-header>

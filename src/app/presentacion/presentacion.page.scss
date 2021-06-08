@@ -6,7 +6,10 @@ ion-content {
 ion-slides {
     height: 100%;
 }
-
+.swiper-slide {
+    overflow-y: scroll;    
+    display: block;    
+}
 ion-row {
     height: 100%;
 }
@@ -43,5 +46,5 @@ p b {
 
 ion-slides {
     --bullet-background: #ffffff !important;
-    --bullet-background-active: #55A020;
+    --bullet-background-active: rgb(39, 4, 4);
 }

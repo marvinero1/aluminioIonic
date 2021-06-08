@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
   selector: 'app-contactanos',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactanosPage implements OnInit {
 
-  constructor() { }
+  contactos$:any = [];
 
-  ngOnInit() {
+  constructor(public modalController: ModalController,public auth:AuthProvider) { 
+
   }
 
+  ngOnInit() {
+    this.getFavoritos();
+  }
+
+  getFavoritos(){  
+    this.auth.getAllObject('getcontactos/')
+    .subscribe((res) =>{ 
+      this.contactos$ = res;
+      //console.log(this.contactos$);       
+    });
+  }
+
+  cerrarModal(){
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
 }

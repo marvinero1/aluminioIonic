@@ -15,8 +15,8 @@ export class SelectPage implements OnInit {
 
   }
 
-  goProducts(){
-    this.router.navigate(['/productos']);
+  goCalculator(){
+    this.router.navigate(['/calculadora']);
   }
 
   goImportadoras(){

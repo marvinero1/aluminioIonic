@@ -1,12 +1,10 @@
-import { viewClassName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController } from '@ionic/angular';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { LoadingController, ModalController, NavController } from '@ionic/angular';
+import { Router, ParamMap } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ReactiveFormsModule} from '@angular/forms';
 import { AuthProvider } from '../providers/auth/auth';
 import {  MenuController } from '@ionic/angular';
-
+import { ContactanosPage } from '../contactanos/contactanos.page';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -19,7 +17,8 @@ export class LoginPage implements OnInit {
   user:any = {usuario: '', password: ''};
 
   constructor(public auth:AuthProvider,public loadingCtrl: LoadingController,private router: Router,
-    private _formBuilder: FormBuilder,private navCtrl: NavController,public menuCtrl: MenuController) { }
+    private _formBuilder: FormBuilder,private navCtrl: NavController,public menuCtrl: MenuController,
+    public modalController: ModalController) { }
   
   ngOnInit() {
     this.menuCtrl.enable(false);
@@ -70,6 +69,13 @@ export class LoginPage implements OnInit {
         }
       );
     });
-    
   }
+
+    async goContactanos(){
+      const modal = await this.modalController.create({
+        component: ContactanosPage,
+        cssClass: 'my-custom-class'
+      });
+      return await modal.present();
+    }
 }
