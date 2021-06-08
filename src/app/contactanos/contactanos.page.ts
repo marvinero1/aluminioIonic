@@ -20,8 +20,7 @@ export class ContactanosPage implements OnInit {
   }
 
   getFavoritos(){  
-    this.auth.getAllObject('getcontactos/')
-    .subscribe((res) =>{ 
+    this.auth.getAllObject('getcontactos').subscribe((res) =>{ 
       this.contactos$ = res;
       //console.log(this.contactos$);       
     });

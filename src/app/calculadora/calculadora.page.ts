@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
-import { ActionSheetController, ToastController } from '@ionic/angular';
+import { ActionSheetController, MenuController, ToastController } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
 import { LoadingController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -42,10 +42,11 @@ export class CalculadoraPage implements OnInit {
     public auth: AuthProvider, public loadingController: LoadingController,
     private _formBuilder: FormBuilder,public alertController: AlertController,
     private restangular:Restangular,private decimalPipe: DecimalPipe,
-    public toastController: ToastController
+    public toastController: ToastController,public menuCtrl: MenuController
     ) {}
 
   ngOnInit() {
+    this.menuCtrl.enable(true);
     this.dataForm = this.createForm();
     this.dataFormHistorial = this.createFormHist();
     this.btnboolean();
