@@ -39,52 +39,62 @@ export class CalculadoraHistorialPage implements OnInit {
     this.getUser();
   }
 
-  async guardarOperacion(){
-    const loading = await this.loadingCtrl.create({
-      // message: 'Registrando.',
-      spinner: 'dots'
-      // duration: 1500
+  async guardarOperacion() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Actualización',
+      message: '¿Desea Actualizar este Item?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            let data = this._formBuilder.group({
+              id:[this.id],
+              celular: [this.celular],
+              nombre_cliente: [this.nombre_cliente],
+              precio: [this.precio],
+              total_suma:[this.resultadoM],
+              descripcion: [this.descripcion],
+              user_id: [this.user_id]
+            });
+
+            this.data1 = data.value;
+            let a = this.data1.id; 
+            let b = this.data1.total_suma;
+            console.log(b);
+            
+            //console.log('actualizarCalculo/',this.data1.id);
+            //console.log(this.data1);
+
+            if (b != null) {
+              if(b != '0' ){
+                this.auth.updateObjectById('actualizarCalculo/', a , this.data1).subscribe((datav) => {
+                  console.log(datav);
+                  // this.navCtrl.back();
+                  //this.modalController.dismiss();
+                  // this.closemodal(response.data);
+                  window.location.reload();
+                });
+              }
+              this.presentToast("El Resultado no puede ser 0")
+            } else{
+              this.presentToast("Ingrese Datos para Actualizar")
+            }
+          }
+        }
+      ]
     });
 
-    loading.present().then(() => {
-      let data = this._formBuilder.group({
-        id:[this.id],
-        celular: [this.celular],
-        nombre_cliente: [this.nombre_cliente],
-        precio: [this.precio],
-        total_suma:[this.resultadoM],
-        descripcion: [this.descripcion],
-        user_id: [this.user_id]
-      });
-      try {
-        this.data1 = data.value;
-        let a = this.data1.id; 
-        //console.log('actualizarCalculo/',this.data1.id);
-        console.log(this.data1);
-
-        if (a != 0) {
-          this.auth.updateObjectById('actualizarCalculo/', a , this.data1).subscribe((datav) => {
-            loading.dismiss().then(()=>{
-              console.log(datav);
-            // this.navCtrl.back();
-            //this.modalController.dismiss();
-            // this.closemodal(response.data);
-            window.location.reload();
-        });
-        },
-        ()=>{
-          loading.dismiss();
-        });
-      } else{
-        loading.dismiss();
-
-        this.presentToast("Ingrese Datos para Actualizar")
-      }
-    }catch (error) {
-        console.log(error);
-      }
-    });
+    await alert.present();
   }
+
  
   getCalculos(user_id) {
     this.auth.getAllObjectById('historialCalculos/', user_id)
