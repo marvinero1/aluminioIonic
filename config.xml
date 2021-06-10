@@ -4,9 +4,9 @@
     <description>Aplicacion de Cotización de Aluminio</description>
     <author email="hi@ionicframework.com" href="http://fullpro.es/">Full Pro Technology</author>
     <content src="index.html" />
-    <access origin="https://altools.es/api"/>
-    <allow-intent href="https://altools.es/api"/>
-    <allow-intent href="https://altools.es/api"/>
+    <access origin="https://altools.es/api" />
+    <allow-intent href="https://altools.es/api" />
+    <allow-intent href="https://altools.es/api" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
