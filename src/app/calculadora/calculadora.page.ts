@@ -93,29 +93,52 @@ export class CalculadoraPage implements OnInit {
 
   createFormHist(): FormGroup {
     return this._formBuilder.group({
-      celular: [this.celular],
-      nombre_cliente: [this.nombre_cliente],
-      precio: [this.precio],
-      total_suma:[this.total_suma],
-      descripcion: [this.descripcion, Validators.compose([Validators.required])],
+      celular: [this.celular, Validators.compose([Validators.required])],
+      nombre_cliente: [this.nombre_cliente, Validators.compose([Validators.required])],
+      precio: [this.precio, Validators.compose([Validators.required])],
+      total_suma:[this.total_suma, Validators.compose([Validators.required])],
+      descripcion: [this.descripcion],
+      suma_m2:[this.total],
       user_id: [this.user_id]
     });
   }
  
-  submitData() {
-    let data = this.dataForm.value;
-    let data_resultado = data.resultado;
-    //console.log(data);
-    if (data_resultado != 0) {
-      this.restangular.all('guardarCalculadora').post(data).subscribe((datav) => {
-      console.log(datav);
-      this.presentLoading();
-      window.location.reload();
-      //this.presentAlert();
+  async submitData() {
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '¿Desea Guardar Este Calculo?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            return false
+            //console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            let data = this.dataForm.value;
+            let data_resultado = data.resultado;
+            //console.log(data);
+            if (data_resultado != 0) {
+              this.restangular.all('guardarCalculadora').post(data).subscribe((datav) => {
+              console.log(datav);
+              this.presentLoading();
+              window.location.reload();
+              //this.presentAlert();
+            });
+            } else {
+              this.presentToast("El resultado no puede ser 0");
+            }
+          }
+        }
+      ]
     });
-    } else {
-      this.presentToast("El resultado no puede ser 0");
-    }
+    await alert.present();
   }
 
   async presentToast(message:any) {
@@ -141,18 +164,42 @@ export class CalculadoraPage implements OnInit {
   return this.resultadoM;
   }
 
+  async postItem(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '¿Desea Guardar este Calculo?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            return false
+            //console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            this.guardarOperacion();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   guardarOperacion(){
     let data1 = this.dataFormHistorial.value;
     let a = data1.user_id;
-
-    let precio_total = data1.total_suma;
-    let objecy = JSON.stringify(data1);
-    console.log(objecy);
-    if (precio_total > 0) {
+ 
+    // let objecy = JSON.stringify(data1);
+    console.log(data1);
+    if (this.dataFormHistorial.valid) {
       this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
-         this.presentLoading();
+          this.presentLoading();
         this.deleteAll(a);
-    });
+      });
     }else{
       this.presentToast("Ingresa los datos requeridos")
     }

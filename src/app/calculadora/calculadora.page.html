@@ -19,18 +19,21 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Ancho</ion-label>
-            <ion-input [(ngModel)]="numero1" formControlName="numero1" type="number" pattern="[0-9]*"></ion-input>
+            <ion-input [(ngModel)]="numero1" formControlName="numero1" type="tel" maxlength="8" 
+            pattern="[0-9]*"
+            ></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label position="floating">Alto</ion-label>
-            <ion-input [(ngModel)]="numero2" formControlName="numero2" type="number" pattern="[0-9]*"></ion-input>
+            <ion-input [(ngModel)]="numero2" formControlName="numero2" type="tel" maxlength="8"
+             pattern="[0-9]*"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-row>
-            <ion-item>
+            <ion-item style="color: black;">
               <ion-label position="floating" type="number">Total</ion-label>
               <ion-input [(ngModel)]="resultado" formControlName="resultado" disabled="true"></ion-input>
             </ion-item>
@@ -62,7 +65,7 @@
       <ion-col col-4>
         <ion-label><strong>Alto</strong> </ion-label>
       </ion-col>
-      <ion-col col-4>
+      <ion-col  col-4>
         <ion-label><strong>TOTAL M²</strong></ion-label>
       </ion-col>
       <ion-col col-4>
@@ -77,7 +80,7 @@
       <ion-col col-4>
         <ion-label>{{element.numero2}}</ion-label>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-4 class="col">
         <ion-label>{{element.resultado}}</ion-label>
       </ion-col>
       <ion-button size="small" color="dark" (click)="deleteItem(element)">
@@ -110,13 +113,13 @@
 </ion-content>
 <ion-footer *ngIf="btnbool == false" class="ion-no-border">
   <div class="div">
-    <form [formGroup]="dataFormHistorial" (ngSubmit)=guardarOperacion()>
+    <form [formGroup]="dataFormHistorial" (ngSubmit)=guardarOperacion() novalidate>
       <ion-row>
         <ion-col class="md-12">
           <ion-item>
             <ion-label position="floating">Nombre Cliente *</ion-label>
             <ion-input [(ngModel)]="nombre_cliente" formControlName="nombre_cliente" type="text"
-            minlength="2" maxlength="40" ></ion-input>
+            minlength="2" maxlength="40" required></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -125,18 +128,22 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Celular *</ion-label>
-            <ion-input [(ngModel)]="celular" formControlName="celular" type="number" pattern="[0-9]*"></ion-input>
+            <ion-input [(ngModel)]="celular" formControlName="celular" type="text" maxlength="9" 
+            pattern="[0-9]*" required></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Precio. $us</ion-label>
-            <ion-input [(ngModel)]="precio" formControlName="precio" type="number" pattern="[0-9]*"></ion-input>
+            <ion-label position="floating">Precio. $us *</ion-label>
+            <ion-input [(ngModel)]="precio" formControlName="precio" type="number" pattern="[0-9]*"
+            required></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
           <ion-input [(ngModel)]="resultadoM" formControlName="total_suma" disabled="true" hidden="true"></ion-input>
+          <ion-input [(ngModel)]="total" formControlName="suma_m2" disabled="true" hidden="true"></ion-input>
+
 
           <label style="float: right; padding: 5px;font-size: 1.2rem;color: black;"><strong>Precio Total: </strong>
             <strong>
@@ -146,7 +153,7 @@
       <ion-row>
         <ion-col class="md-12">
           <ion-item>
-            <ion-label position="floating">Descripción</ion-label>
+            <ion-label position="floating">Descripción *</ion-label>
             <ion-input [(ngModel)]="descripcion" formControlName="descripcion" type="text"></ion-input>
           </ion-item>
         </ion-col>
@@ -159,7 +166,7 @@
         <ion-icon name="calculator"></ion-icon>Cotizar
       </ion-button>
 
-      <ion-button color="dark" (click)="guardarOperacion()" class="float">
+      <ion-button color="dark" (click)="postItem()" class="float">
         <ion-icon name="save"></ion-icon>Guardar Operación
       </ion-button>
     </form>

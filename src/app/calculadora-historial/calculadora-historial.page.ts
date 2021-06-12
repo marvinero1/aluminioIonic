@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ActionSheetController  } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
 import { Restangular } from 'ngx-restangular';
@@ -14,7 +14,7 @@ export class CalculadoraHistorialPage implements OnInit {
 
   calculo$:any=[];
   dataForm: FormGroup;
-  user_id=1;
+  user_id:any;
   id:number;
   total:number;
   resultadoM:number;
@@ -25,6 +25,7 @@ export class CalculadoraHistorialPage implements OnInit {
   nombre_cliente:any;
   total_suma:any;
   celular:any;
+  suma_m2:any;
   descripcion:any;
   precio:any;
 
@@ -57,41 +58,36 @@ export class CalculadoraHistorialPage implements OnInit {
           handler: () => {
             let data = this._formBuilder.group({
               id:[this.id],
-              celular: [this.celular],
-              nombre_cliente: [this.nombre_cliente],
-              precio: [this.precio],
-              total_suma:[this.resultadoM],
+              celular: [this.celular, Validators.compose([Validators.required])],
+              nombre_cliente: [this.nombre_cliente,  Validators.compose([Validators.required])],
+              precio: [this.precio,  Validators.compose([Validators.required])],
+              total_suma:[this.resultadoM,  Validators.compose([Validators.required])],
+              suma_m2:[this.suma_m2,  Validators.compose([Validators.required])],
               descripcion: [this.descripcion],
               user_id: [this.user_id]
             });
 
             this.data1 = data.value;
             let a = this.data1.id; 
-            let b = this.data1.total_suma;
-            console.log(b);
+         
+            console.log(this.data1);
             
-            //console.log('actualizarCalculo/',this.data1.id);
-            //console.log(this.data1);
-
-            if (b != null) {
-              if(b != '0' ){
-                this.auth.updateObjectById('actualizarCalculo/', a , this.data1).subscribe((datav) => {
-                  console.log(datav);
-                  // this.navCtrl.back();
-                  //this.modalController.dismiss();
-                  // this.closemodal(response.data);
-                  window.location.reload();
-                });
-              }
-              this.presentToast("El Resultado no puede ser 0")
+            if(data.valid){
+              this.auth.updateObjectById('actualizarCalculo/', a , this.data1).subscribe((datav) => {
+                console.log(datav);
+                // this.navCtrl.back();
+                //this.modalController.dismiss();
+                // this.closemodal(response.data);
+                window.location.reload();
+              });
+              
             } else{
-              this.presentToast("Ingrese Datos para Actualizar")
+              this.presentToast("Ingrese Datos para Actualizar");
             }
           }
         }
       ]
     });
-
     await alert.present();
   }
 
@@ -105,10 +101,9 @@ export class CalculadoraHistorialPage implements OnInit {
   }
 
   sumaTotalesTotales() {
-    this.resultadoM =  this.total_suma * this.precio;
-    console.log(this.resultadoM);
-    
-   return this.resultadoM;
+    this.resultadoM = this.suma_m2 * this.precio;
+    // console.log(this.resultadoM+"=", +this.suma_m2 ,+ this.precio);
+    return this.resultadoM;
    }
 
   async deleteAll(item){
@@ -149,7 +144,6 @@ export class CalculadoraHistorialPage implements OnInit {
         icon: 'trash',
         handler: () => {
           this.confirmacion(element);
-          
         }
       }, {
         text: 'Editar',
@@ -161,6 +155,7 @@ export class CalculadoraHistorialPage implements OnInit {
             nombre_cliente : [element.nombre_cliente],
             precio: [element.precio],
             total_suma:[element.total_suma],
+            suma_m2:[element.suma_m2],
             descripcion:[element.descripcion],
             user_id:[element.user_id]
           });
@@ -169,8 +164,10 @@ export class CalculadoraHistorialPage implements OnInit {
           this.nombre_cliente = element.nombre_cliente;
           this.precio = element.precio;
           this.total_suma = element.total_suma;
+          this.suma_m2 = element.suma_m2;
           this.descripcion = element.descripcion;
           this.user_id = element.user_id;
+          console.log(data);
         }
       },  {
         text: 'Cancelar',
