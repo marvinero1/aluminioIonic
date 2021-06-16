@@ -19,8 +19,8 @@ export class CalculadoraPage implements OnInit {
   dataFormHistorial: FormGroup;
   data: any = '';
   calculo$: any;
-  numero1: number;
-  numero2: number;
+  numero1: any;
+  numero2: any;
   nombre_cliente: string;
   resParse:any;
   descripcion:string;
@@ -35,6 +35,7 @@ export class CalculadoraPage implements OnInit {
   usuarios$:any=[];
   user_id:number;
   Aid:number;
+  maxVal:any;
   btnbool:boolean = false; 
 
   constructor(public actionSheetController: ActionSheetController,
@@ -71,10 +72,11 @@ export class CalculadoraPage implements OnInit {
   calcular() {
       let num1 = this.numero1;
       let num2 = this.numero2;
-      if (num1>0||num2>0) {
+      
+      if (num1!=0 || num2!=0) {
         this.resultado = num1 * num2;
         this.resultado = this.decimalPipe.transform(this.resultado, '1.1-1');  
-        console.log(this.resParse);
+        console.log(this.resultado);
       } else {
         this.presentToast("Intenta agregando numeros, para sacar el total.");
       }

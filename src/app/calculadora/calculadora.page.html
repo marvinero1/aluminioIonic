@@ -18,17 +18,16 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Ancho</ion-label>
-            <ion-input [(ngModel)]="numero1" formControlName="numero1" type="tel" maxlength="8" 
-            pattern="[0-9]*"
-            ></ion-input>
+            <ion-label position="floating" style="color: black;">Ancho</ion-label>
+            <ion-input [(ngModel)]="numero1" formControlName="numero1" value="numero1" 
+            pattern="[0-9]*" onKeyPress="if(this.value.length==8) return false;" type="number"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Alto</ion-label>
-            <ion-input [(ngModel)]="numero2" formControlName="numero2" type="tel" maxlength="8"
-             pattern="[0-9]*"></ion-input>
+            <ion-label position="floating" style="color: black;">Alto</ion-label>
+            <ion-input [(ngModel)]="numero2" formControlName="numero2" type="number" value="numero2"
+             pattern="[0-9]*" onKeyPress="if(this.value.length==8) return false;" ></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -128,7 +127,7 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Celular *</ion-label>
-            <ion-input [(ngModel)]="celular" formControlName="celular" type="text" maxlength="9" 
+            <ion-input [(ngModel)]="celular" formControlName="celular" type="tel" maxlength="10" 
             pattern="[0-9]*" required></ion-input>
           </ion-item>
         </ion-col>
