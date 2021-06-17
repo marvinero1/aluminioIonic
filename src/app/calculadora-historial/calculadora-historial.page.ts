@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class CalculadoraHistorialPage implements OnInit {
 
   calculo$:any=[];
+  calculo_hoja$:any=[];
   dataForm: FormGroup;
   user_id:any;
   id:number;
@@ -134,6 +135,14 @@ export class CalculadoraHistorialPage implements OnInit {
     await alert.present();
   }
 
+  getCalculsHoja(user_id, hoja_id) {    
+    this.auth.getAllObjectByIdforCalculo('calculos/', user_id, hoja_id)
+      .subscribe((res) => {
+        this.calculo_hoja$ = res;
+        console.log(this.calculo_hoja$);
+      });
+  }
+
   async presentActionSheet(element) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones Historial Calculadora',
@@ -168,6 +177,8 @@ export class CalculadoraHistorialPage implements OnInit {
           this.descripcion = element.descripcion;
           this.user_id = element.user_id;
           console.log(data);
+
+          this.getCalculsHoja(this.user_id, element.hoja_calculo_id);
         }
       },  {
         text: 'Cancelar',

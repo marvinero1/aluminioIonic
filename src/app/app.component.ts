@@ -39,11 +39,11 @@ export class AppComponent implements OnInit {
       url: '/calculadora-historial',
       icon: 'time'
     },
-    // {
-    //   title: 'Importadoras',
-    //   url: '/importadoras',
-    //   icon: 'car'
-    // },
+    {
+      title: 'Importadoras',
+      url: '/importadoras',
+      icon: 'briefcase'
+    },
     // {
     //   title: 'Productos',
     //   url: '/productos',

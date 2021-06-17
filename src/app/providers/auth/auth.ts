@@ -283,6 +283,10 @@ export class AuthProvider {
     return this.http.get(`${this.apiRoot}`+ route + id);
   }
 
+  getAllObjectByIdforCalculo = (route:string, id:number, hoja_id) =>{
+    return this.http.get(`${this.apiRoot}`+ route + id +'/'+ hoja_id);
+  }
+
   postPedido = (route:string,pedido:IPedido)=>{
     return this.http.post<any>(`${this.apiRoot}`+ route, pedido);
   }

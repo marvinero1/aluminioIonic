@@ -17,8 +17,10 @@ export class CalculadoraPage implements OnInit {
   public folder: string;
   dataForm: FormGroup;
   dataFormHistorial: FormGroup;
+  data_hoja: FormGroup;
   data: any = '';
   calculo$: any;
+  hojas$: any = [];
   numero1: any;
   numero2: any;
   nombre_cliente: string;
@@ -31,31 +33,38 @@ export class CalculadoraPage implements OnInit {
   precio: number;
   total_suma: number;
   resultadoM: number;
+  hoja_calculo_id:any;
   logs:any=[];
   usuarios$:any=[];
   user_id:number;
+  id:any;
   Aid:number;
   maxVal:any;
+  estado:any;
+  btnHoja:boolean;
   btnbool:boolean = false; 
+  
 
   constructor(public actionSheetController: ActionSheetController,
-    private activatedRoute: ActivatedRoute, private router: Router,
+    private router: Router,public menuCtrl: MenuController,
     public auth: AuthProvider, public loadingController: LoadingController,
     private _formBuilder: FormBuilder,public alertController: AlertController,
     private restangular:Restangular,private decimalPipe: DecimalPipe,
-    public toastController: ToastController,public menuCtrl: MenuController
+    public toastController: ToastController, 
     ) {}
 
   ngOnInit() {
     this.menuCtrl.enable(true);
     this.dataForm = this.createForm();
+    this.data_hoja = this.data_Hoja();
     this.dataFormHistorial = this.createFormHist();
     this.btnboolean();
+
     this.getUser();
   }
 
-  getCalculs(user_id) {
-    this.auth.getAllObjectById('calculos/', user_id)
+  getCalculs(user_id, hoja_id) {    
+    this.auth.getAllObjectByIdforCalculo('calculos/', user_id, hoja_id)
       .subscribe((res) => {
         this.calculo$ = res;
         console.log(this.calculo$);
@@ -89,6 +98,7 @@ export class CalculadoraPage implements OnInit {
       numero1: [this.numero1],
       numero2: [this.numero2],
       resultado: [this.resultado],
+      hoja_calculo_id:[this.hoja_calculo_id],
       user_id: [this.user_id],
     });
   }
@@ -101,10 +111,12 @@ export class CalculadoraPage implements OnInit {
       total_suma:[this.total_suma, Validators.compose([Validators.required])],
       descripcion: [this.descripcion],
       suma_m2:[this.total],
+      hoja_calculo_id: [this.hoja_calculo_id],
       user_id: [this.user_id]
     });
   }
- 
+
+  
   async submitData() {
 
     const alert = await this.alertController.create({
@@ -183,7 +195,7 @@ export class CalculadoraPage implements OnInit {
         }, {
           text: 'Si',
           handler: () => {
-            this.guardarOperacion();
+            this.statusHoja();
           }
         }
       ]
@@ -197,14 +209,12 @@ export class CalculadoraPage implements OnInit {
  
     // let objecy = JSON.stringify(data1);
     console.log(data1);
-    if (this.dataFormHistorial.valid) {
+    
       this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
-          this.presentLoading();
-        this.deleteAll(a);
+          this.presentLoading1();
+          // this.deleteAll(a); //CAMBIARLO POR EL QUE ACTUALIZA SU ESTADO
       });
-    }else{
-      this.presentToast("Ingresa los datos requeridos")
-    }
+    
   }
 
   async presentLoading() {
@@ -308,6 +318,92 @@ export class CalculadoraPage implements OnInit {
     });
   }
 
+ data_Hoja(): FormGroup {
+    let estado = "false";
+    return this._formBuilder.group({
+      estado: [estado],
+      user_id: [this.user_id]
+    });
+  }
+
+  postHoja(){
+    let data = this.data_hoja.value;
+    console.log(data);
+      if(data){
+        this.restangular.all('guardarHoja').post(data).subscribe((datav)=>{ 
+          this.presentLoading();
+          window.location.reload();
+        });
+      }else{
+        (error)=>{
+          console.log(error);
+        }
+      }
+  }
+
+  getHoja(user_id:number){
+    this.auth.getCarrito('getHojaCalculo/', user_id)
+    .subscribe((res) =>{ 
+      this.hojas$ = res as string[];
+
+      console.log(this.hojas$);
+      let hoja_id = this.hojas$.id
+
+      this.getCalculs(user_id, hoja_id);
+      
+      //this.carrito$ = Object.values(this.carrito$);
+      if(this.hojas$.estado == 'false' ){
+        this.btnHoja = false;
+        //console.log("si hay algo");
+      }else{
+        //console.log("no lo hay");
+        this.btnHoja = true;
+      }
+      //this.loadData();  
+      return this.hojas$;  
+    });
+  }
+
+  async presentLoading1() {
+    
+    const loading = await this.loadingController.create({
+      cssClass: 'loading',
+      message: 'Guardando...',
+      duration: 4000
+    });
+    await loading.present();
+    window.location.reload();
+    const {
+      role,
+      data
+      
+    } = await loading.onDidDismiss();
+    //console.log('Loading dismissed!');
+  }
+
+  async statusHoja(){
+    let estado = 'true';
+   
+    let data =  this._formBuilder.group({
+      //nombre: [this.data.nombre,Validators.compose([Validators.required])],
+      estado:[estado],
+    });
+
+    let data1 = data.value;
+    let a = this.hojas$.id   
+        
+    if(this.dataFormHistorial.valid){
+      
+        this.auth.cerrarCarrito('updateStatusHoja/', a , data1).subscribe((datav) => {
+        this.guardarOperacion();
+      });
+    }else{
+      this.presentToast("Ingresa los datos requeridos")
+    }
+    
+  }
+  
+
   getUser(){
     this.logs = JSON.parse(localStorage.getItem('Usuario'));
     
@@ -315,7 +411,8 @@ export class CalculadoraPage implements OnInit {
       this.usuarios$ = res;
       let user_id =  this.usuarios$.id;
 
-      this.getCalculs(user_id);
+      this.getCalculs(user_id,'');
+      this.getHoja(user_id);
       //console.log(this.usuarios$);
     });
   }
