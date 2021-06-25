@@ -3,6 +3,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-mis-cotizaciones',
   templateUrl: './mis-cotizaciones.page.html',
@@ -16,7 +17,7 @@ export class MisCotizacionesPage implements OnInit {
 
   
   constructor(public auth: AuthProvider,private transfer: FileTransfer,
-    private file: File, private downloader:Downloader ) {}
+    private file: File, private downloader:Downloader,private router: Router ) {}
 
   ngOnInit() {
     this.getUser();
@@ -61,10 +62,6 @@ export class MisCotizacionesPage implements OnInit {
     .then((location: string) => console.log('File downloaded at:'+location))
     .catch((error: any) => console.error(error));
 
-    
-    
-  
-
     console.log(downloadURL );
     
     // fileTransfer.download(url, 'download/' + element.file ).then((entry) => {
@@ -77,7 +74,9 @@ export class MisCotizacionesPage implements OnInit {
   presentAlertConfirm(element){
     console.log(element);
   }
-
+  perfil(){
+    this.router.navigate(['/perfil']);
+  }
   
   getUser(){
     this.logs = JSON.parse(localStorage.getItem('Usuario'));
