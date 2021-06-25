@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
 @Component({
   selector: 'app-mis-cotizaciones',
   templateUrl: './mis-cotizaciones.page.html',
@@ -9,13 +10,13 @@ import { File } from '@ionic-native/file/ngx';
 })
 export class MisCotizacionesPage implements OnInit {
  
-
   cotizaciones$: any = [];
   logs:any=[];
   usuarios$:any=[];
+
   
   constructor(public auth: AuthProvider,private transfer: FileTransfer,
-    private file: File) {}
+    private file: File, private downloader:Downloader ) {}
 
   ngOnInit() {
     this.getUser();
@@ -30,20 +31,47 @@ export class MisCotizacionesPage implements OnInit {
   }
 
   show(element) {
+    
 
     //console.log(element);
 
-    const fileTransfer: FileTransferObject = this.transfer.create();
+    // const fileTransfer: FileTransferObject = this.transfer.create();
 
-    const url = ('http://192.168.1.7:5000/api/');
+    // const url = ('https://192.168.1.7:5000/api/');
+    const url = ('https://altools.es/api/');
 
-    //console.log(url);
+    var downloadURL = (url + 'download/' + element.file);
+    let menjsa=("Mi Cotizacion"+ element.file);
+    let descr=("Descripcion"+element.descripcion);
+
+    var request: DownloadRequest = {
+      uri: downloadURL,
+      title: menjsa,
+      description: descr,
+      mimeType: '',
+      visibleInDownloadsUi: true,
+      notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
+      destinationInExternalFilesDir: {
+          dirType: 'Downloads',
+          subPath: 'MyFile.pdf'
+        }
+    };
+
+    this.downloader.download(request)
+    .then((location: string) => console.log('File downloaded at:'+location))
+    .catch((error: any) => console.error(error));
+
     
-    fileTransfer.download(url, 'download/' + element.file ).then((entry) => {
-      console.log('download complete: ' + entry.toURL());
-    }, (error) => {
-      console.log(error);
-    });
+    
+  
+
+    console.log(downloadURL );
+    
+    // fileTransfer.download(url, 'download/' + element.file ).then((entry) => {
+    //   console.log('download complete: ' + entry.toURL());
+    // }, (error) => {
+    //   console.log(error);
+    // });
   }
 
   presentAlertConfirm(element){

@@ -19,7 +19,7 @@
       <ion-item-sliding *ngFor="let element of  cotizaciones$">
         <ion-item lines="none">
           <ion-thumbnail slot="start">          
-            <ion-icon name="logo-buffer" style="font-size: 53px;"></ion-icon>
+            <ion-icon name="logo-buffer" style="font-size: 53px;color: black;"></ion-icon>
           </ion-thumbnail>
           <ion-label text-wrap>
             <p><strong>{{element.importadora}} </strong></p>
@@ -28,7 +28,7 @@
             <p>{{element.descripcion}}</p><br>
           <!-- <p>Archivo: <a [href]="http://altools.es/{{ element.file }}">{{ element.file }}</a> </p> -->
           </ion-label>
-          <ion-button (click)="show(element)">
+          <ion-button (click)="show(element)" size="default" >
             <ion-icon name="document-text-outline"></ion-icon>
           </ion-button>
         </ion-item>

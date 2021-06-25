@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -19,7 +20,8 @@ export class ContactanosPage implements OnInit {
   beni$:any = [];
   pando$:any = [];
 
-  constructor(public modalController: ModalController,public auth:AuthProvider) { 
+  constructor(public modalController: ModalController,public auth:AuthProvider,
+    private router: Router,) { 
 
   }
 
@@ -98,5 +100,9 @@ export class ContactanosPage implements OnInit {
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+  atras(){
+    this.cerrarModal();
+    this.router.navigateByUrl('/contactanos');
   }
 }

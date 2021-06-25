@@ -4,8 +4,15 @@
       <ion-button (click)="cerrarModal();">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
+      
     </ion-buttons>
     <ion-title>Contactanos</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="atras();">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+      
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -36,10 +43,10 @@
           <strong>La Paz</strong>
           <div *ngFor="let element of lpz$">
             <div *ngIf="element.ciudad == 'La-Paz'">
-              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-              <hr size="8px" color="white"/>
+              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
@@ -47,10 +54,10 @@
           <strong>Cochabamba</strong>
           <div *ngFor="let element of cbba$">
             <div *ngIf="element.ciudad == 'Cochabamba'">
-              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-              <hr size="8px" color="white"/>
+              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
@@ -58,10 +65,10 @@
           <strong>Santa Cruz</strong>
             <div *ngFor="let element of stz$">
               <div *ngIf="element.ciudad == 'Santa-Cruz'">
-                <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-                <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-                <hr size="8px" color="white"/>
+                <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+                <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+                <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
@@ -71,10 +78,10 @@
           <strong>Oruro</strong>
             <div *ngFor="let element of oru$">
             <div *ngIf="element.ciudad == 'Oruro'">
-              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-              <hr size="8px" color="white"/>
+              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
@@ -82,10 +89,10 @@
           <strong>Sucre</strong>
             <div *ngFor="let element of suc$">
               <div *ngIf="element.ciudad == 'Sucre'">
-                <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-                <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-                <hr size="8px" color="white"/>
+                <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+                <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+                <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
@@ -93,10 +100,10 @@
           <strong>Pando</strong>
             <div *ngFor="let element of pando$">
               <div *ngIf="element.ciudad == 'Pando'">
-                <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-                <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-                <hr size="8px" color="white"/>
+                <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+                <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+                <hr size="8px" color="black"/>
               </div>
           </div>
         </ion-col><hr>
@@ -106,10 +113,10 @@
           <strong>Potosi</strong>
           <div *ngFor="let element of pot$">
             <div *ngIf="element.ciudad == 'Potosi'">
-              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-              <hr size="8px" color="white"/>
+              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
@@ -117,10 +124,10 @@
           <strong>Tarija</strong>
             <div *ngFor="let element of tar$">
               <div *ngIf="element.ciudad == 'Tarija'">
-                <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-                <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-                <hr size="8px" color="white"/>
+                <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+                <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+                <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
@@ -128,10 +135,10 @@
           <strong>Beni</strong>
           <div *ngFor="let element of beni$">
             <div *ngIf="element.ciudad == 'Beni'">
-              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: whitesmoke;"></ion-icon> {{ element.nombre}}</p>
-              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: whitesmoke;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: whitesmoke;"></ion-icon > {{ element.whatsapp}}</p>
-              <hr size="8px" color="white"/>
+              <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
+              <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
+              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <hr size="8px" color="black"/>
           </div>
           </div>
         </ion-col>

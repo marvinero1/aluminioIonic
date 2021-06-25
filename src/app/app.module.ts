@@ -27,6 +27,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { Downloader } from '@ionic-native/downloader/ngx';
 import { DecimalPipe } from '@angular/common';
 import { Storage } from '@ionic/storage'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

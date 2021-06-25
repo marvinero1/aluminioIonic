@@ -1,5 +1,5 @@
 ion-content{
-    --background: gray !important;
+    --background: white !important;
 }
 .imagenLogo{
     padding-block-start: 15px;
@@ -10,4 +10,7 @@ ion-content{
 }
 .col{
    padding: 25px;
+}
+p,h3{
+    color: black;
 }

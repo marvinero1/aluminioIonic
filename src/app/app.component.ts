@@ -24,16 +24,16 @@ export class AppComponent implements OnInit {
       url:'/calculadora',
       icon:'calculator'
     },
-    // {
-    //   title:'Carrito',
-    //   url:'/carrito',
-    //   icon:'cart'
-    // },
-    // {
-    //   title: 'Favoritos',
-    //   url: '/favoritos',
-    //   icon: 'heart'
-    // },
+    {
+      title:'Carrito',
+      url:'/carrito',
+      icon:'cart'
+    },
+    {
+      title: 'Favoritos',
+      url: '/favoritos',
+      icon: 'heart'
+    },
     {
       title: 'Historial Calculos',
       url: '/calculadora-historial',
@@ -44,27 +44,27 @@ export class AppComponent implements OnInit {
       url: '/importadoras',
       icon: 'briefcase'
     },
-    // {
-    //   title: 'Productos',
-    //   url: '/productos',
-    //   icon: 'bag'
-    // },
+    {
+      title: 'Productos',
+      url: '/productos',
+      icon: 'bag'
+    },
     
-    // {
-    //   title: 'Novedades',
-    //   url: '/novedades',
-    //   icon: 'bag-handle'
-    // },
+    {
+      title: 'Novedades',
+      url: '/novedades',
+      icon: 'bag-handle'
+    },
     {
       title: 'Mi Perfil',
       url: '/perfil',
       icon: 'accessibility'
     },
-    // {
-    //   title: 'Mis Cotizaciones',
-    //   url: '/mis-cotizaciones',
-    //   icon: 'checkbox'
-    // },
+    {
+      title: 'Mis Cotizaciones',
+      url: '/mis-cotizaciones',
+      icon: 'checkbox'
+    },
     {
       title: 'Contáctanos',
       url: '/contactanos',

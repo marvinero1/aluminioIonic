@@ -64,7 +64,7 @@
 </ion-content>
 <ion-footer class="div">
   <div style="padding: 10px;overflow: scroll;">
-    <ion-row style="border-bottom: groove;text-align: right !important;">
+    <ion-row style="border-bottom: groove;text-align: center !important;">
       <ion-col col-4>
         <ion-label><strong>Ancho</strong></ion-label>
       </ion-col>
@@ -77,7 +77,7 @@
 
     </ion-row>
 
-    <ion-row style="border-bottom: groove;" *ngFor="let element of calculo_hoja$ ">
+    <ion-row style="border-bottom: groove;text-align: center !important;" *ngFor="let element of calculo_hoja$ ">
       <ion-col col-4>
         <ion-label>{{element.numero1}}</ion-label>
       </ion-col>
@@ -106,10 +106,19 @@
     
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label position="floating" type="number">Celular Cliente *</ion-label>
-            <ion-input [(ngModel)]="celular" type="number" pattern="[0-9]*"></ion-input>
+          <ion-item style="width: 194px;">
+            <ion-label >
+              Celular *
+            </ion-label>
+            &nbsp;<a href="tel:{{celular}}"><ion-icon name="call-outline" slot="end" ></ion-icon></a>
+            <ion-input [(ngModel)]="celular" type="tel" pattern="[0-9]*"></ion-input>
           </ion-item>
+          <!-- <ion-item >
+            <ion-label position="floating" type="number">Celular *</ion-label>
+            <a href="tel:celular"><ion-icon name="call-outline" slot="end"  style="padding-left: 8rem;"></ion-icon> </a> 
+            
+            
+          </ion-item> -->
         </ion-col>
         <ion-col>
           <ion-item>
