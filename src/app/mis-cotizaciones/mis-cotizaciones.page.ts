@@ -41,7 +41,7 @@ export class MisCotizacionesPage implements OnInit {
     // const url = ('https://192.168.1.7:5000/api/');
     const url = ('https://altools.es/api/');
 
-    var downloadURL = (url + 'download/' + element.file);
+    var downloadURL = (url + 'downloads/' + element.file);
     let menjsa=("Mi Cotizacion"+ element.file);
     let descr=("Descripcion"+element.descripcion);
 

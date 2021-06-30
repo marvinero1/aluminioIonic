@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
             }
           );
         },
-        (err) => {
+        (err) => {          
           console.log("Password o Email Incorrectos");
           
           loading.dismiss();          
