@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 
-import { LoadingController, Platform } from '@ionic/angular';
+import { LoadingController, Platform, IonRouterOutlet, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthProvider } from './providers/auth/auth';
+import { Plugins } from '@capacitor/core';
+import { Gesture, GestureController } from '@ionic/angular';
+const { App } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -11,7 +15,7 @@ import { AuthProvider } from './providers/auth/auth';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   public selectedIndex = 0;
   public appPages = [
     {
@@ -24,16 +28,16 @@ export class AppComponent implements OnInit {
       url:'/calculadora',
       icon:'calculator'
     },
-    {
-      title:'Carrito',
-      url:'/carrito',
-      icon:'cart'
-    },
-    {
-      title: 'Favoritos',
-      url: '/favoritos',
-      icon: 'heart'
-    },
+    // {
+    //   title:'Carrito',
+    //   url:'/carrito',
+    //   icon:'cart'
+    // },
+    // {
+    //   title: 'Favoritos',
+    //   url: '/favoritos',
+    //   icon: 'heart'
+    // },
     {
       title: 'Historial Calculos',
       url: '/calculadora-historial',
@@ -44,17 +48,16 @@ export class AppComponent implements OnInit {
       url: '/importadoras',
       icon: 'briefcase'
     },
-    {
-      title: 'Productos',
-      url: '/productos',
-      icon: 'bag'
-    },
-    
-    {
-      title: 'Novedades',
-      url: '/novedades',
-      icon: 'bag-handle'
-    },
+    // {
+    //   title: 'Productos',
+    //   url: '/productos',
+    //   icon: 'bag'
+    // },
+    // {
+    //   title: 'Novedades',
+    //   url: '/novedades',
+    //   icon: 'bag-handle'
+    // },
     {
       title: 'Mi Perfil',
       url: '/perfil',
@@ -73,15 +76,21 @@ export class AppComponent implements OnInit {
     
   ];
   public labels = ['Salir'];
+  private DOUBLE_CLICK_THRESHOLD: number = 500;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public loadingCtrl: LoadingController,
-    public auth:AuthProvider
+    public auth:AuthProvider,
+    public alertController: AlertController,
+    public router:Router,
+    private gestureCtrl: GestureController,
+
   ) {
     this.initializeApp();
+    this.backButtonEvent();
   }
 
   initializeApp() {
@@ -92,11 +101,58 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
-    }
+    // const gesture = this.gestureCtrl.create({
+    //   el: this.backButtonEvent,
+    //   threshold: 0,
+    //   onStart: () => { this.onStart(); }
+    // });
+  
+    // gesture.enable();
   }
+
+  backButtonEvent() {
+    document.addEventListener("backbutton", () => {
+    this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+      if (outlet && outlet.canGoBack()) {
+      outlet.pop();
+        } 
+        });
+    });
+    }
+
+  // backNativeButton(){
+  //   this.platform.backButton.subscribeWithPriority(-1, () => {
+  //     if (!this.routerOutlet.canGoBack()) {
+  //       this.salirButton();
+  //       App.exitApp();
+  //     }
+  //   });
+  // }
+
+  // async salirButton(){
+  //   const alert = await this.alertController.create({
+  //     cssClass: 'my-custom-class',
+  //     header: '¿Desea Salir de Altool?',
+  //     message: '',
+  //     buttons: [
+  //       {
+  //         text: 'Cancelar',
+  //         role: 'cancel',
+  //         cssClass: 'secondary',
+  //         handler: (blah) => {
+  //           return false
+  //           //console.log('Confirm Cancel: blah');
+  //         }
+  //       }, {
+  //         text: 'Si',
+  //         handler: () => {
+  //           this.cerrarsesion();
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   await alert.present();
+  // }
 
   async cerrarsesion(){
     console.log("cerrar sesion");

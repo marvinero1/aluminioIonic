@@ -40,34 +40,34 @@
       <p>Encuentranos en las siguientes ciudades:</p>
       <ion-row>
         <ion-col col-4 >
-          <strong>La Paz</strong>
+          <p><strong>La Paz</strong></p>
           <div *ngFor="let element of lpz$">
             <div *ngIf="element.ciudad == 'La-Paz'">
               <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
               <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
               <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
         <ion-col col-4>
-          <strong>Cochabamba</strong>
+          <p><strong>Cochabamba</strong></p> 
           <div *ngFor="let element of cbba$">
             <div *ngIf="element.ciudad == 'Cochabamba'">
               <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
               <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
               <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
         <ion-col col-4>
-          <strong>Santa Cruz</strong>
+          <p><strong>Santa Cruz</strong></p> 
             <div *ngFor="let element of stz$">
               <div *ngIf="element.ciudad == 'Santa-Cruz'">
                 <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
                 <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+                <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
                 <hr size="8px" color="black"/>
             </div>
           </div>
@@ -75,34 +75,35 @@
       </ion-row>
       <ion-row>
         <ion-col col-6>
-          <strong>Oruro</strong>
+          <p><strong>Oruro</strong></p>
+          
             <div *ngFor="let element of oru$">
             <div *ngIf="element.ciudad == 'Oruro'">
               <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
               <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
               <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
         <ion-col col-6>
-          <strong>Sucre</strong>
+          <p><strong>Sucre</strong></p> 
             <div *ngFor="let element of suc$">
               <div *ngIf="element.ciudad == 'Sucre'">
                 <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
                 <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+                <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
                 <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
         <ion-col col-6>
-          <strong>Pando</strong>
+          <p><strong>Pando</strong></p> 
             <div *ngFor="let element of pando$">
               <div *ngIf="element.ciudad == 'Pando'">
                 <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
                 <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+                <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
                 <hr size="8px" color="black"/>
               </div>
           </div>
@@ -110,34 +111,34 @@
       </ion-row>
       <ion-row>
         <ion-col col-6>
-          <strong>Potosi</strong>
+          <p><strong>Potosi</strong></p> 
           <div *ngFor="let element of pot$">
             <div *ngIf="element.ciudad == 'Potosi'">
               <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
               <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
               <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
         <ion-col col-6>
-          <strong>Tarija</strong>
+          <p><strong>Tarija</strong></p> 
             <div *ngFor="let element of tar$">
               <div *ngIf="element.ciudad == 'Tarija'">
                 <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
                 <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-                <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+                <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
                 <hr size="8px" color="black"/>
             </div>
           </div>
         </ion-col><hr>
         <ion-col col-6>
-          <strong>Beni</strong>
+          <p><strong>Beni</strong></p> 
           <div *ngFor="let element of beni$">
             <div *ngIf="element.ciudad == 'Beni'">
               <p style="color: black;"><ion-icon name="accessibility-outline" style="color: black;"></ion-icon> {{ element.nombre}}</p>
               <a href="tel:{{element.telefono}}"><p style="color: steelblue;"><ion-icon name="call-outline" style="color: black;"></ion-icon> {{ element.telefono}}</p></a>
-              <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p>
+              <!-- <p style="color: black;"><ion-icon name="logo-whatsapp" style="color: black;"></ion-icon > {{ element.whatsapp}}</p> -->
               <hr size="8px" color="black"/>
           </div>
           </div>

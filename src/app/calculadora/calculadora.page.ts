@@ -115,7 +115,6 @@ export class CalculadoraPage implements OnInit {
       user_id: [this.user_id]
     });
   }
-
   
   async submitData() {
 
@@ -214,7 +213,6 @@ export class CalculadoraPage implements OnInit {
           this.presentLoading1();
           // this.deleteAll(a); //CAMBIARLO POR EL QUE ACTUALIZA SU ESTADO
       });
-    
   }
 
   async presentLoading() {
@@ -322,24 +320,47 @@ export class CalculadoraPage implements OnInit {
     let estado = "false";
     return this._formBuilder.group({
       estado: [estado],
+      total:[this.total],
       user_id: [this.user_id]
     });
+  } 
+
+  async postHoja(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '¿Desea Crear Hoja de Calculo?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            return false
+            //console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            let data = this.data_hoja.value;
+            console.log(data);
+              if(data){
+                this.restangular.all('guardarHoja').post(data).subscribe((datav)=>{ 
+                  this.presentLoading();
+                  window.location.reload();
+                });
+              }else{
+                (error)=>{
+                  console.log(error);
+                }
+              }
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
-  postHoja(){
-    let data = this.data_hoja.value;
-    console.log(data);
-      if(data){
-        this.restangular.all('guardarHoja').post(data).subscribe((datav)=>{ 
-          this.presentLoading();
-          window.location.reload();
-        });
-      }else{
-        (error)=>{
-          console.log(error);
-        }
-      }
-  }
 
   getHoja(user_id:number){
     this.auth.getCarrito('getHojaCalculo/', user_id)
@@ -386,11 +407,14 @@ export class CalculadoraPage implements OnInit {
    
     let data =  this._formBuilder.group({
       //nombre: [this.data.nombre,Validators.compose([Validators.required])],
+      total:[this.total],
       estado:[estado],
     });
 
     let data1 = data.value;
-    let a = this.hojas$.id   
+    let a = this.hojas$.id 
+    console.log(data1);
+      
         
     if(this.dataFormHistorial.valid){
       

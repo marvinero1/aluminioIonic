@@ -6,7 +6,8 @@
     </form>
     <div *ngIf="btnCarrito == true">
       <ion-button color="light" (click)="crearCarrito();">Crear Carrito</ion-button>
-    </div> 
+    </div>
+     <h2>{{codigo}} - {{nombre}}</h2>
     <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <ion-row>
           <h5 class="h5s">Cantidad a pedir</h5> 
@@ -34,7 +35,7 @@
               <ion-select-option value="Negro">Negro</ion-select-option>
               <ion-select-option value="Blanco">Blanco</ion-select-option>
               <ion-select-option value="Madera">Madera</ion-select-option>
-              <ion-select-option value="Rojo">Rojo</ion-select-option>
+              <!-- <ion-select-option value="Rojo">Rojo</ion-select-option>
               <ion-select-option value="Verde">Verde</ion-select-option>
               <ion-select-option value="Azul">Azul</ion-select-option>
               <ion-select-option value="Amarillo">Amarillo</ion-select-option>
@@ -43,7 +44,7 @@
               <ion-select-option value="Turquesa">Turquesa</ion-select-option>
               <ion-select-option value="Cafe">Cafe</ion-select-option>
               <ion-select-option value="Violeta">Violeta</ion-select-option>
-              <ion-select-option value="Naranja">Naranja</ion-select-option>
+              <ion-select-option value="Naranja">Naranja</ion-select-option> -->
             </ion-select>
           </ion-item>
         </ion-col>

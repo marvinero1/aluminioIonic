@@ -10,8 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RestangularModule, Restangular } from 'ngx-restangular';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { HttpClientModule } from '@angular/common/http';
+
 import { NotificacionsService } from './providers/notificacions.service';
 
 import { AppComponent } from './app.component';
@@ -39,7 +38,7 @@ import { Storage } from '@ionic/storage'
     IonicModule.forRoot(),
     AppRoutingModule,
     RestangularModule.forRoot([AuthProvider], RestangularConfigFactory),
-    HttpClientModule,
+
     PipesModule,
     NgFallimgModule.forRoot({
       default: 'assets/img/default-person.jpg',
@@ -58,7 +57,7 @@ import { Storage } from '@ionic/storage'
     TokenStorageProvider,
     NotificacionsService,
     Camera,
-    Downloader
+    Downloader,
   ],
   bootstrap: [AppComponent]
 })

@@ -188,7 +188,6 @@ export class PedidomodalPage implements OnInit {
       this.usuarios$ = res;
       let user_id =  this.usuarios$.id;
       this.getmyCars(user_id);
-      console.log(this.usuarios$);
     });
   }
 }

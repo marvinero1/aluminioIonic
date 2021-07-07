@@ -29,6 +29,7 @@ export class CalculadoraHistorialPage implements OnInit {
   suma_m2:any;
   descripcion:any;
   precio:any;
+  btnbool:boolean = false; 
 
   constructor(public auth: AuthProvider,public alertController: AlertController,
     public actionSheetController: ActionSheetController,private _formBuilder: FormBuilder,
@@ -158,7 +159,9 @@ export class CalculadoraHistorialPage implements OnInit {
         text: 'Editar',
         icon: 'create',
         handler: () => {
-         let data = this._formBuilder.group({
+          this.btnboolean();
+          
+          let data = this._formBuilder.group({
             id : [element.id],
             celular: [element.celular],
             nombre_cliente : [element.nombre_cliente],
@@ -176,7 +179,7 @@ export class CalculadoraHistorialPage implements OnInit {
           this.suma_m2 = element.suma_m2;
           this.descripcion = element.descripcion;
           this.user_id = element.user_id;
-          console.log(data);
+          console.log(data.value);
 
           this.getCalculsHoja(this.user_id, element.hoja_calculo_id);
         }
@@ -193,6 +196,21 @@ export class CalculadoraHistorialPage implements OnInit {
 
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
+  }
+
+  btnboolean(){
+    if (this.btnbool) {
+      this.btnbool = false;
+    } else {
+      this.btnbool = true;
+    }
+  }
+  cerrar(){
+    if (this.btnbool) {
+      this.btnbool = false;
+    } else {
+      this.btnbool = true;
+    }
   }
   perfil(){
     this.router.navigate(['/perfil']);

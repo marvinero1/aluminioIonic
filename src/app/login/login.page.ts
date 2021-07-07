@@ -78,4 +78,9 @@ export class LoginPage implements OnInit {
       });
       return await modal.present();
     }
+    name = 'This is about double click';
+    public dblcount: any = 0;
+    public snglcount: any = 0;
+    public message:string="Waiting for a click...";
+
 }
