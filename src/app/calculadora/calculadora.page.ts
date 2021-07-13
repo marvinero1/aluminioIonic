@@ -84,7 +84,7 @@ export class CalculadoraPage implements OnInit {
       
       if (num1!=0 || num2!=0) {
         this.resultado = num1 * num2;
-        this.resultado = this.decimalPipe.transform(this.resultado, '1.1-1');  
+        this.resultado = this.decimalPipe.transform(this.resultado, '0.2-2');  
         console.log(this.resultado);
       } else {
         this.presentToast("Intenta agregando numeros, para sacar el total.");
@@ -98,6 +98,7 @@ export class CalculadoraPage implements OnInit {
       numero1: [this.numero1],
       numero2: [this.numero2],
       resultado: [this.resultado],
+      total:[this.total],
       hoja_calculo_id:[this.hoja_calculo_id],
       user_id: [this.user_id],
     });
@@ -320,7 +321,7 @@ export class CalculadoraPage implements OnInit {
     let estado = "false";
     return this._formBuilder.group({
       estado: [estado],
-      total:[this.total],
+      total:[this.total_suma],
       user_id: [this.user_id]
     });
   } 
@@ -407,7 +408,7 @@ export class CalculadoraPage implements OnInit {
    
     let data =  this._formBuilder.group({
       //nombre: [this.data.nombre,Validators.compose([Validators.required])],
-      total:[this.total],
+      total_suma:[this.total],
       estado:[estado],
     });
 

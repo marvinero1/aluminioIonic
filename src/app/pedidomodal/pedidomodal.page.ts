@@ -37,6 +37,7 @@ export class PedidomodalPage implements OnInit {
   user_id:number;
   carrito_id:string;
   btnCarrito:boolean;
+  importadora_carrito: any;
   
   constructor(public modalController: ModalController,private _formBuilder: FormBuilder,
     public auth:AuthProvider,public loadingController: LoadingController,
@@ -55,7 +56,7 @@ export class PedidomodalPage implements OnInit {
     this.auth.getCarrito('getCartAttribute/', user_id)
     .subscribe((res) =>{ 
       this.carrito$ = res as string[];
-      console.log(this.carrito$);
+      // console.log(this.carrito$.importadora);
       
       //this.carrito$ = Object.values(this.carrito$);
       if(this.carrito$.estado == 'false' ){
@@ -68,6 +69,8 @@ export class PedidomodalPage implements OnInit {
       //this.loadData();    
     });
   }
+
+  
 
   createForm(): FormGroup {
     return this._formBuilder.group({
@@ -84,6 +87,7 @@ export class PedidomodalPage implements OnInit {
       precio:[this.precio],
       ancho:[this.ancho],
       alto:[this.alto],
+      importadora_carrito:[this.importadora_carrito],
       codigo:[this.codigo],
       tipo_medida:[this.tipo_medida],
       categorias_id:[this.categorias_id],
@@ -91,16 +95,50 @@ export class PedidomodalPage implements OnInit {
     });
   }
 
+  async postPedido(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '¿Agregar Producto a Carrito?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            return false
+            //console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            this.submitData();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   submitData(){
-    let data = this.dataForm.value;
-    console.log(data);
+    let data_producto = this.dataForm.value;
+
+    let carrito_importadora = data_producto.importadora_carrito;
+    let importadora_producto = data_producto.importadora;
+
     if(this.btnCarrito == false){
-      this.restangular.all('guardarPedido').post(data).subscribe((datav)=>{ 
-          this.dismiss();
-          this.presentLoading("Agregando Producto a Carrito");
-          this.presentAlert();
-      });
+      if(carrito_importadora === importadora_producto){
+          this.restangular.all('guardarPedido').post(data_producto).subscribe((datav)=>{ 
+            this.dismiss();
+            this.presentLoading("Agregando Producto a Carrito");
+            this.presentAlert();
+        });
+      }else{
+        this.dismiss();
+        this.presentToast("Solo agregar productos de una misma importadora");
+      }
     }else{
+      this.dismiss();
       this.presentToast("Primero Cree un Carrito");
       (error)=>{
         console.log(error);

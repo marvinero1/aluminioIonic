@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { Router } from '@angular/router';
+import { ContraseniaPage } from '../contrasenia/contrasenia.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil',
@@ -11,10 +15,23 @@ export class PerfilPage implements OnInit {
   logs:any=[];
   usuarios$:any=[];
 
-  constructor(public auth:AuthProvider) { }
+  constructor(public auth:AuthProvider,private fileChooser: FileChooser,
+    private router:Router, public modalController: ModalController,) { }
 
   ngOnInit() {
     this.getEmail();
+  }
+
+  // changeImagenUser(){    
+  // }
+
+  async changePasswordUser(){
+    const modal = await this.modalController.create({
+      component: ContraseniaPage,
+      cssClass: 'my-custom-class-contraseniaModal',
+      
+    });
+    return await modal.present();
   }
 
   getEmail(){

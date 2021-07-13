@@ -81,5 +81,29 @@
 
   }
   .my-custom-class-pedidoModal{
-    padding-top: 12pc;
+    padding-top: 8pc;
+  }
+
+  .my-custom-class-contraseniaModal{
+    padding-top: 25pc;
+  }
+  .action-sheet-title.sc-ion-action-sheet-md,
+  .action-sheet-button.sc-ion-action-sheet-md,
+  .alert-radio-label.sc-ion-alert-md
+  .my-custom-class-pedido{
+    color: white !important;
+
+    ion-icon{
+      color: white !important;
+  }
+  }
+  .alert-radio-icon.sc-ion-alert-md{
+    color: white !important;
+    border-color: black !important;
+  }
+  .alert-radio-inner.sc-ion-alert-md{
+    background-color: black;
+  }
+  .alert-radio-label.sc-ion-alert-md{
+    color: white;
   }

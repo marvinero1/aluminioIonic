@@ -45,10 +45,11 @@ export class MisProductosPage implements OnInit {
   async presentActionSheet(element) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones Producto Importadora',
-      cssClass: 'my-custom-class',
+      cssClass: 'my-custom-class-pedido',
       buttons: [{
         text: 'Ver',
         role: 'show',
+        cssClass: 'my-custom-class-pedido',
         icon: 'eye',
         handler: () => {
           console.log(element);
@@ -61,6 +62,7 @@ export class MisProductosPage implements OnInit {
       }, {
         text: 'Comprar',
         icon: 'cart',
+        cssClass: 'my-custom-class-pedido',
         role: 'buy',
         handler: () => {
           this.add_productCartShop(element);

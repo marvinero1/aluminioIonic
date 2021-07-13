@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenStorageProvider } from '../token-storage/token-storage';
 import { tap, map, switchMap, catchError } from 'rxjs/operators';
-import { ILogin, IPedido, IFavoritos, ICalculadora, ICarrito } from "../../model/models";
+import { ILogin, IPedido, IFavoritos, ICalculadora, ICarrito, IUser } from "../../model/models";
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { Storage } from '@ionic/storage'
@@ -301,6 +301,10 @@ export class AuthProvider {
 
   updateObjectById = (route:string,id:number, carrito:ICarrito) =>{
     return this.http.put<any>(`${this.apiRoot}`+ route + id, carrito);
+  }
+
+  updateObjectByIdUser = (route:string,id:number, user:IUser) =>{
+    return this.http.put<any>(`${this.apiRoot}`+ route + id, user);
   }
 
   cerrarCarrito = (route:string,id:number, carrito:ICarrito) =>{

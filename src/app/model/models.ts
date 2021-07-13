@@ -79,6 +79,13 @@ export interface ICarrito {
     importadora?: string; 
     user_id: number;
 }
+
+export interface IUser {
+    id: number;
+    email?: string;
+    password?: string;
+
+}
 export interface IMProducto {
     id: number;
     nombre?: string;

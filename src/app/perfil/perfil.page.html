@@ -11,8 +11,8 @@
 
 <ion-content no-padding>
   <ion-row align-items-center style="text-align: center">
-    <!-- <img src="http://192.168.1.7:5000/{{ usuarios$.imagen }}" class="ima"> -->
-    <img src="http://altools.es/{{ usuarios$.imagen }}" class="ima">
+    <img src="http://192.168.1.7:5000/{{ usuarios$.imagen }}" class="ima">
+    <!-- <img src="http://altools.es/{{ usuarios$.imagen }}" class="ima"> -->
 
     <ion-col size="10" style="margin: 0 auto;" align-self: center>
       <ion-item>
@@ -48,6 +48,20 @@
         <ion-label>
           <strong>Rol:</strong> {{ usuarios$.role }}</ion-label>
       </ion-item>
+      <br>
+      <ion-row>
+        <ion-col>
+          <!-- <ion-button (click)="changeImagenUser()">
+            <ion-icon slot="start" name="image" ></ion-icon>
+            Cambiar Imagen
+          </ion-button> -->
+
+          <ion-button (click)="changePasswordUser()">
+            <ion-icon slot="start" name="key" ></ion-icon>
+            Cambiar Contraseña
+          </ion-button>
+        </ion-col>
+      </ion-row>
       <br>
     </ion-col>
   </ion-row>

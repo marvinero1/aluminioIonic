@@ -28,11 +28,11 @@ export class AppComponent implements OnInit {
       url:'/calculadora',
       icon:'calculator'
     },
-    // {
-    //   title:'Carrito',
-    //   url:'/carrito',
-    //   icon:'cart'
-    // },
+    {
+      title:'Carrito',
+      url:'/carrito',
+      icon:'cart'
+    },
     // {
     //   title: 'Favoritos',
     //   url: '/favoritos',

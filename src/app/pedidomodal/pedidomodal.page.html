@@ -5,15 +5,33 @@
     
     </form>
     <div *ngIf="btnCarrito == true">
-      <ion-button color="light" (click)="crearCarrito();">Crear Carrito</ion-button>
+      <ion-button color="primary" (click)="crearCarrito();">Crear Carrito</ion-button>
     </div>
-     <h2>{{codigo}} - {{nombre}}</h2>
-    <form [formGroup]="dataForm" (ngSubmit)=submitData()>
+
+    <ion-item>
+      <p>Codigo: </p>
+      <ion-note slot="end" color="dark">{{ codigo }}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <p>Producto: </p>
+      <ion-note slot="end" color="dark">{{ nombre }}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <p>Importadora: </p>
+      <ion-note slot="end" color="dark">{{ importadora }}</ion-note>
+    </ion-item>
+
+    
+    <form [formGroup]="dataForm" (ngSubmit)=postPedido()>
+      <ion-input type="text" formControlName="importadora_carrito" value="{{carrito$.importadora}}" hidden="true"></ion-input>
       <ion-row>
           <h5 class="h5s">Cantidad a pedir</h5> 
       </ion-row>
       <ion-row >
         <input type="text" value="{{carrito$.id}}" [(ngModel)]="carrito$.id" hidden="true" formControlName="carro_id">
+        
         <ion-col col-4>
           <div class="wrapper">
           <ion-button color="dark" class="plusminus" (click)="handleMinus()"><strong>-</strong></ion-button>&nbsp;
@@ -62,7 +80,7 @@
         <p><Strong>* Nota:</Strong>&nbsp; Se mandarán la solicitud de pedido y 
           el proveedor(importadora) se comunicara con usted.</p>
       </ion-row><br> 
-      <!-- <input type="hidden" formControlName="confirmacion" value="false"> -->
+      <ion-input  formControlName="importadora_producto" value="{{importadora}}" hidden="true"></ion-input>
       <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
 
       <ion-row style="float: right;">

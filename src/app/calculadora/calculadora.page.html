@@ -40,8 +40,10 @@
         </ion-col>
         <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
         <ion-input [(ngModel)]="hojas$.id" formControlName="hoja_calculo_id" disabled="true" hidden="true"></ion-input>
+      </ion-row>
 
-        <ion-col *ngIf="btnHoja == false">
+      <ion-row style="justify-content: center;">
+        <ion-col offset-sm *ngIf="btnHoja == false">
           <ion-button color="dark" (click)="calcular()">
             <ion-icon name="calculator-outline"></ion-icon>Calcular
           </ion-button>
@@ -51,14 +53,14 @@
         </ion-col>
       </ion-row>
     </form>
-    
+
     <div *ngIf="btnHoja == true">
       <form [formGroup]="data_hoja" (ngSubmit)=postHoja()>
         <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
         <ion-row style="display: block; text-align: center;">
           <ion-button color="dark" (click)="postHoja()">
             <ion-icon name="clipboard-outline"></ion-icon>
-           Crear Hoja de Calculo
+            Crear Hoja de Calculo
           </ion-button>
         </ion-row>
       </form>
@@ -94,7 +96,7 @@
         <ion-label>{{element.numero2 | number:'0.3-3'}}</ion-label>
       </ion-col>
       <ion-col col-4 class="col">
-        <ion-label>{{element.resultado | number:'0.2-2'}}</ion-label>
+        <ion-label>{{element.resultado}}</ion-label>
       </ion-col>
       <ion-button size="small" color="dark" (click)="deleteItem(element)">
         <ion-icon name="trash-outline"></ion-icon>
@@ -157,7 +159,8 @@
           <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
           <ion-input [(ngModel)]="resultadoM" formControlName="total_suma" disabled="true" hidden="true"></ion-input>
           <ion-input [(ngModel)]="total" formControlName="suma_m2" disabled="true" hidden="true"></ion-input>
-          <ion-input [(ngModel)]="hojas$.id" formControlName="hoja_calculo_id" disabled="true" hidden="true"></ion-input>
+          <ion-input [(ngModel)]="hojas$.id" formControlName="hoja_calculo_id" disabled="true" hidden="true">
+          </ion-input>
           <label style="float: right; padding: 5px;font-size: 1.2rem;color: black;"><strong>Precio Total: </strong>
             <strong>
               {{ resultadoM | number:'0.1-1' }}</strong></label>

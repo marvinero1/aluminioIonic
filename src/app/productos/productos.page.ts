@@ -9,13 +9,13 @@ import {  MenuController } from '@ionic/angular';
   styleUrls: ['./productos.page.scss'],
 })
 export class ProductosPage implements OnInit {
-  
+
   titulo= "Productos";
   productos$:any=[];
   textoBuscar:string='';
 
   constructor(public api:AuthProvider,private router: Router,
-    public menuCtrl: MenuController){ 
+    public menuCtrl: MenuController){
   }
 
   ngOnInit() {
@@ -24,9 +24,8 @@ export class ProductosPage implements OnInit {
   }
 
   getProducts(){
-      this.api.getAllObject('productos').subscribe((res) =>{ 
-        this.productos$ = res; 
-              
+      this.api.getAllObject('productos').subscribe((res) =>{
+        this.productos$ = res;   
       });
   }
 
@@ -36,7 +35,7 @@ export class ProductosPage implements OnInit {
 
   buscar(event){
     this.textoBuscar = event.detail.value;
-    
+
   }
   perfil(){
     this.router.navigate(['/perfil']);
@@ -49,5 +48,5 @@ export class ProductosPage implements OnInit {
       event.target.complete();
     }, 2000);
   }
-  
+
 }
