@@ -67,7 +67,7 @@
       <ion-icon   (click)="cerrar()"name="close"></ion-icon>
   </div>
 
-  <div style="padding: 10px;overflow: scroll;">
+  <div style="padding: 10px 10px 0px;overflow: scroll;max-height: 31.5%;">
     <ion-row style="border-bottom: groove;text-align: center !important;">
       <ion-col col-4>
         <ion-label><strong>Ancho</strong></ion-label>
@@ -106,40 +106,38 @@
     </ion-row>
   </div>
  
-
-    <ion-row>
-      <ion-col class="md-12">
-        <ion-item>
-          <ion-label position="floating" type="number">Cliente *</ion-label>
-          <ion-input [(ngModel)]="nombre_cliente" type="text"
-          minlength="2" maxlength="40"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    
-    <ion-row>
-        <ion-col>
-          <ion-item style="width: 194px;">
-            <ion-label >
-              Celular *
-            </ion-label>
-            &nbsp;<a href="tel:{{celular}}"><ion-icon name="call-outline" slot="end" ></ion-icon></a>
-            <ion-input [(ngModel)]="celular" type="tel" pattern="[0-9]*"></ion-input>
-          </ion-item>
-          <!-- <ion-item >
-            <ion-label position="floating" type="number">Celular *</ion-label>
-            <a href="tel:celular"><ion-icon name="call-outline" slot="end"  style="padding-left: 8rem;"></ion-icon> </a> 
-            
-            
-          </ion-item> -->
-        </ion-col>
-        <ion-col>
+    <div style="overflow: scroll;max-height: 80%;">
+      <ion-row>
+        <ion-col class="md-12">
           <ion-item>
-            <ion-label position="floating" type="number">Precio $</ion-label>
-            <ion-input [(ngModel)]="precio" type="number" pattern="[0-9]*" ></ion-input>
+            <ion-label position="floating" type="number">Cliente *</ion-label>
+            <ion-input [(ngModel)]="nombre_cliente" type="text"
+            minlength="2" maxlength="40"></ion-input>
           </ion-item>
         </ion-col>
-    </ion-row>
+      </ion-row>
+    
+      <ion-row>
+          <ion-col>
+            <ion-item style="width: 194px;">
+              <ion-label >
+                Celular *
+              </ion-label>
+              &nbsp;<a href="tel:{{celular}}"><ion-icon name="call-outline" slot="end" ></ion-icon></a>
+              <ion-input [(ngModel)]="celular" type="tel" pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <!-- <ion-item >
+              <ion-label position="floating" type="number">Celular *</ion-label>
+              <a href="tel:celular"><ion-icon name="call-outline" slot="end"  style="padding-left: 8rem;"></ion-icon> </a> 
+            </ion-item> -->
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating" type="number">Precio $</ion-label>
+              <ion-input [(ngModel)]="precio" type="number" pattern="[0-9]*" ></ion-input>
+            </ion-item>
+          </ion-col>
+      </ion-row>
       
       <ion-row>
         <ion-col>
@@ -149,7 +147,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <br>
+       <br>
       <p style="float: right; padding: 5px;"><strong>Precio Total: </strong> {{ resultadoM  | number:'0.1-1' }}</p>
       <!-- <ion-item>
         <ion-label position="floating">Total</ion-label>
@@ -163,5 +161,8 @@
       <ion-button color="dark" (click)="guardarOperacion()" class="float">
         <ion-icon name="save"></ion-icon>Actualizar Operacion
       </ion-button>
+    </div>
+      
+     
     
   </ion-footer> 

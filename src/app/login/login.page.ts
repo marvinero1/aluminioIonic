@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthProvider } from '../providers/auth/auth';
 import {  MenuController } from '@ionic/angular';
 import { ContactanosPage } from '../contactanos/contactanos.page';
+import { ContactanosModalPage } from '../contactanos-modal/contactanos-modal.page';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -73,7 +74,7 @@ export class LoginPage implements OnInit {
 
     async goContactanos(){
       const modal = await this.modalController.create({
-        component: ContactanosPage,
+        component: ContactanosModalPage,
         cssClass: 'my-custom-class'
       });
       return await modal.present();

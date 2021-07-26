@@ -95,6 +95,10 @@ const routes: Routes = [
     path: 'contrasenia',
     loadChildren: () => import('./contrasenia/contrasenia.module').then( m => m.ContraseniaPageModule)
   },
+  {
+    path: 'contactanos-modal',
+    loadChildren: () => import('./contactanos-modal/contactanos-modal.module').then( m => m.ContactanosModalPageModule)
+  },
 
 ];
 

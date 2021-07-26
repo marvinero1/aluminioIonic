@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
-import { NavController } from '@ionic/angular';
-@Component({
-  selector: 'app-contactanos',
-  templateUrl: './contactanos.page.html',
-  styleUrls: ['./contactanos.page.scss'],
-})
-export class ContactanosPage implements OnInit {
 
+@Component({
+  selector: 'app-contactanos-modal',
+  templateUrl: './contactanos-modal.page.html',
+  styleUrls: ['./contactanos-modal.page.scss'],
+})
+export class ContactanosModalPage implements OnInit {
+
+  
   lpz$:any = [];
   cbba$:any = [];
   stz$:any = [];
@@ -21,7 +22,7 @@ export class ContactanosPage implements OnInit {
   pando$:any = [];
 
   constructor(public modalController: ModalController,public auth:AuthProvider,
-    private router: Router,private navCtrl: NavController) { 
+    private router: Router,) { 
 
   }
 
@@ -103,6 +104,7 @@ export class ContactanosPage implements OnInit {
   }
   atras(){
     this.cerrarModal();
-    this.navCtrl.back();
+    this.router.navigateByUrl('/contactanos');
   }
+
 }
