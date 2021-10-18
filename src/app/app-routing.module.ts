@@ -68,10 +68,6 @@ const routes: Routes = [
     loadChildren: () => import('./calculadora/calculadora.module').then( m => m.CalculadoraPageModule)
   },
   {
-    path: 'cotizacionmodal',
-    loadChildren: () => import('./cotizacionmodal/cotizacionmodal.module').then( m => m.CotizacionmodalPageModule)
-  },
-  {
     path: 'carrito',
     loadChildren: () => import('./carrito/carrito.module').then( m => m.CarritoPageModule)
   },
@@ -91,13 +87,21 @@ const routes: Routes = [
   {
     path: 'mis-productos/:res',
     loadChildren: () => import('./mis-productos/mis-productos.module').then( m => m.MisProductosPageModule)
-  },  {
+  },
+  {
     path: 'contrasenia',
     loadChildren: () => import('./contrasenia/contrasenia.module').then( m => m.ContraseniaPageModule)
   },
   {
     path: 'contactanos-modal',
     loadChildren: () => import('./contactanos-modal/contactanos-modal.module').then( m => m.ContactanosModalPageModule)
+  },
+  {
+    path: 'cortadora-perfil',
+    loadChildren: () => import('./cortadora-perfil/cortadora-perfil.module').then( m => m.CortadoraPerfilPageModule)
+  },  {
+    path: 'cortadora-pmodal',
+    loadChildren: () => import('./cortadora-pmodal/cortadora-pmodal.module').then( m => m.CortadoraPModalPageModule)
   },
 
 ];

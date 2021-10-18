@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CotizacionmodalPageRoutingModule } from './cotizacionmodal-routing.module';
+import { CortadoraPModalPageRoutingModule } from './cortadora-pmodal-routing.module';
 
-import { CotizacionmodalPage } from './cotizacionmodal.page';
+import { CortadoraPModalPage } from './cortadora-pmodal.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CotizacionmodalPageRoutingModule
+    CortadoraPModalPageRoutingModule
   ],
-  declarations: [CotizacionmodalPage]
+  declarations: [CortadoraPModalPage]
 })
-export class CotizacionmodalPageModule {}
+export class CortadoraPModalPageModule {}

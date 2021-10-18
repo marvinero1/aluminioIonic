@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button disabled="true">
+        <!-- <ion-icon name="person-circle-outline"></ion-icon> -->
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cortadora</ion-title>
+    <ion-buttons slot="end">
+      <form [formGroup]="data_hoja" (ngSubmit)=crearHojaCalculo()>
+        <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
+        <ion-row style="display: block; text-align: center;">
+          <ion-button (click)="crearHojaCalculo()">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-row>
+      </form>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="btnHoja == false" style="padding: 7px;">
+
+
+
+    <p> <strong>Elija una Combinación</strong></p>
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let card of [0,1,2,3,4,5,6]" class="slide">
+        <ion-col>
+          <ion-label>Combinacion 1 #{{ card }}</ion-label>
+          <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
+          <!-- <ion-button size="small" color="success">Success</ion-button> -->
+          <ion-radio-group >
+            <ion-item>
+              <!-- <ion-label>Selecciona</ion-label> -->
+              <ion-radio slot="start" value="biff" color="primary"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+
+        </ion-col>
+      </ion-slide>
+      <br>
+    </ion-slides>
+
+    <p> <strong>Elija una Categoria</strong></p>
+    <ion-list>
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        <ion-select [compareWith]="compareWith">
+          <ion-select-option *ngFor="let categoria of categorias$" [value]="id">{{ categoria.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <div>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Alto</ion-label>
+            <ion-input type="number" required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Ancho</ion-label>
+            <ion-input type="number" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+  </div>
+  <ion-footer>
+    <ion-button color="dark" (click)="submitData()">
+      <ion-icon name="save-outline"></ion-icon>Guardar
+    </ion-button>
+  </ion-footer>
+</ion-content>

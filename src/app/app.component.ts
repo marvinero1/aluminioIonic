@@ -33,6 +33,11 @@ export class AppComponent implements OnInit {
       url:'/carrito',
       icon:'cart'
     },
+    {
+      title:'Cortadora Perfil',
+      url:'/cortadora-perfil',
+      icon:'cut'
+    },
     // {
     //   title: 'Favoritos',
     //   url: '/favoritos',

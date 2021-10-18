@@ -9,7 +9,7 @@ import { Restangular } from 'ngx-restangular';
   styleUrls: ['./pedidomodal.page.scss'],
 })
 export class PedidomodalPage implements OnInit {
-  
+
   @Input() id: string;
   @Input() nombre: string;
   @Input() importadora: string;
@@ -27,7 +27,7 @@ export class PedidomodalPage implements OnInit {
   @Input() categorias_id: string;
   @Input() subcategorias_id: string;
   @Input() tipo_medida: string;
- 
+
   dataForm: FormGroup;
   dataCarrito: FormGroup;
   data:any='';
@@ -38,13 +38,13 @@ export class PedidomodalPage implements OnInit {
   carrito_id:string;
   btnCarrito:boolean;
   importadora_carrito: any;
-  
+
   constructor(public modalController: ModalController,private _formBuilder: FormBuilder,
     public auth:AuthProvider,public loadingController: LoadingController,
     public alertController: AlertController,private restangular:Restangular,
     public toastController: ToastController
     ) { }
- 
+
 
   ngOnInit() {
     this.getUser();
@@ -52,12 +52,12 @@ export class PedidomodalPage implements OnInit {
     this.dataCarrito = this.data_Carrito();
   }
 
-  getmyCars(user_id:number){  
+  getmyCars(user_id:number){
     this.auth.getCarrito('getCartAttribute/', user_id)
-    .subscribe((res) =>{ 
+    .subscribe((res) =>{
       this.carrito$ = res as string[];
       // console.log(this.carrito$.importadora);
-      
+
       //this.carrito$ = Object.values(this.carrito$);
       if(this.carrito$.estado == 'false' ){
         this.btnCarrito = false;
@@ -66,11 +66,11 @@ export class PedidomodalPage implements OnInit {
         //console.log("no lo hay");
         this.btnCarrito = true;
       }
-      //this.loadData();    
+      //this.loadData();
     });
   }
 
-  
+
 
   createForm(): FormGroup {
     return this._formBuilder.group({
@@ -128,11 +128,7 @@ export class PedidomodalPage implements OnInit {
 
     if(this.btnCarrito == false){
       if(carrito_importadora === importadora_producto){
-          this.restangular.all('guardarPedido').post(data_producto).subscribe((datav)=>{ 
-            this.dismiss();
-            this.presentLoading("Agregando Producto a Carrito");
-            this.presentAlert();
-        });
+
       }else{
         this.dismiss();
         this.presentToast("Solo agregar productos de una misma importadora");
@@ -143,7 +139,7 @@ export class PedidomodalPage implements OnInit {
       (error)=>{
         console.log(error);
       };
-    }  
+    }
   }
 
   data_Carrito(): FormGroup {
@@ -162,7 +158,7 @@ export class PedidomodalPage implements OnInit {
     let data = this.dataCarrito.value;
     console.log(data);
     if(data){
-      this.restangular.all('guardarCarrito').post(data).subscribe((datav)=>{ 
+      this.restangular.all('guardarCarrito').post(data).subscribe((datav)=>{
         this.dismiss();
         this.presentLoading("Creando Carrito");
       });
@@ -206,10 +202,10 @@ export class PedidomodalPage implements OnInit {
   value = 0;
 
   handleMinus() {
-    this.value--;  
+    this.value--;
   }
   handlePlus() {
-    this.value++;    
+    this.value++;
   }
   async presentToast(message:any) {
     const toast = await this.toastController.create({
@@ -221,8 +217,8 @@ export class PedidomodalPage implements OnInit {
 
   getUser(){
     this.logs = JSON.parse(localStorage.getItem('Usuario'));
-    
-    this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+
+    this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{
       this.usuarios$ = res;
       let user_id =  this.usuarios$.id;
       this.getmyCars(user_id);

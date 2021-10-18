@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CotizacionmodalPage } from './cotizacionmodal.page';
+import { CortadoraPModalPage } from './cortadora-pmodal.page';
 
-describe('CotizacionmodalPage', () => {
-  let component: CotizacionmodalPage;
-  let fixture: ComponentFixture<CotizacionmodalPage>;
+describe('CortadoraPModalPage', () => {
+  let component: CortadoraPModalPage;
+  let fixture: ComponentFixture<CortadoraPModalPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CotizacionmodalPage ],
+      declarations: [ CortadoraPModalPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CotizacionmodalPage);
+    fixture = TestBed.createComponent(CortadoraPModalPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
