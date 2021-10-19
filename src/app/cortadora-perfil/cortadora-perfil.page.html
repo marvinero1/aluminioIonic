@@ -33,7 +33,7 @@
     <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
       <ion-slide *ngFor="let card of [0,1,2,3,4,5,6]" class="slide">
         <ion-col>
-          <ion-label>Combinacion 1 #{{ card }}</ion-label>
+          <ion-label>Combinación #{{ card }}</ion-label>
           <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
           <!-- <ion-button size="small" color="success">Success</ion-button> -->
           <ion-radio-group >
@@ -42,8 +42,6 @@
               <ion-radio slot="start" value="biff" color="primary"></ion-radio>
             </ion-item>
           </ion-radio-group>
-
-
         </ion-col>
       </ion-slide>
       <br>
@@ -77,11 +75,11 @@
       </ion-row>
     </div>
 
-
-  </div>
-  <ion-footer>
+<ion-footer>
     <ion-button color="dark" (click)="submitData()">
       <ion-icon name="save-outline"></ion-icon>Guardar
     </ion-button>
   </ion-footer>
+  </div>
+  
 </ion-content>

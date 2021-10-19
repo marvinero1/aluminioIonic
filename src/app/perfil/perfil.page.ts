@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from '../providers/auth/auth';
-import { FileChooser } from '@ionic-native/file-chooser/ngx';
+// import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { Router } from '@angular/router';
 import { ContraseniaPage } from '../contrasenia/contrasenia.page';
 import { ModalController } from '@ionic/angular';
@@ -15,7 +15,7 @@ export class PerfilPage implements OnInit {
   logs:any=[];
   usuarios$:any=[];
 
-  constructor(public auth:AuthProvider,private fileChooser: FileChooser,
+  constructor(public auth:AuthProvider,
     private router:Router, public modalController: ModalController,) { }
 
   ngOnInit() {

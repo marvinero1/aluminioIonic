@@ -26,7 +26,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { Downloader } from '@ionic-native/downloader/ngx';
 import { DecimalPipe } from '@angular/common';
 import { Storage } from '@ionic/storage'
-import { FileChooser } from '@ionic-native/file-chooser/ngx';
+// import { FileChooser } from '@ionic-native/file-chooser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -59,7 +59,7 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
     NotificacionsService,
     Camera,
     Downloader,
-    FileChooser,
+    // FileChooser,
   ],
   bootstrap: [AppComponent]
 })
