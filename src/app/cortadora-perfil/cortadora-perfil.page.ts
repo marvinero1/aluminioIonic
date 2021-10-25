@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Restangular } from 'ngx-restangular';
 import { CortadoraPModalPage } from '../cortadora-pmodal/cortadora-pmodal.page';
 import { AuthProvider } from '../providers/auth/auth';
@@ -13,26 +13,44 @@ import { AuthProvider } from '../providers/auth/auth';
 export class CortadoraPerfilPage implements OnInit {
 
   data_hoja: FormGroup;
+  dataForm: FormGroup;
   btnHoja:boolean;
   logs:any=[];
   usuarios$:any=[];
   hojas$: any = [];
   categorias$: any = [];
   user_id:number;
+  categoria:any;
+  alto:any;
+  ancho:any;
+  hoja_id:any;
+  combinacion:any;
 
-  cards = [
-    0,1,2,3,4,5,6
-  ]
+  // cards = [
+  //   0,1,2,3,4,5,6
+  // ]
 
   constructor(public alertController: AlertController, private _formBuilder: FormBuilder,
-    public auth: AuthProvider,  private restangular:Restangular,public loadingController: LoadingController,) { }
+    public auth: AuthProvider,  private restangular:Restangular,
+    public loadingController: LoadingController, public toastController: ToastController,) { }
 
   ngOnInit() {
     this.getSubCategorias();
     this.getUser();
     this.data_hoja = this.data_Hoja();
-    
+    this.dataForm = this.dataCombinacion();
   }
+
+  dataCombinacion(): FormGroup {
+    return this._formBuilder.group({
+      alto:[this.alto],
+      ancho:[this.ancho],
+      combinacion:[this.combinacion],
+      categoria:[this.categoria],
+      hoja_id:[this.hoja_id],
+      user_id: [this.user_id]
+    });
+  } 
 
   
  data_Hoja(): FormGroup {
@@ -41,7 +59,32 @@ export class CortadoraPerfilPage implements OnInit {
     estado: [estado],
     user_id: [this.user_id]
   });
-} 
+  } 
+
+  submitData(){
+    let data = this.dataForm.value;
+    console.log(data);
+    
+    if (data) {
+      this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
+      console.log(data);
+      this.presentLoading();
+      window.location.reload();
+      //this.presentAlert();
+    });
+    } else {
+      this.presentToast("Revise los campos llenados");
+    }
+    
+  }
+
+  async presentToast(message:any) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   async crearHojaCalculo(){
     const alert = await this.alertController.create({

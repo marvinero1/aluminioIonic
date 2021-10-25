@@ -11,7 +11,7 @@
       </ion-menu-button>
     </ion-buttons>
     <ion-title>Cortadora</ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="btnHoja == true">
       <form [formGroup]="data_hoja" (ngSubmit)=crearHojaCalculo()>
         <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
         <ion-row style="display: block; text-align: center;">
@@ -27,61 +27,130 @@
 <ion-content>
   <div *ngIf="btnHoja == false" style="padding: 7px;">
 
-
-
-    <p> <strong>Elija una Combinación</strong></p>
-    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
-      <ion-slide *ngFor="let card of [0,1,2,3,4,5,6]" class="slide">
-        <ion-col>
-          <ion-label>Combinacion 1 #{{ card }}</ion-label>
-          <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
-          <!-- <ion-button size="small" color="success">Success</ion-button> -->
-          <ion-radio-group >
+    <form [formGroup]="dataForm" (ngSubmit)=submitData()>
+      <div>
+        <ion-row>
+          <ion-col>
+            <p> <strong>Elija una Categoria</strong></p>
+            <ion-list>
+              <ion-item>
+                <ion-label>Categoria</ion-label>
+                <ion-select [compareWith]="compareWith" formControlName="categoria">
+                  <ion-select-option value="L-20">Linea 20</ion-select-option>
+                  <ion-select-option value="L-21">Linea 21</ion-select-option>
+                  <ion-select-option value="L-22">Linea 22</ion-select-option>
+                  <ion-select-option value="L-23">Linea 23</ion-select-option>
+                  <ion-select-option value="L-24">Linea 24</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </div>
+  
+  
+      <div>
+        <ion-row>
+          <ion-col>
             <ion-item>
-              <!-- <ion-label>Selecciona</ion-label> -->
-              <ion-radio slot="start" value="biff" color="primary"></ion-radio>
+              <ion-label position="floating">Alto</ion-label>
+              <ion-input type="number" formControlName="alto" required></ion-input>
             </ion-item>
-          </ion-radio-group>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Ancho</ion-label>
+              <ion-input type="number" formControlName="ancho" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+      </div>
+  
+      <div>
+        <p> <strong>Elija una Combinación</strong></p>
+        <p class="lp">*Elija solo una combinación.</p>
+        <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+          <ion-slide class="slide">
+            <ion-col>
+              <ion-label>Combinación 1</ion-label>
+              <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion1.png"></ion-img>
+              <!-- <ion-button size="small" color="success">Success</ion-button> -->
+              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
+                <ion-item>
+                  <ion-label>OK</ion-label>
+                  <ion-radio slot="start" value="combinacion1" color="success"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-col>
+          </ion-slide>
+  
+          <ion-slide class="slide">
+            <ion-col>
+              <ion-label>Combinación 2</ion-label>
+              <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion2.png"></ion-img>
+              <!-- <ion-button size="small" color="success">Success</ion-button> -->
+              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
+                <ion-item>
+                  <ion-label>OK</ion-label>
+                  <ion-radio slot="start" value="combinacion2" color="success"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-col>
+          </ion-slide>
+  
+          <ion-slide class="slide">
+            <ion-col>
+              <ion-label>Combinación 3{{ card }}</ion-label>
+              <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
+              <!-- <ion-button size="small" color="success">Success</ion-button> -->
+              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
+                <ion-item>
+                  <!-- <ion-label>Selecciona</ion-label> -->
+                  <ion-radio slot="start" value="combinacion3" color="primary"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-col>
+          </ion-slide>
+  
+          <ion-slide class="slide">
+            <ion-col>
+              <ion-label>Combinación 4</ion-label>
+              <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
+              <!-- <ion-button size="small" color="success">Success</ion-button> -->
+              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
+                <ion-item>
+                  <!-- <ion-label>Selecciona</ion-label> -->
+                  <ion-radio slot="start" value="biff" color="primary"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-col>
+          </ion-slide>
+  
+          <ion-slide class="slide">
+            <ion-col>
+              <ion-label>Combinación 5</ion-label>
+              <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
+              <!-- <ion-button size="small" color="success">Success</ion-button> -->
+              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
+                <ion-item>
+                  <!-- <ion-label>Selecciona</ion-label> -->
+                  <ion-radio slot="start" value="biff" color="primary"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-col>
+          </ion-slide>
+          <br>
+        </ion-slides>
+      </div>
+      <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
+      <ion-input [(ngModel)]="hojas$.id" formControlName="hoja_id" disabled="true" hidden="true"></ion-input>
 
+    </form>
+    
 
-        </ion-col>
-      </ion-slide>
-      <br>
-    </ion-slides>
-
-    <p> <strong>Elija una Categoria</strong></p>
-    <ion-list>
-      <ion-item>
-        <ion-label>Categoria</ion-label>
-        <ion-select [compareWith]="compareWith">
-          <ion-select-option *ngFor="let categoria of categorias$" [value]="id">{{ categoria.nombre }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-
-    <div>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Alto</ion-label>
-            <ion-input type="number" required></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Ancho</ion-label>
-            <ion-input type="number" required></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </div>
-
-
-  </div>
-  <ion-footer>
-    <ion-button color="dark" (click)="submitData()">
+    <ion-button color="dark" expand="block" (click)="submitData()">
       <ion-icon name="save-outline"></ion-icon>Guardar
     </ion-button>
-  </ion-footer>
+  </div>
 </ion-content>
