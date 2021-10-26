@@ -32,7 +32,7 @@ export interface AccessData {
 
 @Injectable()
 export class AuthProvider {
-  apiRoot: string = "http://192.168.1.7:5000/api/";
+  apiRoot: string = "http://127.0.0.1:5000/api/";
   // apiRoot: string = "https://altools.es/api/";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
 

@@ -11,7 +11,7 @@ export function RestangularConfigFactory (RestangularProvider,AutentificacionSer
   // console.log(bearerToken);
   let headerss = {
     // 'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Origin':'*',
       // 'Accept': 'application/json',
       // 'Accept': 'application/x.laravel.v1+json'
       'Authorization': `Bearer ${bearerToken}`
@@ -26,8 +26,8 @@ export function RestangularConfigFactory (RestangularProvider,AutentificacionSer
   };
   RestangularProvider
   // .setBaseUrl('/api')
-  .setBaseUrl('http://192.168.1.7:5000/api')
-  // .setBaseUrl('http://altools.es/api/')
+  .setBaseUrl('http://127.0.0.1:5000/api')
+  // .setBaseUrl('https://altools.es/api/')
   // .setDefaultHeaders(headerss)// set static header
   .addResponseInterceptor((data, operation, what, url, response)=> {
     var extractedData;

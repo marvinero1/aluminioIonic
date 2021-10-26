@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Restangular } from 'ngx-restangular';
-import { CortadoraPModalPage } from '../cortadora-pmodal/cortadora-pmodal.page';
 import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
@@ -24,6 +23,7 @@ export class CortadoraPerfilPage implements OnInit {
   alto:any;
   ancho:any;
   hoja_id:any;
+  repeticion:any;
   combinacion:any;
 
   // cards = [
@@ -47,6 +47,7 @@ export class CortadoraPerfilPage implements OnInit {
       ancho:[this.ancho],
       combinacion:[this.combinacion],
       categoria:[this.categoria],
+      repeticion:[this.repeticion],
       hoja_id:[this.hoja_id],
       user_id: [this.user_id]
     });
@@ -54,28 +55,23 @@ export class CortadoraPerfilPage implements OnInit {
 
   
  data_Hoja(): FormGroup {
-  let estado = "false";
-  return this._formBuilder.group({
-    estado: [estado],
-    user_id: [this.user_id]
-  });
+    let estado = "false";
+    return this._formBuilder.group({
+      estado: [estado],
+      user_id: [this.user_id]
+    });
   } 
 
   submitData(){
     let data = this.dataForm.value;
     console.log(data);
     
-    if (data) {
       this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
       console.log(data);
       this.presentLoading();
       window.location.reload();
       //this.presentAlert();
-    });
-    } else {
-      this.presentToast("Revise los campos llenados");
-    }
-    
+    });    
   }
 
   async presentToast(message:any) {
