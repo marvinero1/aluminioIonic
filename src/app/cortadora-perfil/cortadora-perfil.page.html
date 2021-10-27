@@ -30,19 +30,27 @@
       <div>
         <ion-row>
           <ion-col>
-            <p> <strong>Elija una Categoria</strong></p>
+            <p> <strong>Elija una Linea</strong></p>
             <ion-list>
               <ion-item>
-                <ion-label>Categoria</ion-label>
-                <ion-select [compareWith]="compareWith" formControlName="categoria">
+                <ion-label>Linea</ion-label>
+                <ion-select [compareWith]="compareWith" formControlName="linea">
                   <ion-select-option value="L-20">Linea 20</ion-select-option>
-                  <ion-select-option value="L-21">Linea 21</ion-select-option>
+                  <!-- <ion-select-option value="L-21">Linea 21</ion-select-option>
                   <ion-select-option value="L-22">Linea 22</ion-select-option>
                   <ion-select-option value="L-23">Linea 23</ion-select-option>
-                  <ion-select-option value="L-24">Linea 24</ion-select-option>
+                  <ion-select-option value="L-24">Linea 24</ion-select-option> -->
+                  <ion-select-option value="L-25">Linea 25</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>
+          </ion-col>
+          <ion-col>
+            <p> <strong>Repetición</strong></p>
+            <ion-item>
+              <ion-label position="floating"># Repetición</ion-label>
+              <ion-input type="number" formControlName="repeticion" required></ion-input>
+            </ion-item>
           </ion-col>
         </ion-row>
       </div>
@@ -151,6 +159,10 @@
 
     <ion-button color="dark" expand="block" (click)="submitData()">
       <ion-icon name="save-outline"></ion-icon>Guardar
+    </ion-button>
+
+    <ion-button color="dark" expand="block" >
+      <ion-icon name="close-outline"></ion-icon>Cerrar Hoja de Calculo
     </ion-button>
   </div>
 </ion-content>
