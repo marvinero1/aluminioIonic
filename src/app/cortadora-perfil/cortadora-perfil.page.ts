@@ -146,7 +146,25 @@ export class CortadoraPerfilPage implements OnInit {
       console.log(this.categorias$);
         
     });
-}
+  }
+
+   async cerrarHoja(){
+      let estado = 'true';
+      let data =  this._formBuilder.group({
+        //nombre: [this.data.nombre,Validators.compose([Validators.required])],
+        estado:[estado],
+      });
+  
+      let data1 = data.value;
+      let a = this.hojas$.id 
+
+      
+      this.auth.cerrarHojaCortadora('updateStatusHojaCortadora/', a , data1).subscribe((datav) => {
+        window.location.reload();
+     });
+        
+    
+  }
 
 
   async presentLoading() {

@@ -414,21 +414,16 @@ export class CalculadoraPage implements OnInit {
 
     let data1 = data.value;
     let a = this.hojas$.id 
-    console.log(data1);
-      
-        
+    // console.log(data1);
     if(this.dataFormHistorial.valid){
-      
         this.auth.cerrarCarrito('updateStatusHoja/', a , data1).subscribe((datav) => {
         this.guardarOperacion();
       });
     }else{
       this.presentToast("Ingresa los datos requeridos")
-    }
-    
+    }  
   }
   
-
   getUser(){
     this.logs = JSON.parse(localStorage.getItem('Usuario'));
     

@@ -79,7 +79,7 @@
         <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Combinación 1</ion-label>
+              <ion-label>Dos Hojas Combinación 1</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion1.png"></ion-img>
               <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
@@ -93,7 +93,7 @@
   
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Combinación 2</ion-label>
+              <ion-label>Dos Hojas Combinación 2</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion2.png"></ion-img>
               <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
@@ -107,8 +107,8 @@
   
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Combinación 3{{ card }}</ion-label>
-              <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
+              <ion-label>Dos Hojas Combinación 3</ion-label>
+              <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion3.png"></ion-img>
               <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
                 <ion-item>
@@ -121,13 +121,13 @@
   
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Combinación 4</ion-label>
-              <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
+              <ion-label>Tres Hojas Combinación 4</ion-label>
+              <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion4.png"></ion-img>
               <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
                 <ion-item>
                   <!-- <ion-label>Selecciona</ion-label> -->
-                  <ion-radio slot="start" value="biff" color="primary"></ion-radio>
+                  <ion-radio slot="start" value="combinacion4" color="primary"></ion-radio>
                 </ion-item>
               </ion-radio-group>
             </ion-col>
@@ -135,13 +135,13 @@
   
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Combinación 5</ion-label>
-              <ion-img style="pointer-events:none" src="https://via.placeholder.com/150"></ion-img>
+              <ion-label>Cuatro Hojas Combinación 5</ion-label>
+              <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion5.png"></ion-img>
               <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
                 <ion-item>
                   <!-- <ion-label>Selecciona</ion-label> -->
-                  <ion-radio slot="start" value="biff" color="primary"></ion-radio>
+                  <ion-radio slot="start" value="combinacion5" color="primary"></ion-radio>
                 </ion-item>
               </ion-radio-group>
             </ion-col>
@@ -157,7 +157,7 @@
       <ion-icon name="save-outline"></ion-icon>Guardar
     </ion-button>
 
-    <ion-button color="dark" expand="block" >
+    <ion-button color="dark" expand="block" (click)="cerrarHoja()">
       <ion-icon name="close-outline"></ion-icon>Cerrar Hoja de Calculo
     </ion-button>
   </div>
