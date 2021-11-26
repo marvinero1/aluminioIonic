@@ -27,8 +27,8 @@ export function RestangularConfigFactory (RestangularProvider,AutentificacionSer
   RestangularProvider
   // .setBaseUrl('/api')
   // .setBaseUrl('http://192.168.1.7:5000/api')
-  .setBaseUrl('http://192.168.1.5:5000/api')
-  // .setBaseUrl('http://altools.es/api/')
+  // .setBaseUrl('http://192.168.1.5:5000/api')
+  .setBaseUrl('http://altools.es/api/')
   // .setDefaultHeaders(headerss)// set static header
   .addResponseInterceptor((data, operation, what, url, response)=> {
     var extractedData;
