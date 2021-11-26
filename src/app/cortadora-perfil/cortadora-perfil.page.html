@@ -12,7 +12,7 @@
     </ion-buttons>
     <ion-title>Cortadora</ion-title>
     <ion-buttons slot="end" *ngIf="btnHoja == true">
-      <form [formGroup]="data_hoja" (ngSubmit)=crearHojaCalculo()>
+      <form [formGroup]="data_hoja1" (ngSubmit)=crearHojaCalculo()>
         <ion-input [(ngModel)]="usuarios$.id" formControlName="user_id" disabled="true" hidden="true"></ion-input>
         <ion-row style="display: block; text-align: center;">
           <ion-button (click)="crearHojaCalculo()">
@@ -24,7 +24,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" padding>
   <div *ngIf="btnHoja == false" style="padding: 7px;">
     <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <div>
@@ -45,21 +45,11 @@
               </ion-item>
             </ion-list>
           </ion-col>
-          <ion-col>
-            <p> <strong>Repetición</strong></p>
-            <ion-item>
-              <ion-label position="floating"># Repetición</ion-label>
-              <ion-input type="number" formControlName="repeticion" required></ion-input>
-            </ion-item>
-          </ion-col>
         </ion-row>
       </div>
-  
-  
       <div>
         <ion-row>
           <ion-col>
-
             <ion-item>
               <ion-label position="floating">Alto</ion-label>
               <ion-input type="number" formControlName="alto" required></ion-input>
@@ -69,6 +59,20 @@
             <ion-item>
               <ion-label position="floating">Ancho</ion-label>
               <ion-input type="number" formControlName="ancho" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Precio Bs.</ion-label>
+              <ion-input type="number" formControlName="precio" required></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating"># Repetición</ion-label>
+              <ion-input type="number" formControlName="repeticion" required></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -91,11 +95,10 @@
             </ion-col>
           </ion-slide>
   
-          <ion-slide class="slide">
+          <!-- <ion-slide class="slide">
             <ion-col>
               <ion-label>Dos Hojas Combinación 2</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion2.png"></ion-img>
-              <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
                 <ion-item>
                   <ion-label>OK</ion-label>
@@ -103,31 +106,30 @@
                 </ion-item>
               </ion-radio-group>
             </ion-col>
-          </ion-slide>
+          </ion-slide> -->
   
-          <ion-slide class="slide">
+          <!-- <ion-slide class="slide">
             <ion-col>
               <ion-label>Dos Hojas Combinación 3</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion3.png"></ion-img>
-              <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
                 <ion-item>
-                  <!-- <ion-label>Selecciona</ion-label> -->
-                  <ion-radio slot="start" value="combinacion3" color="primary"></ion-radio>
+                  <ion-label>OK</ion-label>
+                  <ion-radio slot="start" value="combinacion3" color="success"></ion-radio>
                 </ion-item>
               </ion-radio-group>
             </ion-col>
-          </ion-slide>
+          </ion-slide> -->
   
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Tres Hojas Combinación 4</ion-label>
+              <ion-label>Tres Hojas Combinación 2</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion4.png"></ion-img>
               <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
                 <ion-item>
-                  <!-- <ion-label>Selecciona</ion-label> -->
-                  <ion-radio slot="start" value="combinacion4" color="primary"></ion-radio>
+                  <ion-label>OK</ion-label>
+                  <ion-radio slot="start" value="combinacion4" color="success"></ion-radio>
                 </ion-item>
               </ion-radio-group>
             </ion-col>
@@ -135,13 +137,13 @@
   
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Cuatro Hojas Combinación 5</ion-label>
+              <ion-label>Cuatro Hojas Combinación 3</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion5.png"></ion-img>
               <!-- <ion-button size="small" color="success">Success</ion-button> -->
               <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
                 <ion-item>
-                  <!-- <ion-label>Selecciona</ion-label> -->
-                  <ion-radio slot="start" value="combinacion5" color="primary"></ion-radio>
+                  <ion-label>OK</ion-label>
+                  <ion-radio slot="start" value="combinacion5" color="success"></ion-radio>
                 </ion-item>
               </ion-radio-group>
             </ion-col>
@@ -157,8 +159,43 @@
       <ion-icon name="save-outline"></ion-icon>Guardar
     </ion-button>
 
-    <ion-button color="dark" expand="block" (click)="cerrarHoja()">
+    <ion-button color="dark" expand="block" (click)="abrirVentana()">
       <ion-icon name="close-outline"></ion-icon>Cerrar Hoja de Calculo
     </ion-button>
   </div>
 </ion-content>
+
+<ion-footer *ngIf="btnbool == false" class="ion-no-border">
+  <div class="div">
+    <form [formGroup]="data_hoja" (ngSubmit)=cerrarHoja() novalidate>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nombre Cliente *</ion-label>
+            <ion-input  formControlName="nombre_cliente" type="text" minlength="2" maxlength="40" required></ion-input>
+          </ion-item>
+        </ion-col>
+         <ion-col>
+          <ion-item>
+            <ion-label position="floating">Celular *</ion-label>
+            <ion-input formControlName="celular" type="tel" maxlength="10" pattern="[0-9]*" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Descripción *</ion-label>
+            <ion-input formControlName="descripcion" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-col>
+        <ion-button color="dark" (click)="cerrarHoja()" class="float" expand="full">
+          <ion-icon name="save"></ion-icon>Guardar Operación
+        </ion-button>
+      </ion-col>
+    </form>
+  </div>
+</ion-footer>

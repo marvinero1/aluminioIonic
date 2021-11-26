@@ -13,6 +13,8 @@ export class CortadoraPerfilPage implements OnInit {
 
   data_hoja: FormGroup;
   dataForm: FormGroup;
+  data_hoja1: FormGroup;
+  dataFormHistorial: FormGroup;
   btnHoja:boolean;
   logs:any=[];
   usuarios$:any=[];
@@ -22,9 +24,14 @@ export class CortadoraPerfilPage implements OnInit {
   linea:any;
   alto:any;
   ancho:any;
+  precio:any;
   hoja_id:any;
   repeticion:any;
   combinacion:any;
+  nombre_cliente:any;
+  celular:any;
+  descripcion:any;
+  btnbool:boolean = false; 
 
   // cards = [
   //   0,1,2,3,4,5,6
@@ -37,6 +44,8 @@ export class CortadoraPerfilPage implements OnInit {
   ngOnInit() {
     this.getSubCategorias();
     this.getUser();
+    this.abrirVentana();
+    this.data_hoja1 = this.data_Hoja1();
     this.data_hoja = this.data_Hoja();
     this.dataForm = this.dataCombinacion();
   }
@@ -49,18 +58,28 @@ export class CortadoraPerfilPage implements OnInit {
       linea:[this.linea],
       repeticion:[this.repeticion],
       hoja_id:[this.hoja_id],
+      precio:[this.precio],
       user_id: [this.user_id]
     });
   } 
-
   
- data_Hoja(): FormGroup {
+  data_Hoja1(): FormGroup {
     let estado = "false";
     return this._formBuilder.group({
       estado: [estado],
       user_id: [this.user_id]
     });
   } 
+  
+  data_Hoja(): FormGroup {
+      let estado = "true";
+      return this._formBuilder.group({
+        nombre_cliente: [this.nombre_cliente],
+        celular: [this.celular],
+        descripcion: [this.descripcion],
+        estado: [estado],
+      });
+    } 
 
   submitData(){
     let data = this.dataForm.value;
@@ -99,7 +118,7 @@ export class CortadoraPerfilPage implements OnInit {
           text: 'Si',
           handler: () => {
             console.log('Confirm Okay');
-            let data = this.data_hoja.value;
+            let data = this.data_hoja1.value;
             console.log(data);
               if(data){
                 this.restangular.all('/guardarHojaCortadoraPerfil').post(data).subscribe((datav)=>{ 
@@ -150,22 +169,33 @@ export class CortadoraPerfilPage implements OnInit {
 
    async cerrarHoja(){
       let estado = 'true';
-      let data =  this._formBuilder.group({
-        //nombre: [this.data.nombre,Validators.compose([Validators.required])],
-        estado:[estado],
-      });
-  
-      let data1 = data.value;
-      let a = this.hojas$.id 
-
+      let data = this.data_hoja.value;
+      let a = this.hojas$.id;
       
-      this.auth.cerrarHojaCortadora('updateStatusHojaCortadora/', a , data1).subscribe((datav) => {
+      this.auth.cerrarHojaCortadora('updateStatusHojaCortadora/', a , data).subscribe((datav) => {
         window.location.reload();
      });
-        
-    
   }
 
+  abrirVentana(){
+    if (this.btnbool) {
+      this.btnbool = false;
+    } else {
+      this.btnbool = true;
+    }
+  }
+
+  
+  guardarOperacion(){
+    let data1 = this.dataFormHistorial.value;
+    let a = data1.user_id;
+    console.log(data1);
+    
+      this.restangular.all('guardarCalculadoraHistorial').post(data1).subscribe((datav) => {
+          this.presentLoading();
+          // this.deleteAll(a); //CAMBIARLO POR EL QUE ACTUALIZA SU ESTADO
+      });
+  }
 
   async presentLoading() {
     const loading = await this.loadingController.create({
