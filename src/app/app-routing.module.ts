@@ -103,6 +103,10 @@ const routes: Routes = [
     path: 'cortadora-pmodal',
     loadChildren: () => import('./cortadora-pmodal/cortadora-pmodal.module').then( m => m.CortadoraPModalPageModule)
   },
+  {
+    path: 'mis-cortes',
+    loadChildren: () => import('./mis-cortes/mis-cortes.module').then( m => m.MisCortesPageModule)
+  },
 
 ];
 
