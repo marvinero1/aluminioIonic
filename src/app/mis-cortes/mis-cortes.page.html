@@ -1,9 +1,62 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>misCortes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button disabled="true">
+        <!-- <ion-icon name="person-circle-outline"></ion-icon> -->
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button><ion-icon name="menu-outline"></ion-icon></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cortes Guardados</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="contenido">
+    <ion-row style="border-bottom: groove; text-align: right;">
+      <ion-col col-3>
+        <ion-label><strong>Hoja</strong></ion-label>
+      </ion-col>
+      <ion-col col-3>
+        <ion-label><strong>Ancho</strong></ion-label>
+      </ion-col>
+      <ion-col col-3>
+        <ion-label><strong>Alto</strong></ion-label>
+      </ion-col>
+      <ion-col col-3>
+        <ion-label><strong>Linea</strong></ion-label>
+      </ion-col>
+      <!-- <ion-col col-4>
+        <ion-label onclick="true"><strong>Total $us</strong></ion-label>
+      </ion-col> -->
+      <ion-col col-4>
+        <ion-label><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-label>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row style="border-bottom: groove;text-align: center;" *ngFor="let element of calculoPerfil$ ">
+      <ion-col class="col" col-4>
+        <ion-label>{{element.hoja_id}}</ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-label>{{element.ancho}}</ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-label>{{element.alto }}</ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-label> {{element.linea}}</ion-label>
+      </ion-col>
 
-</ion-content>
+  
+      <ion-button size="small" color="light" (click)="presentActionSheet(element)">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+  
+      <!-- <ion-button size="small" color="danger" (click)="deleteAll(element)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button> -->
+    </ion-row>
+  </div>
+  </ion-content>

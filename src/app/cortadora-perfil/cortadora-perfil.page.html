@@ -51,18 +51,18 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label position="floating">Alto</ion-label>
-              <ion-input type="number" formControlName="alto" required></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
               <ion-label position="floating">Ancho</ion-label>
               <ion-input type="number" formControlName="ancho" required></ion-input>
             </ion-item>
           </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Alto</ion-label>
+              <ion-input type="number" formControlName="alto" required></ion-input>
+            </ion-item>
+          </ion-col>
         </ion-row>
-        <ion-row>
+        <!-- <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="floating">Precio Bs.</ion-label>
@@ -75,73 +75,44 @@
               <ion-input type="number" formControlName="repeticion" required></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>
-      </div>  
+        </ion-row> -->
+      </div>  <br>
       <div>
         <p> <strong>Elija una Combinación</strong></p>
         <p class="lp">*Elija solo una combinación.</p>
         <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Dos Hojas Combinación 1</ion-label>
+              <ion-label>Dos Hojas</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion1.png"></ion-img>
-              <!-- <ion-button size="small" color="success">Success</ion-button> -->
-              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
-                <ion-item>
+              <ion-radio-group allow-empty-selection="true" [(ngModel)]="isChecked1" formControlName="combinacion">
+                <ion-item *ngIf="!isChecked2 && !isChecked3">
                   <ion-label>OK</ion-label>
-                  <ion-radio slot="start" value="combinacion1" color="success"></ion-radio>
+                  <ion-radio slot="start"  value="combinacion1" color="success"></ion-radio>
                 </ion-item>
               </ion-radio-group>
             </ion-col>
           </ion-slide>
-  
-          <!-- <ion-slide class="slide">
-            <ion-col>
-              <ion-label>Dos Hojas Combinación 2</ion-label>
-              <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion2.png"></ion-img>
-              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
-                <ion-item>
-                  <ion-label>OK</ion-label>
-                  <ion-radio slot="start" value="combinacion2" color="success"></ion-radio>
-                </ion-item>
-              </ion-radio-group>
-            </ion-col>
-          </ion-slide> -->
-  
-          <!-- <ion-slide class="slide">
-            <ion-col>
-              <ion-label>Dos Hojas Combinación 3</ion-label>
-              <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion3.png"></ion-img>
-              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
-                <ion-item>
-                  <ion-label>OK</ion-label>
-                  <ion-radio slot="start" value="combinacion3" color="success"></ion-radio>
-                </ion-item>
-              </ion-radio-group>
-            </ion-col>
-          </ion-slide> -->
-  
+
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Tres Hojas Combinación 2</ion-label>
+              <ion-label>Tres Hojas</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion4.png"></ion-img>
-              <!-- <ion-button size="small" color="success">Success</ion-button> -->
-              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
-                <ion-item>
-                  <ion-label>OK</ion-label>
-                  <ion-radio slot="start" value="combinacion4" color="success"></ion-radio>
-                </ion-item>
-              </ion-radio-group>
+                <ion-radio-group allow-empty-selection="true" [(ngModel)]="isChecked2" formControlName="combinacion">
+                  <ion-item *ngIf="!isChecked1 && !isChecked3">
+                    <ion-label>OK</ion-label>
+                    <ion-radio slot="start" value="combinacion4" color="success"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
             </ion-col>
           </ion-slide>
   
           <ion-slide class="slide">
             <ion-col>
-              <ion-label>Cuatro Hojas Combinación 3</ion-label>
+              <ion-label>Cuatro Hojas</ion-label>
               <ion-img style="pointer-events:none" src="assets/combinaciones/combinacion5.png"></ion-img>
-              <!-- <ion-button size="small" color="success">Success</ion-button> -->
-              <ion-radio-group allow-empty-selection="true" formControlName="combinacion">
-                <ion-item>
+              <ion-radio-group allow-empty-selection="true" [(ngModel)]="isChecked3" formControlName="combinacion">
+                <ion-item *ngIf="!isChecked1 && !isChecked2">
                   <ion-label>OK</ion-label>
                   <ion-radio slot="start" value="combinacion5" color="success"></ion-radio>
                 </ion-item>

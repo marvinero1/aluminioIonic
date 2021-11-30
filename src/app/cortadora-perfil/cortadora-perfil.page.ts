@@ -26,12 +26,15 @@ export class CortadoraPerfilPage implements OnInit {
   ancho:any;
   precio:any;
   hoja_id:any;
-  repeticion:any;
-  combinacion:any;
+  repeticion="1";
+  combinacion:string;
   nombre_cliente:any;
   celular:any;
   descripcion:any;
   btnbool:boolean = false; 
+  isChecked1:boolean = false; 
+  isChecked2:boolean = false; 
+  isChecked3:boolean = false; 
 
   // cards = [
   //   0,1,2,3,4,5,6
@@ -84,7 +87,7 @@ export class CortadoraPerfilPage implements OnInit {
   submitData(){
     let data = this.dataForm.value;
     console.log(data);
-    
+  
       this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
       console.log(data);
       this.presentLoading();
@@ -210,7 +213,6 @@ export class CortadoraPerfilPage implements OnInit {
     } = await loading.onDidDismiss();
     //console.log('Loading dismissed!');
   }
-
   getUser(){
     this.logs = JSON.parse(localStorage.getItem('Usuario'));
     

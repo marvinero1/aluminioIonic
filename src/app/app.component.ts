@@ -38,11 +38,11 @@ export class AppComponent implements OnInit {
       url:'/cortadora-perfil',
       icon:'cut'
     },
-    // {
-    //   title: 'Favoritos',
-    //   url: '/favoritos',
-    //   icon: 'heart'
-    // },
+    {
+      title: 'Historial Cortes',
+      url: '/mis-cortes',
+      icon: 'time'
+    },
     {
       title: 'Historial Calculos',
       url: '/calculadora-historial',
@@ -58,11 +58,6 @@ export class AppComponent implements OnInit {
     //   url: '/productos',
     //   icon: 'bag'
     // },
-    // {
-    //   title: 'Novedades',
-    //   url: '/novedades',
-    //   icon: 'bag-handle'
-    // },
     {
       title: 'Mi Perfil',
       url: '/perfil',
@@ -73,11 +68,11 @@ export class AppComponent implements OnInit {
       url: '/mis-cotizaciones',
       icon: 'checkbox'
     },
-    {
-      title: 'Contáctanos',
-      url: '/contactanos',
-      icon: 'storefront'
-    },
+    // {
+    //   title: 'Contáctanos',
+    //   url: '/contactanos',
+    //   icon: 'storefront'
+    // },
     
   ];
   public labels = ['Salir'];
