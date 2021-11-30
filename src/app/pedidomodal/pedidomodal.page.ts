@@ -122,13 +122,18 @@ export class PedidomodalPage implements OnInit {
 
   submitData(){
     let data_producto = this.dataForm.value;
+    console.log(data_producto);
+    
 
     let carrito_importadora = data_producto.importadora_carrito;
     let importadora_producto = data_producto.importadora;
 
     if(this.btnCarrito == false){
       if(carrito_importadora === importadora_producto){
-
+        this.restangular.all('guardarPedido').post(data_producto).subscribe((datav)=>{
+          this.dismiss();
+          this.presentLoading("Guardando Pedido")
+        }); 
       }else{
         this.dismiss();
         this.presentToast("Solo agregar productos de una misma importadora");
