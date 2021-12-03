@@ -52,13 +52,13 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Ancho</ion-label>
-              <ion-input type="number" formControlName="ancho" required></ion-input>
+              <ion-input type="number" formControlName="ancho" onKeyPress="if(this.value.length==5) return false;" pattern="[0-9]*" required></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item>
               <ion-label position="floating">Alto</ion-label>
-              <ion-input type="number" formControlName="alto" required></ion-input>
+              <ion-input type="number" formControlName="alto" onKeyPress="if(this.value.length==5) return false;" pattern="[0-9]*" required></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -143,13 +143,13 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Nombre Cliente *</ion-label>
-            <ion-input  formControlName="nombre_cliente" type="text" minlength="2" maxlength="40" required></ion-input>
+            <ion-input [(ngModel)]="nombre_cliente"  formControlName="nombre_cliente" type="text" minlength="2" maxlength="40" required></ion-input>
           </ion-item>
         </ion-col>
          <ion-col>
           <ion-item>
             <ion-label position="floating">Celular *</ion-label>
-            <ion-input formControlName="celular" type="tel" maxlength="10" pattern="[0-9]*" required></ion-input>
+            <ion-input [(ngModel)]="celular" formControlName="celular" type="tel" maxlength="10" pattern="[0-9]*" required></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

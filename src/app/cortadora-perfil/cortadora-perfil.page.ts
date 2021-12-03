@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Restangular } from 'ngx-restangular';
 import { AuthProvider } from '../providers/auth/auth';
@@ -77,8 +77,8 @@ export class CortadoraPerfilPage implements OnInit {
   data_Hoja(): FormGroup {
       let estado = "true";
       return this._formBuilder.group({
-        nombre_cliente: [this.nombre_cliente],
-        celular: [this.celular],
+        nombre_cliente: [this.nombre_cliente, Validators.compose([Validators.required])],
+        celular: [this.celular, Validators.compose([Validators.required])],
         descripcion: [this.descripcion],
         estado: [estado],
       });
@@ -174,10 +174,17 @@ export class CortadoraPerfilPage implements OnInit {
       let estado = 'true';
       let data = this.data_hoja.value;
       let a = this.hojas$.id;
+      let celular = data.celular;
+      let nombre = data.nombre_cliente;
+      console.log(nombre);
       
-      this.auth.cerrarHojaCortadora('updateStatusHojaCortadora/', a , data).subscribe((datav) => {
-        window.location.reload();
-     });
+      if (nombre != undefined && celular != undefined) {
+          this.auth.cerrarHojaCortadora('updateStatusHojaCortadora/', a , data).subscribe((datav) => {
+            window.location.reload();
+         });
+      } else {
+        this.presentToast("Ingrese los datos correspondientes")
+      }
   }
 
   abrirVentana(){
@@ -187,7 +194,6 @@ export class CortadoraPerfilPage implements OnInit {
       this.btnbool = true;
     }
   }
-
   
   guardarOperacion(){
     let data1 = this.dataFormHistorial.value;
@@ -213,6 +219,7 @@ export class CortadoraPerfilPage implements OnInit {
     } = await loading.onDidDismiss();
     //console.log('Loading dismissed!');
   }
+
   getUser(){
     this.logs = JSON.parse(localStorage.getItem('Usuario'));
     
