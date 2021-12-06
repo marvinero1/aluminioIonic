@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
   selector: 'app-select',
@@ -8,11 +9,14 @@ import { Router } from '@angular/router';
 })
 export class SelectPage implements OnInit {
   public isLogged:boolean = false;
-  constructor(public router:Router) { }
+  logs:any=[];
+  usuarios$:any=[];
+  role:string;
+  constructor(public router:Router,public auth:AuthProvider,) { }
 
   ngOnInit() {
     this.onCheckUser();  
-
+    this.getUser();
   }
 
   goCalculator(){
@@ -21,6 +25,9 @@ export class SelectPage implements OnInit {
 
   goImportadoras(){
     this.router.navigate(['/importadoras']);
+  }
+  goCortadora(){
+    this.router.navigate(['/cortadora-perfil']);
   }
 
   getCurrentUser() {
@@ -39,5 +46,16 @@ export class SelectPage implements OnInit {
     } else {
       this.isLogged = true;
     }
+  }
+
+  getUser(){
+    this.logs = JSON.parse(localStorage.getItem('Usuario'));
+    
+    this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+      this.usuarios$ = res;
+      let user_id =  this.usuarios$.id;
+      this.role = this.usuarios$.role;
+        console.log(this.role);
+    });
   }
 }

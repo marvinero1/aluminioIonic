@@ -84,16 +84,32 @@ export class CortadoraPerfilPage implements OnInit {
       });
     } 
 
+    Crearbarras(perfil_id:number){
+      let data = 1;
+      console.log(data);
+      
+      // this.restangular.all('crearBarra', perfil_id).post(data).subscribe((datav) => {
+      
+      //   console.log(data);
+      //   this.presentLoading();
+      //   window.location.reload();
+      //   //this.presentAlert();
+      // });
+    }
+
   submitData(){
     let data = this.dataForm.value;
-    console.log(data);
+    let perfil_id  = data.perfil_id;
+    console.log(perfil_id);
+    this.Crearbarras(perfil_id);
   
-      this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
-      console.log(data);
-      this.presentLoading();
-      window.location.reload();
-      //this.presentAlert();
-    });    
+    // this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
+    //   this.Crearbarras(perfil_id);
+    //   console.log(data);
+    //   this.presentLoading();
+    //   window.location.reload();
+    //   //this.presentAlert();
+    // });    
   }
 
   async presentToast(message:any) {
@@ -227,8 +243,6 @@ export class CortadoraPerfilPage implements OnInit {
       this.usuarios$ = res;
       let user_id =  this.usuarios$.id;
       console.log(user_id);
-      
-      
       // this.getCalculs(user_id,'');
       this.getHoja(user_id);
       //console.log(this.usuarios$);

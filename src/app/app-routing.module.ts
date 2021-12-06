@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -98,8 +99,10 @@ const routes: Routes = [
   },
   {
     path: 'cortadora-perfil',
-    loadChildren: () => import('./cortadora-perfil/cortadora-perfil.module').then( m => m.CortadoraPerfilPageModule)
-  },  {
+    loadChildren: () => import('./cortadora-perfil/cortadora-perfil.module').then( m => m.CortadoraPerfilPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'cortadora-pmodal',
     loadChildren: () => import('./cortadora-pmodal/cortadora-pmodal.module').then( m => m.CortadoraPModalPageModule)
   },

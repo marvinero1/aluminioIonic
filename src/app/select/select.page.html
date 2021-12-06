@@ -6,20 +6,34 @@
 
 <ion-content [fullscreen]="true" class="body" scroll-y="true">
 <br><br><br>
-  <h4>Seleccione que desea ver en su recorido.</h4>
-  <a (click)="goCalculator()">
-    <ion-card class="cardProduct">
-      <div>
-        <!-- <h2>Calculadora</h2> -->
-      </div>
-    </ion-card>
-  </a><br>
+  <div *ngIf="this.role != 'user'">
+    <h4>Seleccione que desea ver en su recorido.</h4>
+    <a (click)="goCalculator()">
+      <ion-card class="cardProduct">
+        <div>
+          <!-- <h2>Calculadora</h2> -->
+        </div>
+      </ion-card>
+    </a><br>
+  
+    <a (click)="goImportadoras()">
+      <ion-card class="cardImportadora">
+        <div>
+          <!-- <h2>Importadoras</h2> -->
+        </div>
+      </ion-card>
+    </a>
+  </div>
 
-  <a (click)="goImportadoras()">
-    <ion-card class="cardImportadora">
-      <div>
-        <!-- <h2>Importadoras</h2> -->
-      </div>
-    </ion-card>
-  </a>
+  <div *ngIf="this.role == 'user'"><br>
+    <h4>Seleccione que desea ver en su recorido.</h4><br>
+    <a (click)="goCortadora()">
+      <ion-card style="background: transparent !important;padding: 20px;">
+        <div class="cardCortadora">
+          
+          <h1><ion-icon name="cut" class="icon"></ion-icon>Cortadora</h1>
+        </div>
+      </ion-card>
+    </a>
+  </div>
 </ion-content>

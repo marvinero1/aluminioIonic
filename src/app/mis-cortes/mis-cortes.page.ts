@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class MisCortesPage implements OnInit {
 
   calculoPerfil$:any=[];
+  hoja_calculo_perfil$:any=[];
   logs:any=[];
   usuarios$:any=[];
   data:any=[];
@@ -24,7 +25,14 @@ export class MisCortesPage implements OnInit {
   alto:any;
   linea:any;
   id:number;
-  btnbool:boolean = false; 
+  btnbool:boolean = false;
+  btnboolPefil:boolean = false;
+  role:string;
+
+  nombre_cliente:any;
+  celular:any;
+  descripcion:any;
+
 
   constructor(public auth: AuthProvider,public alertController: AlertController,
     public actionSheetController: ActionSheetController,private _formBuilder: FormBuilder,
@@ -36,7 +44,16 @@ export class MisCortesPage implements OnInit {
     this.dataFormHistorial = this.createFormHist();
   }
 
-  getCalculos(user_id) {
+  getHojaCalculo(user_id) {
+    this.auth.getAllObjectById('getHojaCalculoPerfilEditapp/', user_id)
+      .subscribe((res) => {
+        this.hoja_calculo_perfil$ = res;
+        console.log(this.hoja_calculo_perfil$);
+      });
+  }
+
+
+  getPerfils(user_id) {
     this.auth.getAllObjectById('getHistorialCalculos/', user_id)
       .subscribe((res) => {
         this.calculoPerfil$ = res;
@@ -44,7 +61,7 @@ export class MisCortesPage implements OnInit {
       });
   }
 
-  async presentActionSheet(element) {
+  async selectOptionHojaPerfil(element) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones Historial Cortes',
       cssClass: 'my-custom-class',
@@ -53,7 +70,7 @@ export class MisCortesPage implements OnInit {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-          this.confirmacion(element);
+          this.deleteHojaCalculo(element);
         }
       }, {
         text: 'Editar',
@@ -61,12 +78,48 @@ export class MisCortesPage implements OnInit {
         handler: () => {
           this.btnboolean(); 
           this.id = element.id;
-          this.combinacion = element.combinacion;
-          this.ancho = element.ancho;
-          this.alto = element.alto;
-          this.linea = element.linea;
+          this.nombre_cliente = element.nombre_cliente;
+          this.celular = element.celular;
+          this.descripcion = element.descripcion;
         }
       },  {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          actionSheet.dismiss();
+        }
+      }]
+    });
+    await actionSheet.present();
+
+    const { role } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  async selectOptionPerfil(element) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones Perfiles',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Eliminar',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.deletePerfil(element);
+        }
+      }, {
+        text: 'Editar',
+        icon: 'create',
+        handler: () => {
+          this.btnbooleanPerfil(); 
+          this.id = element.id;
+          this.alto = element.alto;
+          this.ancho = element.ancho;
+          this.linea = element.linea;
+          this.combinacion = element.combinacion;
+        }
+      },{
         text: 'Cancelar',
         icon: 'close',
         role: 'cancel',
@@ -90,7 +143,49 @@ export class MisCortesPage implements OnInit {
     });
   }
  
-  async guardarOperacion(element) {
+  async guardarOperacionHoja(element) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Actualización',
+      message: '¿Desea Actualizar este Item?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            let data = this._formBuilder.group({
+              id:[this.id],
+              nombre_cliente: [this.nombre_cliente, Validators.compose([Validators.required])],
+              celular: [this.celular,  Validators.compose([Validators.required])],
+              descripcion: [this.descripcion,  Validators.compose([Validators.required])],
+            });
+
+            this.data1 = data.value;
+            let a = this.data1.id; 
+            console.log(this.data1);
+            
+            if(data.valid){
+              this.auth.updateObjectById('updateStatusHojaAll/', a , this.data1).subscribe((datav) => {
+                console.log(datav);
+                window.location.reload();
+              });
+            } else{
+              this.presentToast("Ingrese Datos para Actualizar");
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async guardarOperacionPerfil(element) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Actualización',
@@ -149,6 +244,14 @@ export class MisCortesPage implements OnInit {
       this.btnbool = true;
     }
   }
+  btnbooleanPerfil(){
+    this.btnboolean();
+    if (this.btnboolPefil) {
+      this.btnboolPefil = false;
+    } else {
+      this.btnboolPefil = true;
+    }
+  }
   cerrar(){
     if (this.btnbool) {
       this.btnbool = false;
@@ -157,7 +260,7 @@ export class MisCortesPage implements OnInit {
     }
   }
 
-  async confirmacion(element){
+  async deleteHojaCalculo(element){
     const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
     header: '¿Desea Eliminar este Elemento?',
@@ -174,7 +277,7 @@ export class MisCortesPage implements OnInit {
       }, {
         text: 'Si',
         handler: () => {
-          this.auth.deleteObjectById('HistorialDelete/', element.id).subscribe(res=>{
+          this.auth.deleteObjectById('deleteHojaPerfil/', element.id).subscribe(res=>{
             window.location.reload();
           });
         }
@@ -182,8 +285,35 @@ export class MisCortesPage implements OnInit {
     ]
   });
 
-  await alert.present();
-}
+    await alert.present();
+  }
+
+  async deletePerfil(element){
+    const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    header: '¿Desea Eliminar este Elemento?',
+    message: '',
+    buttons: [{
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          return false
+          //console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Si',
+        handler: () => {
+          this.auth.deleteObjectById('deletePerfil/', element.id).subscribe(res=>{
+            window.location.reload();
+          });
+        }
+      }
+    ]
+  });
+
+    await alert.present();
+  }
 
   getUser(){
     this.logs = JSON.parse(localStorage.getItem('Usuario'));
@@ -191,7 +321,11 @@ export class MisCortesPage implements OnInit {
     this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
       this.usuarios$ = res;
       let user_id =  this.usuarios$.id;
-      this.getCalculos(user_id);
+      this.role = this.usuarios$.role;
+       console.log(this.role);
+       
+      this.getPerfils(user_id);
+      this.getHojaCalculo(user_id);
     });
   }
 }

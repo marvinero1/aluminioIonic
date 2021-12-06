@@ -17,6 +17,9 @@ const { App } = Plugins;
 export class AppComponent implements OnInit {
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   public selectedIndex = 0;
+  logs:any=[];
+  usuarios$:any=[];
+  role:string;
   public appPages = [
     {
       title: 'Inicio',
@@ -32,11 +35,6 @@ export class AppComponent implements OnInit {
       title:'Carrito',
       url:'/carrito',
       icon:'cart'
-    },
-    {
-      title:'Cortadora Perfil',
-      url:'/cortadora-perfil',
-      icon:'cut'
     },
     {
       title: 'Historial Cortes',
@@ -101,6 +99,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUser();
     // const gesture = this.gestureCtrl.create({
     //   el: this.backButtonEvent,
     //   threshold: 0,
@@ -108,6 +107,13 @@ export class AppComponent implements OnInit {
     // });
   
     // gesture.enable();
+  }
+  rutaCortadora(){
+    this.router.navigateByUrl('/cortadora-perfil');
+  }
+
+  rutaCortadoraHistorial(){
+    this.router.navigateByUrl('/mis-cortes');
   }
 
   backButtonEvent() {
@@ -118,6 +124,17 @@ export class AppComponent implements OnInit {
         } 
         });
     });
+    }
+
+    getUser(){
+      this.logs = JSON.parse(localStorage.getItem('Usuario'));
+      
+      this.auth.getUsers('usuariosStorage/', this.logs).subscribe((res) =>{ 
+        this.usuarios$ = res;
+        let user_id =  this.usuarios$.id;
+        this.role = this.usuarios$.role;
+          console.log(this.role);
+      });
     }
 
   // backNativeButton(){
