@@ -55,7 +55,6 @@ export class SelectPage implements OnInit {
       this.usuarios$ = res;
       let user_id =  this.usuarios$.id;
       this.role = this.usuarios$.role;
-        console.log(this.role);
     });
   }
 }

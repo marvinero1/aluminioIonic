@@ -36,10 +36,6 @@ export class CortadoraPerfilPage implements OnInit {
   isChecked2:boolean = false; 
   isChecked3:boolean = false; 
 
-  // cards = [
-  //   0,1,2,3,4,5,6
-  // ]
-
   constructor(public alertController: AlertController, private _formBuilder: FormBuilder,
     public auth: AuthProvider,  private restangular:Restangular,
     public loadingController: LoadingController, public toastController: ToastController,) { }
@@ -84,32 +80,16 @@ export class CortadoraPerfilPage implements OnInit {
       });
     } 
 
-    Crearbarras(perfil_id:number){
-      let data = 1;
-      console.log(data);
-      
-      // this.restangular.all('crearBarra', perfil_id).post(data).subscribe((datav) => {
-      
-      //   console.log(data);
-      //   this.presentLoading();
-      //   window.location.reload();
-      //   //this.presentAlert();
-      // });
-    }
 
   submitData(){
     let data = this.dataForm.value;
     let perfil_id  = data.perfil_id;
-    console.log(perfil_id);
-    this.Crearbarras(perfil_id);
-  
-    // this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
-    //   this.Crearbarras(perfil_id);
-    //   console.log(data);
-    //   this.presentLoading();
-    //   window.location.reload();
-    //   //this.presentAlert();
-    // });    
+
+    this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
+      // console.log(data);
+      this.presentLoading();
+      window.location.reload();
+    });    
   }
 
   async presentToast(message:any) {
@@ -164,16 +144,11 @@ export class CortadoraPerfilPage implements OnInit {
       console.log(this.hojas$);
       let hoja_id = this.hojas$.id
 
-      // this.getCalculs(user_id, hoja_id);
-      //this.carrito$ = Object.values(this.carrito$);
       if(this.hojas$.estado == 'false' ){
         this.btnHoja = false;
-        //console.log("si hay algo");
       }else{
-        //console.log("no lo hay");
         this.btnHoja = true;
-      }
-      //this.loadData();  
+      }  
       return this.hojas$;  
     });
   }
@@ -181,8 +156,7 @@ export class CortadoraPerfilPage implements OnInit {
   getSubCategorias(){
     this.auth.getAllObject('getSubCategoria').subscribe((res) =>{
       this.categorias$ = res; 
-      console.log(this.categorias$);
-        
+      // console.log(this.categorias$);
     });
   }
 
@@ -233,7 +207,6 @@ export class CortadoraPerfilPage implements OnInit {
       role,
       data
     } = await loading.onDidDismiss();
-    //console.log('Loading dismissed!');
   }
 
   getUser(){
@@ -243,9 +216,7 @@ export class CortadoraPerfilPage implements OnInit {
       this.usuarios$ = res;
       let user_id =  this.usuarios$.id;
       console.log(user_id);
-      // this.getCalculs(user_id,'');
       this.getHoja(user_id);
-      //console.log(this.usuarios$);
     });
   }
 }
