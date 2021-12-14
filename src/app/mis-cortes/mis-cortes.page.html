@@ -133,8 +133,6 @@
 </ion-footer>
 
 
-
-
 <ion-footer class="div" *ngIf="btnboolPefil == true">
   <div style="padding: 2px 1px 2px 2px;overflow: scroll;max-height: 31.5%;">
     <ion-row style="border-bottom: groove;text-align: center !important;" *ngFor="let element of calculo_hoja$ ">
@@ -179,7 +177,7 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Ancho *</ion-label>
-            <ion-input [(ngModel)]="ancho" type="number"></ion-input>
+            <ion-input [(ngModel)]="ancho" type="number" ></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ActionSheetController  } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
 import { ToastController } from '@ionic/angular';
+// import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-mis-cortes',
@@ -34,7 +35,7 @@ export class MisCortesPage implements OnInit {
 
   constructor(public auth: AuthProvider,public alertController: AlertController,
     public actionSheetController: ActionSheetController,private _formBuilder: FormBuilder,
-    public toastController: ToastController) { }
+    public toastController: ToastController,) { }
 
   ngOnInit(){
     this.getUser();
@@ -105,9 +106,20 @@ export class MisCortesPage implements OnInit {
     console.log('onDidDismiss resolved with role', role);
   }
 
-  goWeb(id){
+  goWeb(id){ 
+
+    // const browser = this.iab.create('https://altools.es/hojaCalculo/'+id);
+
+    // browser.executeScript(...);
+
+    // browser.insertCSS(...);
+    // browser.on('loadstop').subscribe(event => {
+    //   browser.insertCSS({ code: "body{color: red;" });
+    // });
+
+    // browser.close();
     // this.router.navigateByUrl('https://altools.es/api/hojaCalculo/'+ id);
-    window.open('https://altools.es/hojaCalculo/'+id, '_system', 'location=yes'); return false;
+    // window.open('https://altools.es/hojaCalculo/'+id, '_system', 'location=yes'); return false;
   }
 
   async selectOptionPerfil(element) {

@@ -25,7 +25,8 @@ import { TokenStorageProvider } from './providers/token-storage/token-storage';
 import { PipesModule } from './pipes/pipes.module';
 import { Downloader } from '@ionic-native/downloader/ngx';
 import { DecimalPipe } from '@angular/common';
-import { Storage } from '@ionic/storage'
+import { Storage } from '@ionic/storage';
+
 // import { FileChooser } from '@ionic-native/file-chooser/ngx';
 
 @NgModule({

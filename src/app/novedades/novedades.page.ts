@@ -19,11 +19,7 @@ export class NovedadesPage implements OnInit {
   getProductoNovedad(){
     this.api.getAllObject('productosNovedad')
     .subscribe((res) =>{ 
-      this.novedades$ = res;
-      
-      
-      this.novedades$ = Object.values(this.novedades$)
-      console.log(this.novedades$);        
+      this.novedades$ = res;        
     });
   }
   perfil(){

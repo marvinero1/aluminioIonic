@@ -169,15 +169,12 @@ export class MisProductosPage implements OnInit {
     
     this.api.getAllObjectById('getMyProducts/', a)
     .subscribe((res) =>{ 
-      this.productos$ = res;
-      this.productos$ = Object.values(this.productos$);
-      this.loadData(this.productos$);    
+      this.productos$ = res;   
     });
   }
 
   buscar(event){
     this.textoBuscar = event.detail.value;
-    
   }
 
   dissmis(){

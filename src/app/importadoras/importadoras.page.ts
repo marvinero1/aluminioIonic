@@ -28,8 +28,7 @@ export class ImportadorasPage implements OnInit {
   getImportadoras(){
     this.api.getAllObject('importadoras')
     .subscribe((res) =>{ 
-      this.importadoras$ = res;
-      this.importadoras$ = Object.values(this.importadoras$)      
+      this.importadoras$ = res;     
     });
   }
 

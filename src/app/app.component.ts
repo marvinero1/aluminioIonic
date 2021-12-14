@@ -112,6 +112,9 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/cortadora-perfil');
   }
 
+  rutaImportadora(){
+    this.router.navigateByUrl('/importadoras');
+  }
   rutaCortadoraHistorial(){
     this.router.navigateByUrl('/mis-cortes');
   }
