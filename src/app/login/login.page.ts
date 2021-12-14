@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     public modalController: ModalController) { }
   
   ngOnInit() {
-    this.menuCtrl.enable(false);
+    this.menuCtrl.enable(false); 
     this.dataForm = this.createForm();
   }
 

@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ActionSheetController  } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
-import { Restangular } from 'ngx-restangular';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mis-cortes',
@@ -25,19 +23,18 @@ export class MisCortesPage implements OnInit {
   alto:any;
   linea:any;
   id:number;
-  btnbool:boolean = false;
-  btnboolPefil:boolean = false;
+  btnbool:boolean;
+  btnboolPefil:boolean;
   role:string;
-
+  hoja_id:any;
   nombre_cliente:any;
   celular:any;
+  user_id:any;
   descripcion:any;
-
 
   constructor(public auth: AuthProvider,public alertController: AlertController,
     public actionSheetController: ActionSheetController,private _formBuilder: FormBuilder,
-    private restangular:Restangular,private loadingCtrl:LoadingController,
-    private router: Router,  public toastController: ToastController) { }
+    public toastController: ToastController) { }
 
   ngOnInit(){
     this.getUser();
@@ -53,8 +50,10 @@ export class MisCortesPage implements OnInit {
   }
 
 
-  getPerfils(user_id) {
-    this.auth.getAllObjectById('getHistorialCalculos/', user_id)
+  getPerfils(user_id, hoja_id) {
+    console.log(this.hoja_id);
+    
+    this.auth.getAllObjectByIdPerfils('getHistorialCalculos/', user_id , hoja_id)
       .subscribe((res) => {
         this.calculoPerfil$ = res;
         // console.log(this.calculoPerfil$);
@@ -81,6 +80,8 @@ export class MisCortesPage implements OnInit {
           this.nombre_cliente = element.nombre_cliente;
           this.celular = element.celular;
           this.descripcion = element.descripcion;
+          this.user_id = element.user_id
+          this.getPerfils(this.user_id, this.id);
         }
       },  {
         text: 'Cancelar',
@@ -88,6 +89,13 @@ export class MisCortesPage implements OnInit {
         role: 'cancel',
         handler: () => {
           actionSheet.dismiss();
+        }},
+      {
+        text: 'Ver Historial en la Web',
+        role: 'view',
+        icon: 'globe',
+        handler: () => {
+          this.goWeb(element.id);
         }
       }]
     });
@@ -95,6 +103,11 @@ export class MisCortesPage implements OnInit {
 
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
+  }
+
+  goWeb(id){
+    // this.router.navigateByUrl('https://altools.es/api/hojaCalculo/'+ id);
+    window.open('https://altools.es/hojaCalculo/'+id, '_system', 'location=yes'); return false;
   }
 
   async selectOptionPerfil(element) {
@@ -112,6 +125,7 @@ export class MisCortesPage implements OnInit {
         text: 'Editar',
         icon: 'create',
         handler: () => {
+          this.cerrar(); 
           this.btnbooleanPerfil(); 
           this.id = element.id;
           this.alto = element.alto;
@@ -132,6 +146,20 @@ export class MisCortesPage implements OnInit {
 
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
+  }
+
+  btnbooleanPerfil(){
+    return this.btnboolPefil = true;
+  }
+  cerrarHoja(){
+    return this.btnboolPefil = false;
+  }
+
+  btnboolean(){
+    return this.btnbool = true;
+  }
+  cerrar(){
+    return  this.btnbool = false;
   }
 
   createFormHist(): FormGroup {
@@ -236,29 +264,8 @@ export class MisCortesPage implements OnInit {
     });
     toast.present();
   }
-
-  btnboolean(){
-    if (this.btnbool) {
-      this.btnbool = false;
-    } else {
-      this.btnbool = true;
-    }
-  }
-  btnbooleanPerfil(){
-    this.btnboolean();
-    if (this.btnboolPefil) {
-      this.btnboolPefil = false;
-    } else {
-      this.btnboolPefil = true;
-    }
-  }
-  cerrar(){
-    if (this.btnbool) {
-      this.btnbool = false;
-    } else {
-      this.btnbool = true;
-    }
-  }
+  
+ 
 
   async deleteHojaCalculo(element){
     const alert = await this.alertController.create({
@@ -278,13 +285,13 @@ export class MisCortesPage implements OnInit {
         text: 'Si',
         handler: () => {
           this.auth.deleteObjectById('deleteHojaPerfil/', element.id).subscribe(res=>{
+            console.log("Hoja Eliminada");
             window.location.reload();
           });
         }
       }
     ]
   });
-
     await alert.present();
   }
 
@@ -324,7 +331,7 @@ export class MisCortesPage implements OnInit {
       this.role = this.usuarios$.role;
        console.log(this.role);
        
-      this.getPerfils(user_id);
+      // this.getPerfils(user_id);
       this.getHojaCalculo(user_id);
     });
   }

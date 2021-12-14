@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Restangular } from 'ngx-restangular';
 import { AuthProvider } from '../providers/auth/auth';
+import {  MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cortadora-perfil',
@@ -38,7 +39,7 @@ export class CortadoraPerfilPage implements OnInit {
 
   constructor(public alertController: AlertController, private _formBuilder: FormBuilder,
     public auth: AuthProvider,  private restangular:Restangular,
-    public loadingController: LoadingController, public toastController: ToastController,) { }
+    public loadingController: LoadingController,public menuCtrl: MenuController, public toastController: ToastController,) { }
 
   ngOnInit() {
     this.getSubCategorias();
@@ -47,6 +48,7 @@ export class CortadoraPerfilPage implements OnInit {
     this.data_hoja1 = this.data_Hoja1();
     this.data_hoja = this.data_Hoja();
     this.dataForm = this.dataCombinacion();
+    this.menuCtrl.enable(true);
   }
 
   dataCombinacion(): FormGroup {

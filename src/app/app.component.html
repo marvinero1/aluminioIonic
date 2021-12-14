@@ -18,6 +18,11 @@
           
           <ion-menu-toggle auto-hide="false">
             <ion-item (click)="rutaCortadora()" lines="none" *ngIf="this.role == 'user' || this.role == 'empresa' || this.role == 'admin' || this.role == 'vendedor'">
+              <ion-icon color="dark" slot="start" name="briefcase"></ion-icon>
+              <ion-label color="dark">Importadoras</ion-label>
+            </ion-item>
+
+            <ion-item (click)="rutaCortadora()" lines="none" *ngIf="this.role == 'user' || this.role == 'empresa' || this.role == 'admin' || this.role == 'vendedor'">
               <ion-icon color="dark" slot="start" name="cut"></ion-icon>
               <ion-label color="dark">
                   Cortadora Perfil

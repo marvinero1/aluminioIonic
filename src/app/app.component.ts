@@ -36,21 +36,21 @@ export class AppComponent implements OnInit {
       url:'/carrito',
       icon:'cart'
     },
-    {
-      title: 'Historial Cortes',
-      url: '/mis-cortes',
-      icon: 'time'
-    },
+    // {
+    //   title: 'Historial Cortes',
+    //   url: '/mis-cortes',
+    //   icon: 'time'
+    // },
     {
       title: 'Historial Calculos',
       url: '/calculadora-historial',
       icon: 'time'
     },
-    {
-      title: 'Importadoras',
-      url: '/importadoras',
-      icon: 'briefcase'
-    },
+    // {
+    //   title: 'Importadoras',
+    //   url: '/importadoras',
+    //   icon: 'briefcase'
+    // },
     // {
     //   title: 'Productos',
     //   url: '/productos',
