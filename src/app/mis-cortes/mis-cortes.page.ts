@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ActionSheetController  } from '@ionic/angular';
 import { AuthProvider } from '../providers/auth/auth';
 import { ToastController } from '@ionic/angular';
-// import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-mis-cortes',
@@ -35,7 +35,7 @@ export class MisCortesPage implements OnInit {
 
   constructor(public auth: AuthProvider,public alertController: AlertController,
     public actionSheetController: ActionSheetController,private _formBuilder: FormBuilder,
-    public toastController: ToastController,) { }
+    public toastController: ToastController,private iab: InAppBrowser) { }
 
   ngOnInit(){
     this.getUser();
@@ -107,17 +107,14 @@ export class MisCortesPage implements OnInit {
   }
 
   goWeb(id){ 
+    const browser = this.iab.create('https://altools.es/hojaCalculo/'+ id);
 
-    // const browser = this.iab.create('https://altools.es/hojaCalculo/'+id);
+    browser.on('loadstop').subscribe(event => {
+      browser.insertCSS({ code: "body{color: red;" });
+    });
 
-    // browser.executeScript(...);
-
-    // browser.insertCSS(...);
-    // browser.on('loadstop').subscribe(event => {
-    //   browser.insertCSS({ code: "body{color: red;" });
-    // });
-
-    // browser.close();
+    browser.close();
+  
     // this.router.navigateByUrl('https://altools.es/api/hojaCalculo/'+ id);
     // window.open('https://altools.es/hojaCalculo/'+id, '_system', 'location=yes'); return false;
   }
@@ -276,8 +273,6 @@ export class MisCortesPage implements OnInit {
     });
     toast.present();
   }
-  
- 
 
   async deleteHojaCalculo(element){
     const alert = await this.alertController.create({
@@ -323,15 +318,29 @@ export class MisCortesPage implements OnInit {
       }, {
         text: 'Si',
         handler: () => {
-          this.auth.deleteObjectById('deletePerfil/', element.id).subscribe(res=>{
-            window.location.reload();
-          });
+          this.postDeletePerfil(element);
+          window.location.reload();
+
         }
       }
     ]
   });
 
     await alert.present();
+  }
+
+  postDeletePerfil(element){
+    this.auth.deleteObjectById('deletePerfil/', element.id).subscribe(res=>{
+    });
+  }
+
+  doRefresh(event) {
+    
+    window.location.reload();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
   getUser(){

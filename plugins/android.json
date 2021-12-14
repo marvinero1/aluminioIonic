@@ -40,6 +40,9 @@
     },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "es.altools"
+    },
+    "cordova-plugin-safariviewcontroller": {
+      "PACKAGE_NAME": "es.altools"
     }
   },
   "dependent_plugins": {

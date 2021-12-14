@@ -26,6 +26,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { Downloader } from '@ionic-native/downloader/ngx';
 import { DecimalPipe } from '@angular/common';
 import { Storage } from '@ionic/storage';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 // import { FileChooser } from '@ionic-native/file-chooser/ngx';
 
@@ -60,6 +61,7 @@ import { Storage } from '@ionic/storage';
     NotificacionsService,
     Camera,
     Downloader,
+    InAppBrowser,
     // FileChooser,
   ],
   bootstrap: [AppComponent]

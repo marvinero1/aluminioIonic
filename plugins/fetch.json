@@ -110,7 +110,15 @@
   "cordova-plugin-inappbrowser": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-inappbrowser@4.1.0"
+      "id": "cordova-plugin-inappbrowser@^4.1.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-safariviewcontroller": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-safariviewcontroller"
     },
     "is_top_level": true,
     "variables": {}

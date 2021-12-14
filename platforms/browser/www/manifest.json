@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Altools",
+  "short_name": "Altools",
+  "version": "es.altools",
+  "description": "Aplicacion de Cotización de Aluminio",
+  "author": "Full Pro Technology",
+  "icons": [],
+  "start_url": "index.html"
+}

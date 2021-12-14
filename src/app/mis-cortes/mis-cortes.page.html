@@ -12,6 +12,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="contenido">
     <ion-row style="border-bottom: groove; text-align: right;">
       <ion-col col-4>
