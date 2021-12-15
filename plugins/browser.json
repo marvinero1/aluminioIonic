@@ -45,6 +45,12 @@
     },
     "cordova-plugin-safariviewcontroller": {
       "PACKAGE_NAME": "es.altools"
+    },
+    "cordova-plugin-androidx": {
+      "PACKAGE_NAME": "es.altools"
+    },
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "es.altools"
     }
   },
   "dependent_plugins": {

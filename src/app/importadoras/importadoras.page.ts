@@ -13,6 +13,7 @@ export class ImportadorasPage implements OnInit {
 
   importadorImagen:any;
   importadoras$:any=[];
+  importa$:any=[];
   textoBuscar:string='';
   productos$:any;
 
@@ -26,9 +27,9 @@ export class ImportadorasPage implements OnInit {
   }
 
   getImportadoras(){
-    this.api.getAllObject('importadoras')
-    .subscribe((res) =>{ 
-      this.importadoras$ = res;     
+    this.api.getAllObject('importadoras').subscribe((res) =>{ 
+      this.importadoras$ = res; 
+      this.importa$ = this.importadoras$;    
     });
   }
 

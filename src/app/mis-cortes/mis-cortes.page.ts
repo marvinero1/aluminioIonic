@@ -108,12 +108,18 @@ export class MisCortesPage implements OnInit {
 
   goWeb(id){ 
     const browser = this.iab.create('https://altools.es/hojaCalculo/'+ id);
+    // browser.executeScript( { code: "\
+    //   var message = 'this is the message';\
+    //   var messageObj = {my_message: message};\
+    //   var stringifiedMessageObj = JSON.stringify(messageObj);\
+    //   webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);"
+    // });
 
     browser.on('loadstop').subscribe(event => {
       browser.insertCSS({ code: "body{color: red;" });
     });
 
-    browser.close();
+    browser.show();
   
     // this.router.navigateByUrl('https://altools.es/api/hojaCalculo/'+ id);
     // window.open('https://altools.es/hojaCalculo/'+id, '_system', 'location=yes'); return false;

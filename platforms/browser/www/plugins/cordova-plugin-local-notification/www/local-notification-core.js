@@ -1,4 +1,5 @@
-cordova.define("cordova-plugin-local-notification.LocalNotification.Core", function(require, exports, module) { /*
+cordova.define("cordova-plugin-local-notification.LocalNotification.Core", function(require, exports, module) {
+/*
  * Apache 2.0 License
  *
  * Copyright (c) Sebastian Katzer 2017
