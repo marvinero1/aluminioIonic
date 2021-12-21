@@ -24,6 +24,7 @@ export class MisCortesPage implements OnInit {
   alto:any;
   linea:any;
   id:number;
+  estado:string = "false";
   btnbool:boolean;
   btnboolPefil:boolean;
   role:string;
@@ -49,7 +50,6 @@ export class MisCortesPage implements OnInit {
         console.log(this.hoja_calculo_perfil$);
       });
   }
-
 
   getPerfils(user_id, hoja_id) {
     console.log(this.hoja_id);
@@ -81,7 +81,7 @@ export class MisCortesPage implements OnInit {
           this.nombre_cliente = element.nombre_cliente;
           this.celular = element.celular;
           this.descripcion = element.descripcion;
-          this.user_id = element.user_id
+          this.user_id = element.user_id;
           this.getPerfils(this.user_id, this.id);
         }
       },  {
@@ -207,6 +207,7 @@ export class MisCortesPage implements OnInit {
               nombre_cliente: [this.nombre_cliente, Validators.compose([Validators.required])],
               celular: [this.celular,  Validators.compose([Validators.required])],
               descripcion: [this.descripcion,  Validators.compose([Validators.required])],
+             
             });
 
             this.data1 = data.value;
@@ -228,7 +229,7 @@ export class MisCortesPage implements OnInit {
     await alert.present();
   }
 
-  async guardarOperacionPerfil(element) {
+  async guardarOperacionPerfil() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Actualización',
@@ -245,12 +246,12 @@ export class MisCortesPage implements OnInit {
           text: 'Ok',
           handler: () => {
             let data = this._formBuilder.group({
-              id:[this.id],
-              ancho: [this.ancho, Validators.compose([Validators.required])],
-              alto: [this.alto,  Validators.compose([Validators.required])],
-              linea: [this.linea,  Validators.compose([Validators.required])],
+              id: this.id,
+              ancho: this.ancho,
+              alto: this.alto,
+              linea: [this.linea, Validators.compose([Validators.required])],
               combinacion: [this.combinacion,  Validators.compose([Validators.required])],
-
+              estado: [this.estado,  Validators.compose([Validators.required])],
             });
 
             this.data1 = data.value;
@@ -259,7 +260,7 @@ export class MisCortesPage implements OnInit {
             
             if(data.valid){
               this.auth.updateObjectById('actualizarPerfil/', a , this.data1).subscribe((datav) => {
-                console.log(datav);
+                // console.log(datav);
                 window.location.reload();
               });
             } else{

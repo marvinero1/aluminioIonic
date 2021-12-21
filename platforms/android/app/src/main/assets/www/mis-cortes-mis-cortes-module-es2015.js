@@ -82,6 +82,7 @@ MisCortesPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
             _mis_cortes_routing_module__WEBPACK_IMPORTED_MODULE_5__["MisCortesPageRoutingModule"]
         ],
         declarations: [_mis_cortes_page__WEBPACK_IMPORTED_MODULE_6__["MisCortesPage"]]
@@ -142,6 +143,7 @@ let MisCortesPage = class MisCortesPage {
         this.usuarios$ = [];
         this.data = [];
         this.data1 = [];
+        this.estado = "false";
     }
     ngOnInit() {
         this.getUser();
@@ -323,7 +325,7 @@ let MisCortesPage = class MisCortesPage {
             yield alert.present();
         });
     }
-    guardarOperacionPerfil(element) {
+    guardarOperacionPerfil() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 cssClass: 'my-custom-class',
@@ -341,18 +343,19 @@ let MisCortesPage = class MisCortesPage {
                         text: 'Ok',
                         handler: () => {
                             let data = this._formBuilder.group({
-                                id: [this.id],
-                                ancho: [this.ancho, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
-                                alto: [this.alto, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
+                                id: this.id,
+                                ancho: this.ancho,
+                                alto: this.alto,
                                 linea: [this.linea, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
                                 combinacion: [this.combinacion, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
+                                estado: [this.estado, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
                             });
                             this.data1 = data.value;
                             let a = this.data1.id;
                             console.log(this.data1);
                             if (data.valid) {
                                 this.auth.updateObjectById('actualizarPerfil/', a, this.data1).subscribe((datav) => {
-                                    console.log(datav);
+                                    // console.log(datav);
                                     window.location.reload();
                                 });
                             }

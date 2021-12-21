@@ -250,6 +250,7 @@
           this.usuarios$ = [];
           this.hojas$ = [];
           this.categorias$ = [];
+          this.estado = "false";
           this.repeticion = "1";
           this.btnbool = false;
           this.isChecked1 = false;
@@ -279,6 +280,7 @@
               repeticion: [this.repeticion],
               hoja_id: [this.hoja_id],
               precio: [this.precio],
+              estado: [this.estado],
               user_id: [this.user_id]
             });
           }

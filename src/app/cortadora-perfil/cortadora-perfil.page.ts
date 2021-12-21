@@ -27,6 +27,7 @@ export class CortadoraPerfilPage implements OnInit {
   ancho:any;
   precio:any;
   hoja_id:any;
+  estado:string="false";
   repeticion="1";
   combinacion:string;
   nombre_cliente:any;
@@ -60,6 +61,7 @@ export class CortadoraPerfilPage implements OnInit {
       repeticion:[this.repeticion],
       hoja_id:[this.hoja_id],
       precio:[this.precio],
+      estado: [this.estado],
       user_id: [this.user_id]
     });
   } 
@@ -135,7 +137,6 @@ export class CortadoraPerfilPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 

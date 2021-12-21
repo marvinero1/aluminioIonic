@@ -153,7 +153,7 @@
       };
 
       MisCortesPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _mis_cortes_routing_module__WEBPACK_IMPORTED_MODULE_5__["MisCortesPageRoutingModule"]],
+        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _mis_cortes_routing_module__WEBPACK_IMPORTED_MODULE_5__["MisCortesPageRoutingModule"]],
         declarations: [_mis_cortes_page__WEBPACK_IMPORTED_MODULE_6__["MisCortesPage"]]
       })], MisCortesPageModule);
       /***/
@@ -251,6 +251,7 @@
           this.usuarios$ = [];
           this.data = [];
           this.data1 = [];
+          this.estado = "false";
         }
 
         _createClass(MisCortesPage, [{
@@ -536,7 +537,7 @@
           }
         }, {
           key: "guardarOperacionPerfil",
-          value: function guardarOperacionPerfil(element) {
+          value: function guardarOperacionPerfil() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
               var _this6 = this;
 
@@ -561,11 +562,12 @@
                           text: 'Ok',
                           handler: function handler() {
                             var data = _this6._formBuilder.group({
-                              id: [_this6.id],
-                              ancho: [_this6.ancho, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
-                              alto: [_this6.alto, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
+                              id: _this6.id,
+                              ancho: _this6.ancho,
+                              alto: _this6.alto,
                               linea: [_this6.linea, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
-                              combinacion: [_this6.combinacion, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])]
+                              combinacion: [_this6.combinacion, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
+                              estado: [_this6.estado, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])]
                             });
 
                             _this6.data1 = data.value;
@@ -574,7 +576,7 @@
 
                             if (data.valid) {
                               _this6.auth.updateObjectById('actualizarPerfil/', a, _this6.data1).subscribe(function (datav) {
-                                console.log(datav);
+                                // console.log(datav);
                                 window.location.reload();
                               });
                             } else {
