@@ -4,6 +4,8 @@ import { AlertController, LoadingController, ToastController } from '@ionic/angu
 import { Restangular } from 'ngx-restangular';
 import { AuthProvider } from '../providers/auth/auth';
 import {  MenuController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { HelpModalComponent } from '../help-modal/help-modal.component';
 
 @Component({
   selector: 'app-cortadora-perfil',
@@ -22,6 +24,8 @@ export class CortadoraPerfilPage implements OnInit {
   hojas$: any = [];
   categorias$: any = [];
   user_id:number;
+  anchosDecimal:number;
+  altosDecimal:number;
   linea:any;
   alto:any;
   ancho:any;
@@ -39,8 +43,8 @@ export class CortadoraPerfilPage implements OnInit {
   isChecked3:boolean = false; 
 
   constructor(public alertController: AlertController, private _formBuilder: FormBuilder,
-    public auth: AuthProvider,  private restangular:Restangular,
-    public loadingController: LoadingController,public menuCtrl: MenuController, public toastController: ToastController,) { }
+    public auth: AuthProvider,  private restangular:Restangular,public modalController: ModalController
+    ,public loadingController: LoadingController,public menuCtrl: MenuController, public toastController: ToastController,) { }
 
   ngOnInit() {
     this.getSubCategorias();
@@ -50,11 +54,12 @@ export class CortadoraPerfilPage implements OnInit {
     this.data_hoja = this.data_Hoja();
     this.dataForm = this.dataCombinacion();
     this.menuCtrl.enable(true);
+
   }
 
   dataCombinacion(): FormGroup {
     return this._formBuilder.group({
-      alto:[this.alto],
+      alto:[this.alto,],
       ancho:[this.ancho],
       combinacion:[this.combinacion],
       linea:[this.linea],
@@ -87,14 +92,30 @@ export class CortadoraPerfilPage implements OnInit {
 
   submitData(){
     let data = this.dataForm.value;
-    let perfil_id  = data.perfil_id;
-
-    this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
-      // console.log(data);
-      this.presentLoading();
-      window.location.reload();
-    });    
+    let anchos = data.ancho;
+    let altos = data.alto;
+    console.log(data);
+    
+    this.anchosDecimal = anchos.toFixed(4);
+    this.altosDecimal = altos.toFixed(4);
+    console.log(this.anchosDecimal, this.altosDecimal);
+    
+    if (this.anchosDecimal %1 == 0 ){
+      this.presentToast('La variable ancho es entero, debe ser decimal.');
+    }else if(this.altosDecimal%1 == 0){
+      this.presentToast('La variable alto es entero, debe ser decimal.');
+    }else if(this.altosDecimal%1 == 0 && this.anchosDecimal %1 == 0 ){
+      this.presentToast('ambos son enteros');
+    }else{
+      console.log('ambos son decimales');
+      this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
+        // console.log(data);
+        this.presentLoading();
+        window.location.reload();
+      }); 
+    }
   }
+
 
   async presentToast(message:any) {
     const toast = await this.toastController.create({
@@ -211,6 +232,14 @@ export class CortadoraPerfilPage implements OnInit {
       data
     } = await loading.onDidDismiss();
   }
+
+  async help(){
+      const modal = await this.modalController.create({
+        component: HelpModalComponent,
+        cssClass: 'modal-help'
+      });
+      return await modal.present();
+    }
 
   getUser(){
     this.logs = JSON.parse(localStorage.getItem('Usuario'));

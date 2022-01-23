@@ -116,7 +116,7 @@ export class MisCortesPage implements OnInit {
     // });
 
     browser.on('loadstop').subscribe(event => {
-      browser.insertCSS({ code: "body{color: red;" });
+      browser.insertCSS({ code: "body{color: black;" });
     });
 
     browser.show();

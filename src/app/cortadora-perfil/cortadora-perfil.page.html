@@ -24,17 +24,18 @@
     <form [formGroup]="dataForm" (ngSubmit)=submitData()>
       <div>
         <ion-row>
+          
           <ion-col>
-            <p> <strong>Elija una Linea</strong></p>
+            <p> <strong>Elija una Linea
+              <ion-button class="help" slot="end" (click)="help()" color="light" shape="round" size="small">?</ion-button>
+               </strong></p><br>
+            
+           
             <ion-list>
               <ion-item>
                 <ion-label>Linea</ion-label>
                 <ion-select [compareWith]="compareWith" formControlName="linea">
                   <ion-select-option value="L-20">Linea 20</ion-select-option>
-                  <!-- <ion-select-option value="L-21">Linea 21</ion-select-option>
-                  <ion-select-option value="L-22">Linea 22</ion-select-option>
-                  <ion-select-option value="L-23">Linea 23</ion-select-option>
-                  <ion-select-option value="L-24">Linea 24</ion-select-option> -->
                   <ion-select-option value="L-25">Linea 25</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -47,13 +48,13 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Ancho</ion-label>
-              <ion-input type="number" formControlName="ancho" onKeyPress="if(this.value.length==5) return false;" pattern="[0-9]*" required></ion-input>
+              <ion-input type="number" aria-placeholder="0.000" formControlName="ancho" step="0.001" max="9.999" onKeyPress="if(this.value.length==5) return false;" pattern="[0-9]*" required></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item>
               <ion-label position="floating">Alto</ion-label>
-              <ion-input type="number" formControlName="alto" onKeyPress="if(this.value.length==5) return false;" pattern="[0-9]*" required></ion-input>
+              <ion-input type="number" aria-placeholder="0.000" formControlName="alto" step="0.001" max="9.999" onKeyPress="if(this.value.length==5) return false;" pattern="[0-9]*" required></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -122,7 +123,7 @@
     </form>
 
     <ion-button color="dark" expand="block" (click)="submitData()">
-      <ion-icon name="save-outline"></ion-icon>Guardar
+      <ion-icon name="save-outline"></ion-icon> Guardar
     </ion-button>
 
     <ion-button color="dark" expand="block" (click)="abrirVentana()">
