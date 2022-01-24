@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true" class="body" scroll-y="true">
 <br><br><br>
-  <div *ngIf="this.role != 'user'">
+  <div *ngIf="this.role != 'user' && this.role != 'vendedor'">
     <h4>Seleccione que desea ver en su recorido.</h4>
     <a (click)="goCalculator()">
       <ion-card class="cardProduct">
@@ -25,7 +25,7 @@
     </a>
   </div>
 
-  <div *ngIf="this.role == 'user'"><br>
+  <div *ngIf="this.role != 'admin' && this.role != 'empresa'"><br>
     <h4>Seleccione que desea ver en su recorido.</h4><br>
     <a (click)="goCortadora()">
       <ion-card style="background: transparent !important;padding: 20px;">
@@ -44,4 +44,6 @@
       </ion-card>
     </a>
   </div>
+
+
 </ion-content>

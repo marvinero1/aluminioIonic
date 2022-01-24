@@ -22,7 +22,27 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button>\r\n        <ion-icon name=\"menu-outline\"></ion-icon>\r\n      </ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Cortadora</ion-title>\r\n    <ion-buttons slot=\"end\" *ngIf=\"btnHoja == true\">\r\n      <form [formGroup]=\"data_hoja1\" (ngSubmit)=crearHojaCalculo()>\r\n        <ion-input [(ngModel)]=\"usuarios$.id\" formControlName=\"user_id\" disabled=\"true\" hidden=\"true\"></ion-input>\r\n        <ion-row style=\"display: block; text-align: center;\">\r\n          <ion-button (click)=\"crearHojaCalculo()\">\r\n            <ion-icon name=\"add-outline\"></ion-icon>\r\n          </ion-button>\r\n        </ion-row>\r\n      </form>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\" padding>\r\n  <div *ngIf=\"btnHoja == false\" style=\"padding: 7px;\">\r\n    <form [formGroup]=\"dataForm\" (ngSubmit)=submitData()>\r\n      <div>\r\n        <ion-row>\r\n          <ion-col>\r\n            <p> <strong>Elija una Linea</strong></p>\r\n            <ion-list>\r\n              <ion-item>\r\n                <ion-label>Linea</ion-label>\r\n                <ion-select [compareWith]=\"compareWith\" formControlName=\"linea\">\r\n                  <ion-select-option value=\"L-20\">Linea 20</ion-select-option>\r\n                  <!-- <ion-select-option value=\"L-21\">Linea 21</ion-select-option>\r\n                  <ion-select-option value=\"L-22\">Linea 22</ion-select-option>\r\n                  <ion-select-option value=\"L-23\">Linea 23</ion-select-option>\r\n                  <ion-select-option value=\"L-24\">Linea 24</ion-select-option> -->\r\n                  <ion-select-option value=\"L-25\">Linea 25</ion-select-option>\r\n                </ion-select>\r\n              </ion-item>\r\n            </ion-list>\r\n          </ion-col>\r\n        </ion-row>\r\n      </div>\r\n      <div>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Ancho</ion-label>\r\n              <ion-input type=\"number\" formControlName=\"ancho\" onKeyPress=\"if(this.value.length==5) return false;\" pattern=\"[0-9]*\" required></ion-input>\r\n            </ion-item>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Alto</ion-label>\r\n              <ion-input type=\"number\" formControlName=\"alto\" onKeyPress=\"if(this.value.length==5) return false;\" pattern=\"[0-9]*\" required></ion-input>\r\n            </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        <!-- <ion-row>\r\n          <ion-col>\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Precio Bs.</ion-label>\r\n              <ion-input type=\"number\" formControlName=\"precio\" required></ion-input>\r\n            </ion-item>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-item>\r\n              <ion-label position=\"floating\"># Repetición</ion-label>\r\n              <ion-input type=\"number\" formControlName=\"repeticion\" required></ion-input>\r\n            </ion-item>\r\n          </ion-col>\r\n        </ion-row> -->\r\n      </div>  <br>\r\n      <div>\r\n        <p> <strong>Elija una Combinación</strong></p>\r\n        <p class=\"lp\">*Elija solo una combinación.</p>\r\n        <ion-slides [options]=\"{ slidesPerView: 'auto', zoom: false, grabCursor: true }\">\r\n          <ion-slide class=\"slide\">\r\n            <ion-col>\r\n              <ion-label>Dos Hojas</ion-label>\r\n              <ion-img style=\"pointer-events:none\" src=\"assets/combinaciones/combinacion1.png\"></ion-img>\r\n              <ion-radio-group allow-empty-selection=\"true\" [(ngModel)]=\"isChecked1\" formControlName=\"combinacion\">\r\n                <ion-item *ngIf=\"!isChecked2 && !isChecked3\">\r\n                  <ion-label>OK</ion-label>\r\n                  <ion-radio slot=\"start\"  value=\"combinacion1\" color=\"success\"></ion-radio>\r\n                </ion-item>\r\n              </ion-radio-group>\r\n            </ion-col>\r\n          </ion-slide>\r\n\r\n          <ion-slide class=\"slide\">\r\n            <ion-col>\r\n              <ion-label>Tres Hojas</ion-label>\r\n              <ion-img style=\"pointer-events:none\" src=\"assets/combinaciones/combinacion4.png\"></ion-img>\r\n                <ion-radio-group allow-empty-selection=\"true\" [(ngModel)]=\"isChecked2\" formControlName=\"combinacion\">\r\n                  <ion-item *ngIf=\"!isChecked1 && !isChecked3\">\r\n                    <ion-label>OK</ion-label>\r\n                    <ion-radio slot=\"start\" value=\"combinacion4\" color=\"success\"></ion-radio>\r\n                  </ion-item>\r\n                </ion-radio-group>\r\n            </ion-col>\r\n          </ion-slide>\r\n  \r\n          <ion-slide class=\"slide\">\r\n            <ion-col>\r\n              <ion-label>Cuatro Hojas</ion-label>\r\n              <ion-img style=\"pointer-events:none\" src=\"assets/combinaciones/combinacion5.png\"></ion-img>\r\n              <ion-radio-group allow-empty-selection=\"true\" [(ngModel)]=\"isChecked3\" formControlName=\"combinacion\">\r\n                <ion-item *ngIf=\"!isChecked1 && !isChecked2\">\r\n                  <ion-label>OK</ion-label>\r\n                  <ion-radio slot=\"start\" value=\"combinacion5\" color=\"success\"></ion-radio>\r\n                </ion-item>\r\n              </ion-radio-group>\r\n            </ion-col>\r\n          </ion-slide>\r\n          <br>\r\n        </ion-slides>\r\n      </div>\r\n      <ion-input [(ngModel)]=\"usuarios$.id\" formControlName=\"user_id\" disabled=\"true\" hidden=\"true\"></ion-input>\r\n      <ion-input [(ngModel)]=\"hojas$.id\" formControlName=\"hoja_id\" disabled=\"true\" hidden=\"true\"></ion-input>\r\n    </form>\r\n\r\n    <ion-button color=\"dark\" expand=\"block\" (click)=\"submitData()\">\r\n      <ion-icon name=\"save-outline\"></ion-icon>Guardar\r\n    </ion-button>\r\n\r\n    <ion-button color=\"dark\" expand=\"block\" (click)=\"abrirVentana()\">\r\n      <ion-icon name=\"close-outline\"></ion-icon>Cerrar Hoja de Calculo\r\n    </ion-button>\r\n  </div>\r\n</ion-content>\r\n\r\n<ion-footer *ngIf=\"btnbool == false\" class=\"ion-no-border\">\r\n  <div class=\"div\">\r\n    <form [formGroup]=\"data_hoja\" (ngSubmit)=cerrarHoja() novalidate>\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label position=\"floating\">Nombre Cliente *</ion-label>\r\n            <ion-input [(ngModel)]=\"nombre_cliente\"  formControlName=\"nombre_cliente\" type=\"text\" minlength=\"2\" maxlength=\"40\" required></ion-input>\r\n          </ion-item>\r\n        </ion-col>\r\n         <ion-col>\r\n          <ion-item>\r\n            <ion-label position=\"floating\">Celular *</ion-label>\r\n            <ion-input [(ngModel)]=\"celular\" formControlName=\"celular\" type=\"tel\" maxlength=\"10\" pattern=\"[0-9]*\" required></ion-input>\r\n          </ion-item>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label position=\"floating\">Descripción *</ion-label>\r\n            <ion-input formControlName=\"descripcion\" type=\"text\"></ion-input>\r\n          </ion-item>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-col>\r\n        <ion-button color=\"dark\" (click)=\"cerrarHoja()\" class=\"float\" expand=\"full\">\r\n          <ion-icon name=\"save\"></ion-icon>Guardar Operación\r\n        </ion-button>\r\n      </ion-col>\r\n    </form>\r\n  </div>\r\n</ion-footer>";
+      __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button>\r\n        <ion-icon name=\"menu-outline\"></ion-icon>\r\n      </ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Cortadora</ion-title>\r\n    <ion-buttons slot=\"end\" *ngIf=\"btnHoja == true\">\r\n      <form [formGroup]=\"data_hoja1\" (ngSubmit)=crearHojaCalculo()>\r\n        <ion-input [(ngModel)]=\"usuarios$.id\" formControlName=\"user_id\" disabled=\"true\" hidden=\"true\"></ion-input>\r\n        <ion-row style=\"display: block; text-align: center;\">\r\n          <ion-button (click)=\"crearHojaCalculo()\">\r\n            <ion-icon name=\"add-outline\"></ion-icon>\r\n          </ion-button>\r\n        </ion-row>\r\n      </form>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\" padding>\r\n  <div *ngIf=\"btnHoja == false\" style=\"padding: 7px;\">\r\n    <form [formGroup]=\"dataForm\" (ngSubmit)=submitData()>\r\n      <div>\r\n        <ion-row>\r\n          \r\n          <ion-col>\r\n            <p> <strong>Elija una Linea\r\n              <ion-button class=\"help\" slot=\"end\" (click)=\"help()\" color=\"light\" shape=\"round\" size=\"small\">?</ion-button>\r\n               </strong></p><br>\r\n            \r\n           \r\n            <ion-list>\r\n              <ion-item>\r\n                <ion-label>Linea</ion-label>\r\n                <ion-select [compareWith]=\"compareWith\" formControlName=\"linea\">\r\n                  <ion-select-option value=\"L-20\">Linea 20</ion-select-option>\r\n                  <ion-select-option value=\"L-25\">Linea 25</ion-select-option>\r\n                </ion-select>\r\n              </ion-item>\r\n            </ion-list>\r\n          </ion-col>\r\n        </ion-row>\r\n      </div>\r\n      <div>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Ancho</ion-label>\r\n              <ion-input type=\"number\" aria-placeholder=\"0.000\" formControlName=\"ancho\" step=\"0.001\" max=\"9.999\" onKeyPress=\"if(this.value.length==5) return false;\" pattern=\"[0-9]*\" required></ion-input>\r\n            </ion-item>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Alto</ion-label>\r\n              <ion-input type=\"number\" aria-placeholder=\"0.000\" formControlName=\"alto\" step=\"0.001\" max=\"9.999\" onKeyPress=\"if(this.value.length==5) return false;\" pattern=\"[0-9]*\" required></ion-input>\r\n            </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        <!-- <ion-row>\r\n          <ion-col>\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Precio Bs.</ion-label>\r\n              <ion-input type=\"number\" formControlName=\"precio\" required></ion-input>\r\n            </ion-item>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-item>\r\n              <ion-label position=\"floating\"># Repetición</ion-label>\r\n              <ion-input type=\"number\" formControlName=\"repeticion\" required></ion-input>\r\n            </ion-item>\r\n          </ion-col>\r\n        </ion-row> -->\r\n      </div>  <br>\r\n      <div>\r\n        <p> <strong>Elija una Combinación</strong></p>\r\n        <p class=\"lp\">*Elija solo una combinación.</p>\r\n        <ion-slides [options]=\"{ slidesPerView: 'auto', zoom: false, grabCursor: true }\">\r\n          <ion-slide class=\"slide\">\r\n            <ion-col>\r\n              <ion-label>Dos Hojas</ion-label>\r\n              <ion-img style=\"pointer-events:none\" src=\"assets/combinaciones/combinacion1.png\"></ion-img>\r\n              <ion-radio-group allow-empty-selection=\"true\" [(ngModel)]=\"isChecked1\" formControlName=\"combinacion\">\r\n                <ion-item *ngIf=\"!isChecked2 && !isChecked3\">\r\n                  <ion-label>OK</ion-label>\r\n                  <ion-radio slot=\"start\"  value=\"combinacion1\" color=\"success\"></ion-radio>\r\n                </ion-item>\r\n              </ion-radio-group>\r\n            </ion-col>\r\n          </ion-slide>\r\n\r\n          <ion-slide class=\"slide\">\r\n            <ion-col>\r\n              <ion-label>Tres Hojas</ion-label>\r\n              <ion-img style=\"pointer-events:none\" src=\"assets/combinaciones/combinacion4.png\"></ion-img>\r\n                <ion-radio-group allow-empty-selection=\"true\" [(ngModel)]=\"isChecked2\" formControlName=\"combinacion\">\r\n                  <ion-item *ngIf=\"!isChecked1 && !isChecked3\">\r\n                    <ion-label>OK</ion-label>\r\n                    <ion-radio slot=\"start\" value=\"combinacion4\" color=\"success\"></ion-radio>\r\n                  </ion-item>\r\n                </ion-radio-group>\r\n            </ion-col>\r\n          </ion-slide>\r\n  \r\n          <ion-slide class=\"slide\">\r\n            <ion-col>\r\n              <ion-label>Cuatro Hojas</ion-label>\r\n              <ion-img style=\"pointer-events:none\" src=\"assets/combinaciones/combinacion5.png\"></ion-img>\r\n              <ion-radio-group allow-empty-selection=\"true\" [(ngModel)]=\"isChecked3\" formControlName=\"combinacion\">\r\n                <ion-item *ngIf=\"!isChecked1 && !isChecked2\">\r\n                  <ion-label>OK</ion-label>\r\n                  <ion-radio slot=\"start\" value=\"combinacion5\" color=\"success\"></ion-radio>\r\n                </ion-item>\r\n              </ion-radio-group>\r\n            </ion-col>\r\n          </ion-slide>\r\n          <br>\r\n        </ion-slides>\r\n      </div>\r\n      <ion-input [(ngModel)]=\"usuarios$.id\" formControlName=\"user_id\" disabled=\"true\" hidden=\"true\"></ion-input>\r\n      <ion-input [(ngModel)]=\"hojas$.id\" formControlName=\"hoja_id\" disabled=\"true\" hidden=\"true\"></ion-input>\r\n    </form>\r\n\r\n    <ion-button color=\"dark\" expand=\"block\" (click)=\"submitData()\">\r\n      <ion-icon name=\"save-outline\"></ion-icon> Guardar\r\n    </ion-button>\r\n\r\n    <ion-button color=\"dark\" expand=\"block\" (click)=\"abrirVentana()\">\r\n      <ion-icon name=\"close-outline\"></ion-icon>Cerrar Hoja de Calculo\r\n    </ion-button>\r\n  </div>\r\n</ion-content>\r\n\r\n<ion-footer *ngIf=\"btnbool == false\" class=\"ion-no-border\">\r\n  <div class=\"div\">\r\n    <form [formGroup]=\"data_hoja\" (ngSubmit)=cerrarHoja() novalidate>\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label position=\"floating\">Nombre Cliente *</ion-label>\r\n            <ion-input [(ngModel)]=\"nombre_cliente\"  formControlName=\"nombre_cliente\" type=\"text\" minlength=\"2\" maxlength=\"40\" required></ion-input>\r\n          </ion-item>\r\n        </ion-col>\r\n         <ion-col>\r\n          <ion-item>\r\n            <ion-label position=\"floating\">Celular *</ion-label>\r\n            <ion-input [(ngModel)]=\"celular\" formControlName=\"celular\" type=\"tel\" maxlength=\"10\" pattern=\"[0-9]*\" required></ion-input>\r\n          </ion-item>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label position=\"floating\">Descripción *</ion-label>\r\n            <ion-input formControlName=\"descripcion\" type=\"text\"></ion-input>\r\n          </ion-item>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-col>\r\n        <ion-button color=\"dark\" (click)=\"cerrarHoja()\" class=\"float\" expand=\"full\">\r\n          <ion-icon name=\"save\"></ion-icon>Guardar Operación\r\n        </ion-button>\r\n      </ion-col>\r\n    </form>\r\n  </div>\r\n</ion-footer>";
+      /***/
+    },
+
+    /***/
+    "./node_modules/raw-loader/dist/cjs.js!./src/app/help-modal/help-modal.component.html":
+    /*!********************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/help-modal/help-modal.component.html ***!
+      \********************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function node_modulesRawLoaderDistCjsJsSrcAppHelpModalHelpModalComponentHtml(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"dark\">\n    <h5>¿Como ingresar datos?</h5>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-row>\n      <ion-col>\n        <h5><strong>Alto</strong></h5>\n        <p>Los número validos para este campo son del 0.001 al 9.999 Metros.</p>\n      </ion-col>\n      <ion-col>\n        <h5><strong>Ancho</strong></h5>\n        <p>Los número validos para este campo son del 0.001 al 9.999 Metros.</p>\n      </ion-col>\n  </ion-row>\n</ion-content> \n\n<ion-footer style=\"text-align: center;\">\n    <ion-button color=\"dark\" (click)=\"closeModal()\">Ok</ion-button>\n</ion-footer>";
       /***/
     },
 
@@ -175,7 +195,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "p, ion-label {\n  color: black;\n}\n\n.slide {\n  height: 250px;\n  width: 157px;\n  border: 2px solid #f8f8f8;\n  margin: 4px;\n}\n\n.lp {\n  font-size: 0.7rem;\n}\n\n.div {\n  margin: auto;\n  background: steelblue;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29ydGFkb3JhLXBlcmZpbC9jb3J0YWRvcmEtcGVyZmlsLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFlBQUE7QUFDSjs7QUFDQTtFQUNJLGFBQUE7RUFDQSxZQUFBO0VBQ0EseUJBQUE7RUFDQSxXQUFBO0FBRUo7O0FBQUE7RUFDSSxpQkFBQTtBQUdKOztBQURBO0VBQ0ksWUFBQTtFQUNGLHFCQUFBO0FBSUYiLCJmaWxlIjoic3JjL2FwcC9jb3J0YWRvcmEtcGVyZmlsL2NvcnRhZG9yYS1wZXJmaWwucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsicCxpb24tbGFiZWx7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbn1cclxuLnNsaWRle1xyXG4gICAgaGVpZ2h0OiAyNTBweDtcclxuICAgIHdpZHRoOiAxNTdweDtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICNmOGY4Zjg7XHJcbiAgICBtYXJnaW46IDRweDtcclxufVxyXG4ubHB7XHJcbiAgICBmb250LXNpemU6IDAuN3JlbTtcclxufVxyXG4uZGl2e1xyXG4gICAgbWFyZ2luOiAgICAgYXV0bztcclxuICBiYWNrZ3JvdW5kOiBzdGVlbGJsdWU7XHJcbiAgfSAiXX0= */";
+      __webpack_exports__["default"] = "p, ion-label {\n  color: black;\n}\n\n.slide {\n  height: 250px;\n  width: 157px;\n  border: 2px solid #f8f8f8;\n  margin: 4px;\n}\n\n.lp {\n  font-size: 0.7rem;\n}\n\n.div {\n  margin: auto;\n  background: steelblue;\n}\n\n.help {\n  float: right;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29ydGFkb3JhLXBlcmZpbC9jb3J0YWRvcmEtcGVyZmlsLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFlBQUE7QUFDSjs7QUFDQTtFQUNJLGFBQUE7RUFDQSxZQUFBO0VBQ0EseUJBQUE7RUFDQSxXQUFBO0FBRUo7O0FBQUE7RUFDSSxpQkFBQTtBQUdKOztBQURBO0VBQ0ksWUFBQTtFQUNGLHFCQUFBO0FBSUY7O0FBRkE7RUFDSSxZQUFBO0FBS0oiLCJmaWxlIjoic3JjL2FwcC9jb3J0YWRvcmEtcGVyZmlsL2NvcnRhZG9yYS1wZXJmaWwucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsicCxpb24tbGFiZWx7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbn1cclxuLnNsaWRle1xyXG4gICAgaGVpZ2h0OiAyNTBweDtcclxuICAgIHdpZHRoOiAxNTdweDtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICNmOGY4Zjg7XHJcbiAgICBtYXJnaW46IDRweDtcclxufVxyXG4ubHB7XHJcbiAgICBmb250LXNpemU6IDAuN3JlbTtcclxufVxyXG4uZGl2e1xyXG4gICAgbWFyZ2luOiAgICAgYXV0bztcclxuICBiYWNrZ3JvdW5kOiBzdGVlbGJsdWU7XHJcbiAgfVxyXG4uaGVscHtcclxuICAgIGZsb2F0OiByaWdodDtcclxufSAiXX0= */";
       /***/
     },
 
@@ -234,15 +254,22 @@
       var _providers_auth_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ../providers/auth/auth */
       "./src/app/providers/auth/auth.ts");
+      /* harmony import */
+
+
+      var _help_modal_help_modal_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../help-modal/help-modal.component */
+      "./src/app/help-modal/help-modal.component.ts");
 
       var CortadoraPerfilPage = /*#__PURE__*/function () {
-        function CortadoraPerfilPage(alertController, _formBuilder, auth, restangular, loadingController, menuCtrl, toastController) {
+        function CortadoraPerfilPage(alertController, _formBuilder, auth, restangular, modalController, loadingController, menuCtrl, toastController) {
           _classCallCheck(this, CortadoraPerfilPage);
 
           this.alertController = alertController;
           this._formBuilder = _formBuilder;
           this.auth = auth;
           this.restangular = restangular;
+          this.modalController = modalController;
           this.loadingController = loadingController;
           this.menuCtrl = menuCtrl;
           this.toastController = toastController;
@@ -310,13 +337,28 @@
             var _this = this;
 
             var data = this.dataForm.value;
-            var perfil_id = data.perfil_id;
-            this.restangular.all('guardarCombinacion').post(data).subscribe(function (datav) {
-              // console.log(data);
-              _this.presentLoading();
+            var anchos = data.ancho;
+            var altos = data.alto;
+            console.log(data);
+            this.anchosDecimal = anchos.toFixed(4);
+            this.altosDecimal = altos.toFixed(4);
+            console.log(this.anchosDecimal, this.altosDecimal);
 
-              window.location.reload();
-            });
+            if (this.anchosDecimal % 1 == 0) {
+              this.presentToast('La variable ancho es entero, debe ser decimal.');
+            } else if (this.altosDecimal % 1 == 0) {
+              this.presentToast('La variable alto es entero, debe ser decimal.');
+            } else if (this.altosDecimal % 1 == 0 && this.anchosDecimal % 1 == 0) {
+              this.presentToast('ambos son enteros');
+            } else {
+              console.log('ambos son decimales');
+              this.restangular.all('guardarCombinacion').post(data).subscribe(function (datav) {
+                // console.log(data);
+                _this.presentLoading();
+
+                window.location.reload();
+              });
+            }
           }
         }, {
           key: "presentToast",
@@ -525,6 +567,37 @@
             }));
           }
         }, {
+          key: "help",
+          value: function help() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var modal;
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      _context5.next = 2;
+                      return this.modalController.create({
+                        component: _help_modal_help_modal_component__WEBPACK_IMPORTED_MODULE_6__["HelpModalComponent"],
+                        cssClass: 'modal-help'
+                      });
+
+                    case 2:
+                      modal = _context5.sent;
+                      _context5.next = 5;
+                      return modal.present();
+
+                    case 5:
+                      return _context5.abrupt("return", _context5.sent);
+
+                    case 6:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5, this);
+            }));
+          }
+        }, {
           key: "getUser",
           value: function getUser() {
             var _this6 = this;
@@ -553,6 +626,8 @@
         }, {
           type: ngx_restangular__WEBPACK_IMPORTED_MODULE_4__["Restangular"]
         }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]
+        }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"]
@@ -570,6 +645,102 @@
         /*! ./cortadora-perfil.page.scss */
         "./src/app/cortadora-perfil/cortadora-perfil.page.scss"))["default"]]
       })], CortadoraPerfilPage);
+      /***/
+    },
+
+    /***/
+    "./src/app/help-modal/help-modal.component.scss":
+    /*!******************************************************!*\
+      !*** ./src/app/help-modal/help-modal.component.scss ***!
+      \******************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function srcAppHelpModalHelpModalComponentScss(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "h5 {\n  text-align: center;\n  color: black;\n}\n\np {\n  color: black;\n  text-align: -webkit-center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaGVscC1tb2RhbC9oZWxwLW1vZGFsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQUE7RUFDQSxZQUFBO0FBQ0o7O0FBQ0E7RUFDSSxZQUFBO0VBQ0EsMEJBQUE7QUFFSiIsImZpbGUiOiJzcmMvYXBwL2hlbHAtbW9kYWwvaGVscC1tb2RhbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImg1e1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG59XHJcbnB7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICB0ZXh0LWFsaWduOiAtd2Via2l0LWNlbnRlcjtcclxufSJdfQ== */";
+      /***/
+    },
+
+    /***/
+    "./src/app/help-modal/help-modal.component.ts":
+    /*!****************************************************!*\
+      !*** ./src/app/help-modal/help-modal.component.ts ***!
+      \****************************************************/
+
+    /*! exports provided: HelpModalComponent */
+
+    /***/
+    function srcAppHelpModalHelpModalComponentTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "HelpModalComponent", function () {
+        return HelpModalComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+
+      var HelpModalComponent = /*#__PURE__*/function () {
+        function HelpModalComponent(modalController) {
+          _classCallCheck(this, HelpModalComponent);
+
+          this.modalController = modalController;
+        }
+
+        _createClass(HelpModalComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {}
+        }, {
+          key: "closeModal",
+          value: function closeModal() {
+            this.modalController.dismiss();
+          }
+        }]);
+
+        return HelpModalComponent;
+      }();
+
+      HelpModalComponent.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+        }];
+      };
+
+      HelpModalComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-help-modal',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! raw-loader!./help-modal.component.html */
+        "./node_modules/raw-loader/dist/cjs.js!./src/app/help-modal/help-modal.component.html"))["default"],
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! ./help-modal.component.scss */
+        "./src/app/help-modal/help-modal.component.scss"))["default"]]
+      })], HelpModalComponent);
       /***/
     }
   }]);

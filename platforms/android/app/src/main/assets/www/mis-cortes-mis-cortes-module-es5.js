@@ -368,7 +368,7 @@
 
             browser.on('loadstop').subscribe(function (event) {
               browser.insertCSS({
-                code: "body{color: red;"
+                code: "body{color: black;"
               });
             });
             browser.show(); // this.router.navigateByUrl('https://altools.es/api/hojaCalculo/'+ id);

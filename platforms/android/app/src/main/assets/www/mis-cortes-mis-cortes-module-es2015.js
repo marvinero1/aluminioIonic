@@ -219,7 +219,7 @@ let MisCortesPage = class MisCortesPage {
         //   webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);"
         // });
         browser.on('loadstop').subscribe(event => {
-            browser.insertCSS({ code: "body{color: red;" });
+            browser.insertCSS({ code: "body{color: black;" });
         });
         browser.show();
         // this.router.navigateByUrl('https://altools.es/api/hojaCalculo/'+ id);
