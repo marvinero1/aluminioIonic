@@ -89,9 +89,19 @@ export class CortadoraPerfilPage implements OnInit {
       });
     } 
 
+  isFloat(n) {
+      if (n!=1000 && n!=2000 && n!=3000 && n!=4000 && n!=5000 && n!=6000 && n!=7000 && n!=8000 && n!=9000) {
+       console.log("Es a 1000,2000,3000");
+      }else{
+        console.log("Es distinto a 1000,2000,3000");
+        return n % 1 == 0;
+      }
+  }
+
 
   submitData(){
     let data = this.dataForm.value;
+    let combinacion = data.combinacion;
     let anchos = data.ancho;
     let altos = data.alto;
     console.log(data);
@@ -99,23 +109,23 @@ export class CortadoraPerfilPage implements OnInit {
     this.anchosDecimal = anchos.toFixed(4);
     this.altosDecimal = altos.toFixed(4);
     console.log(this.anchosDecimal, this.altosDecimal);
-    
-    if (this.anchosDecimal %1 == 0 ){
-      this.presentToast('La variable ancho es entero, debe ser decimal.');
-    }else if(this.altosDecimal%1 == 0){
-      this.presentToast('La variable alto es entero, debe ser decimal.');
-    }else if(this.altosDecimal%1 == 0 && this.anchosDecimal %1 == 0 ){
-      this.presentToast('ambos son enteros');
-    }else{
-      console.log('ambos son decimales');
-      this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
-        // console.log(data);
-        this.presentLoading();
-        window.location.reload();
-      }); 
+
+    if (combinacion != false) {
+      if (this.isFloat(this.anchosDecimal)){
+        this.presentToast('La variable ancho es entero, debe ser decimal.');
+      }else if(this.isFloat(this.altosDecimal)){
+        this.presentToast('La variable alto es entero, debe ser decimal.');
+      }else{
+        console.log('ambos son decimales');
+        this.restangular.all('guardarCombinacion').post(data).subscribe((datav) => {
+          this.presentLoading();
+          window.location.reload();
+        }); 
+      }
+    } else {
+      this.presentToast('Ingrese una combinación, Porfavor.');
     }
   }
-
 
   async presentToast(message:any) {
     const toast = await this.toastController.create({

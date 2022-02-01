@@ -10,11 +10,13 @@
           </ion-row>
           
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" *ngIf="this.role != 'user' && this.role != 'vendedor'" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+            <ion-item (click)="selectedIndex = i" *ngIf="this.role != 'vendedor' && this.role != 'user'" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
               <ion-icon color="dark" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label color="dark">{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          
           
           <ion-menu-toggle auto-hide="false">
             <ion-item (click)="rutaImportadora()" lines="none" *ngIf="this.role != 'empresa'">
@@ -36,7 +38,7 @@
               </ion-label>
             </ion-item>
 
-            <ion-item (click)="cerrarsesion()" lines="none" *ngIf="this.role == 'user' || this.role == 'empresa' || this.role == 'admin' || this.role == 'vendedor'">
+            <ion-item (click)="cerrarsesion()" lines="none">
               <ion-icon color="dark" slot="start" name="log-out"></ion-icon>
               <ion-label color="dark">
                   Cerrar Sesión
