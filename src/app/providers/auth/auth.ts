@@ -12,17 +12,13 @@ import { Storage } from '@ionic/storage'
 // import 'rxjs/add/operator/do';
 // import 'rxjs/add/operator/switchMap';
 // import 'rxjs/add/operator/catch';
-
 import { NavController,ToastController } from '@ionic/angular';
-
 // import { AccessData, ILogin } from '../../models/models';
-
 
 export interface AccessData {
   access_token: string;
   refresh_token: string;
 }
-  
 /*
   Generated class for the AuthProvider provider.
 
@@ -33,7 +29,7 @@ export interface AccessData {
 @Injectable()
 export class AuthProvider {
 
-  // apiRoot: string = "http://192.168.1.7:5000/api/";
+  // apiRoot: string = "http://192.168.1.100:5000/api/";
   // apiRoot: string = "http://192.168.1.5:5000/api/";
   apiRoot: string = "https://altools.es/api/";
   //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";

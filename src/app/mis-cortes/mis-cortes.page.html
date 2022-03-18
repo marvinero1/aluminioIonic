@@ -180,13 +180,13 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Ancho *</ion-label>
-            <ion-input [ngModel]="ancho | number:'0.3-3'" type="number" ></ion-input>
+            <ion-input [(ngModel)]="ancho"  type="number"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label position="floating">Alto *</ion-label>
-            <ion-input [ngModel]="alto | number:'0.3-3'" type="number"></ion-input>
+            <ion-input [(ngModel)]="alto" form type="number"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

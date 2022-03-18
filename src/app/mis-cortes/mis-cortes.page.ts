@@ -22,6 +22,8 @@ export class MisCortesPage implements OnInit {
   dataFormHistorial: FormGroup;
   ancho:any;
   alto:any;
+  anchoEditar:0;
+  altoEditar:0;
   linea:any;
   id:number;
   estado:string = "false";
@@ -36,7 +38,7 @@ export class MisCortesPage implements OnInit {
 
   constructor(public auth: AuthProvider,public alertController: AlertController,
     public actionSheetController: ActionSheetController,private _formBuilder: FormBuilder,
-    public toastController: ToastController,private iab: InAppBrowser) { }
+    public toastController: ToastController,private iab: InAppBrowser){}
 
   ngOnInit(){
     this.getUser();
@@ -47,7 +49,7 @@ export class MisCortesPage implements OnInit {
     this.auth.getAllObjectById('getHojaCalculoPerfilEditapp/', user_id)
       .subscribe((res) => {
         this.hoja_calculo_perfil$ = res;
-        console.log(this.hoja_calculo_perfil$);
+        // console.log(this.hoja_calculo_perfil$);
       });
   }
 
@@ -256,8 +258,8 @@ export class MisCortesPage implements OnInit {
 
             this.data1 = data.value;
             let a = this.data1.id; 
-            console.log(this.data1);
-            
+
+          // console.log(this.data1);
             if(data.valid){
               this.auth.updateObjectById('actualizarPerfil/', a , this.data1).subscribe((datav) => {
                 // console.log(datav);
@@ -332,7 +334,6 @@ export class MisCortesPage implements OnInit {
       }
     ]
   });
-
     await alert.present();
   }
 
@@ -342,7 +343,6 @@ export class MisCortesPage implements OnInit {
   }
 
   doRefresh(event) {
-    
     window.location.reload();
     setTimeout(() => {
       console.log('Async operation has ended');

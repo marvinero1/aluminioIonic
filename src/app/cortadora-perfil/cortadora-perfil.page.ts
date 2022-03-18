@@ -64,6 +64,7 @@ export class CortadoraPerfilPage implements OnInit {
       combinacion:[this.combinacion],
       linea:[this.linea],
       repeticion:[this.repeticion],
+      descripcion:[this.descripcion],
       hoja_id:[this.hoja_id],
       precio:[this.precio],
       estado: [this.estado],
@@ -108,8 +109,7 @@ export class CortadoraPerfilPage implements OnInit {
     
     this.anchosDecimal = anchos.toFixed(4);
     this.altosDecimal = altos.toFixed(4);
-    console.log(this.anchosDecimal, this.altosDecimal);
-
+    
     if (combinacion != false) {
       if (this.isFloat(this.anchosDecimal)){
         this.presentToast('La variable ancho es entero, debe ser decimal.');
