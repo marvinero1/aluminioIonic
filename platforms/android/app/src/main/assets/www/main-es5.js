@@ -1261,7 +1261,7 @@
           this.router = router;
           this.toastCtrl = toastCtrl;
           this.tokenStorage = tokenStorage;
-          this.storage = storage; // apiRoot: string = "http://192.168.1.7:5000/api/";
+          this.storage = storage; // apiRoot: string = "http://192.168.1.100:5000/api/";
           // apiRoot: string = "http://192.168.1.5:5000/api/";
 
           this.apiRoot = "https://altools.es/api/"; //apiRoot: string = "https://sheconsultinggroupsrl.com/api/";
@@ -1993,7 +1993,7 @@
         };
 
         RestangularProvider // .setBaseUrl('/api')
-        // .setBaseUrl('http://192.168.1.7:5000/api')
+        // .setBaseUrl('http://192.168.1.100:5000/api')
         // .setBaseUrl('http://192.168.1.5:5000/api')
         .setBaseUrl('http://altools.es/api/') // .setDefaultHeaders(headerss)// set static header
         .addResponseInterceptor(function (data, operation, what, url, response) {
