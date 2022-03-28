@@ -49,6 +49,7 @@
     "integrator-cordova-plugin-downloader": "^1.1.0",
     "ng-fallimg": "0.0.1",
     "ngx-restangular": "^6.0.0",
+    "npm": "^8.5.5",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
